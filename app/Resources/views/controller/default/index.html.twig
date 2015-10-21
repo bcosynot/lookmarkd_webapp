@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheetsDist %}
+<style type="text/css">
+    {% include 'public/styles/critical/index.css' ignore missing %}
+</style>
+<script>
+    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}"]));
+</script>
+<noscript>
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+</noscript>
+{% endblock stylesheetsDist %}
+
+{% block body %}
+    
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <h3 class="text-muted">lookmarkd</h3>
+        </div>
+
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-lg-6 col-lg-push-6">
+                    <img class="yeoman-team" src="{{ asset('img/yo-grunt-bower-symfony.png') }}" alt=""/>
+                </div>
+                <div class="col-lg-6 col-lg-pull-6">
+                    <h1>'Allo, 'Allo!</h1>
+                    <p class="lead">Always a pleasure scaffolding your apps.</p>
+                    <p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Symfony</h4>
+                <p>High Performance PHP Framework for Web Development</p>
+                <h4>Browsersync</h4>
+                <p>Keep multiple browsers & devices in sync when building websites.</p>
+
+                <h4>Sass</h4>
+                <p>Sass is a mature, stable, and powerful professional grade CSS extension language.</p>
+                
+                <h4>Critical</h4>
+                <p>Extracts & inlines critical-path (above-the-fold) CSS from HTML.</p>
+                <h4>Bootstrap</h4>
+                <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+                <h4>RequireJS</h4>
+                <p>A JavaScript file and module loader optimized for in-browser use.</p>
+                
+            </div>
+        </div>
+
+    </div>
+    
+{% endblock %}
