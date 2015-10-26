@@ -11,7 +11,6 @@
 /bin/
 /composer.phar
 /node_modules/
-/grunt/
 /bower_components/
 /.editorconfig
 /.buildpath
