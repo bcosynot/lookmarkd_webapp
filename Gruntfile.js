@@ -6,8 +6,14 @@ module.exports = function(grunt) {
     var fs = require('fs');
     var path = require('path');
     var env = _.defaults(fs.existsSync('.envrc') && grunt.file.readJSON('.envrc') || {},{
-        port: parseInt(grunt.option('port'), 10) || 8000
+        port: parseInt(grunt.option('port'), 10) || 8000,
     });
+    
+
+    console.log(grunt.option('useproxy'));
+    var useproxy = grunt.option('useproxy');
+    console.log(grunt.option('proxy'));
+    var proxy =  grunt.option('proxy');
 
 
     var paths = {
@@ -27,7 +33,9 @@ module.exports = function(grunt) {
         // data passed into config.
         data: {
             paths: paths,
-            env: env
+            env: env,
+            useproxy: useproxy,
+            proxy: proxy
         },
 
         jitGrunt: true
