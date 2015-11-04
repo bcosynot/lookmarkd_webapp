@@ -23,6 +23,13 @@ module.exports = function(config) {
         files: [
             'test/test-main.js',
             //bower:
+            {pattern: 'bower_components/modernizr/modernizr.js', included: false},
+            {pattern: 'bower_components/jquery/dist/jquery.js', included: false},
+            {pattern: 'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js', included: false},
+            {pattern: 'bower_components/requirejs/require.js', included: false},
+            {pattern: 'bower_components/almond/almond.js', included: false},
+            {pattern: 'bower_components/loglevel/dist/loglevel.min.js', included: false},
+            {pattern: 'bower_components/picturefill/dist/picturefill.js', included: false},
             //endbower
             {pattern: 'app/Resources/public/scripts/**/*.js', included: false},
             {pattern: 'test/**/*Spec.js', included: false}

@@ -11,7 +11,10 @@
 /bin/
 /composer.phar
 /node_modules/
-/bower_components/
 /.editorconfig
 /.buildpath
 /.project
+UPGRADE*.md
+npm-debug.log
+LICENSE
+.tmp/

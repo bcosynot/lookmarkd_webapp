@@ -1,0 +1,5 @@
+app/Resources/public/scripts/retina-1.1.0.js
+app/Resources/public/scripts/bootstrap.min.js
+app/Resources/public/scripts/ie10-viewport-bug-workaround.js
+app/Resources/public/scripts/jquery.min.js
+app/Resources/public/scripts/jquery.unveilEffects.js
