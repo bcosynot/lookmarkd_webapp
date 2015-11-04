@@ -10,11 +10,9 @@
         {% block stylesheets %}
             {% if app.environment == 'node' %}
                 <link rel="stylesheet" href="styles/main.css?no-rev"/>
-                <link rel="stylesheet" href="styles/style.css?no-rev"/>
             {% else %}
                 {% block stylesheetsDist %}
                 <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
-                <link rel="stylesheet" href="{{ asset('styles/style.css') }}"/>
                 {% endblock stylesheetsDist %}
             {% endif %}
             <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
