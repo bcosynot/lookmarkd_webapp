@@ -20,7 +20,10 @@ var require = {
         'bootstrap/tab': 'bootstrap-sass-official/assets/javascripts/bootstrap/tab',
         'bootstrap/tooltip': 'bootstrap-sass-official/assets/javascripts/bootstrap/tooltip',
         'bootstrap/transition': 'bootstrap-sass-official/assets/javascripts/bootstrap/transition',
-        picturefill: 'picturefill/dist/picturefill'
+        picturefill: 'picturefill/dist/picturefill',
+        'bootstrap3-ie10-viewport-bug-workaround': 'bootstrap3-ie10-viewport-bug-workaround/ie10-viewport-bug-workaround',
+        retina: 'retina.js/build/js/retina-1.2.0',
+        'jquery-unveil': 'jquery-unveil/jquery.unveil'
     },
     shim: {
         bootstrap: {

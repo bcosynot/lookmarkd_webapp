@@ -12,6 +12,9 @@ define(function(require, exports) {
     var $ = require('jquery');
     var log = require('loglevel');
     require('bootstrap');
+    require('bootstrap/scrollspy');
+    require('jquery-unveil');
+    require('bootstrap3-ie10-viewport-bug-workaround');
     
 
 
