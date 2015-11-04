@@ -56,6 +56,7 @@ module.exports = function(grunt, options) {
                 src: [
                     '<%= paths.app %>/scripts/**/*.js',
                     '<%= paths.app %>/images/**/*.{jpg,jpeg,gif,png,webp}',
+                    'app/Resources/views/*.html.twig',
                     'app/Resources/views/**/*.html.twig',
                     '.tmp/styles/*.css'
                 ]

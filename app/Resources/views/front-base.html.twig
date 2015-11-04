@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% if app.environment == 'node' %}
+                <link rel="stylesheet" href="styles/main.css?no-rev"/>
+                <link rel="stylesheet" href="styles/style.css?no-rev"/>
+            {% else %}
+                {% block stylesheetsDist %}
+                <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+                <link rel="stylesheet" href="{{ asset('styles/style.css') }}"/>
+                {% endblock stylesheetsDist %}
+            {% endif %}
+            <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {% if app.environment == 'node' %}
+                <script type="text/javascript" src="scripts/config.js"></script>
+                <script type="text/javascript" data-main="main" src="bower_components/requirejs/require.js"></script>
+            {% else %}
+                <script type="text/javascript" src="{{ asset('scripts/main.js') }}"></script>
+            {% endif %}
+        {% endblock %}
+    </body>
+</html>
