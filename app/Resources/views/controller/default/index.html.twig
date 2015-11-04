@@ -1,0 +1,271 @@
+{% extends 'front-base.html.twig' %}
+
+{% block stylesheetsDist %}
+<style type="text/css">
+    {% include 'public/styles/critical/index.css' ignore missing %}
+</style>
+<script>
+    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}"]));
+</script>
+<noscript>
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+</noscript>
+{% endblock stylesheetsDist %}
+
+{% block body %}
+    
+   <!-- ********** HEADER SECTION ********** --> 
+	<div id="h">
+		<div class="container">
+			<div class="row centered">
+				<h3 class="logo aligncenter">LANDING<br/>SUMO</h3>
+				<h1>Close more deals with<br/>our awesome app.</h1>
+				
+				<div class="col-md-6 col-md-offset-3 mt">
+					<form role="form" action="http://lookmark.us12.list-manage.com/subscribe/post" method="post" enctype="plain"> 
+						<input type="hidden" name="u" value="564038ebcb932c8bbcabe1ac4">
+						<input type="hidden" name="id" value="144d3b15ab">
+	    				<input type="email" name="MERGE0" class="subscribe-input" placeholder="Enter your e-mail address..." required>
+						<button class='btn btn-lg btn-green subscribe-submit' type="submit">Yes, Please</button>
+					</form>
+				</div>
+			</div><!--/row -->
+			
+			<div class="row">
+				<div class="continue">
+					<i class="ion-chevron-down"></i>
+				</div>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/header -->	  
+
+	<!-- ********** CALL TO ACTION SECTION ********** --> 
+	<div id="cta">
+		<div class="container">
+			<div class="row">
+				<h2>It's time to grab your customers attention properly. Let us help you.</h2>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+
+	<!-- ********** INTRODUCTION SECTION ********** --> 
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<h2>More About Landing Sumo</h2>
+				<hr class="aligncenter">
+				<h4>The Final Solution Is Just Here</h4>
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+		
+		<div class="row mt">
+			<div class="col-md-6">
+				<p><i class="ion-android-information green alignleft"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+				<p class="mt"><i class="ion-android-information green alignleft"></i> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+				<p class="mt"><i class="ion-android-information green alignleft"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+			</div><!--/col-md-6 -->
+			
+			<div class="col-md-6 of">
+				<img src="{{ asset('img/browser.png') }}" class="img-responsive aligncenter" alt="" data-effect="slide-right">
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+	
+	<!-- ********** HOW IT WORKS SECTION ********** --> 
+	<div id="g">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 centered">
+					<h2>How It Works</h2>
+					<hr class="aligncenter">
+					<h4>The Steps Of Our Success</h4>
+				</div><!-- /col-md-6-->
+			</div><!--/ row-->
+			
+			<div class="row mt">
+				<div class="col-md-4">
+					<h4 class="green">STEP 1</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<h4 class="green mt">STEP 2</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4">
+					<img src="{{ asset('img/item.png') }}" alt="" class="img-responsive aligncenter" data-effect="slide-bottom">
+				</div><!--/col-md-4-->
+				<div class="col-md-4">
+					<h4 class="green">STEP 3</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<h4 class="green mt">STEP 4</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->
+			
+			<div class="row mt">
+				<div class="col-md-4 col-md-offset-4 centered">
+					<button class="btn btn-lg btn-green">Download Our PDF</button>
+				</div><!--/col-md-4-->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/G -->
+	
+	<!-- ********** CALL TO ACTION SECTION ********** --> 
+	<div id="cta">
+		<div class="container">
+			<div class="row">
+				<h2>More than <b>65%</b> of users check their mail on a mobile device.</h2>
+				<h2>In 2014, <b>40%</b> made a purchase through their smartphone.</h2>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+
+	<!-- ********** FEATURES SECTION - Part 1 ********** --> 
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-4 centered">
+				<i class="ion-compass green big"></i>
+				<p class="green">Don't miss your opportunity</p>
+				<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+			</div><!--/col-md-4-->
+			<div class="col-md-4 centered">
+				<i class="ion-disc green big"></i>
+				<p class="green">Save on external devices</p>
+				<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+			</div><!--/col-md-4-->
+			<div class="col-md-4 centered">
+				<i class="ion-earth green big"></i>
+				<p class="green">Work in every place</p>
+				<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+			</div><!--/col-md-4-->
+		</div><!--/row -->
+		
+		<div class="row mt">
+			<div class="col-md-12">
+				<img src="{{ asset('img/display.jpg') }}" class="img-responsive aligncenter" alt="" data-effect="slide-bottom">
+			</div><!--/col-md-12-->
+		</div><!--/row -->
+	</div><!--/container -->
+
+	<!-- ********** FEATURES SECTION - Part 2 ********** --> 
+	<div id="g">
+		<div class="container">
+			<div class="row mt">
+				<div class="col-md-6 col-md-offset-3 centered">
+					<h2>App Features</h2>
+					<hr class="aligncenter">
+					<h4>What You Need To Know</h4>
+				</div><!-- /col-md-6-->
+			</div><!--/row -->
+			
+			<div class="row mt">
+				<div class="col-md-4 centered">
+					<i class="ion-cube green big"></i>
+					<p class="green">All Included in a big package</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-document-text green big"></i>
+					<p class="green">Complete documentation</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-email green big"></i>
+					<p class="green">Free email support</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->
+			
+			<div class="row mt">
+				<div class="col-md-4 centered">
+					<i class="ion-eye green big"></i>
+					<p class="green">Retina device ready</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-fireball green big"></i>
+					<p class="green">Hot trends used</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-heart green big"></i>
+					<p class="green">Crafted with love</p>
+					<p class="text16">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/g -->
+
+	<!-- ********** TESTIMONIAL SECTION ********** --> 
+	<div id="testimonial">
+		<div class="container">
+			<div class="row mt">
+				<div class="col-lg-8 col-lg-offset-2 centered">
+				    <!-- Carousel
+				    ================================================== -->
+				    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+				      <div class="carousel-inner">
+				        <div class="item active">
+				          <img src="{{ asset('img/ui-01.jpg') }}" class="img-circle aligncenter" width="120" alt="First slide">
+				          <h3>Mark Turin</h3>
+				          <hr class="aligncenter">
+				          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+				        </div>
+				        <div class="item">
+				          <img src="{{ asset('img/ui-02.jpg') }}" class="img-circle aligncenter" width="120"  alt="Second slide">
+				          <h3>Sarah Schmidt</h3>
+				          <hr class="aligncenter">
+				          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+				        </div>
+				        <div class="item">
+				          <img src="{{ asset('img/ui-03.jpg') }}" width="120" class="img-circle aligncenter" alt="Third slide">
+				          <h3>Phil Carsons</h3>
+				          <hr class="aligncenter">
+				          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+				        </div>
+				      </div>
+				    </div><!-- /.carousel -->
+				</div><!--/col-lg-8 -->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/testimonial -->
+	
+	
+	<!-- ********** REGISTER SECTION ********** --> 
+	<div id="g">
+		<div class="container">
+			<div class="row mt">
+				<div class="col-md-6 col-md-offset-3 centered">
+					<h2>Stay In Contact</h2>
+					<hr class="aligncenter">
+					<h4>We Are Social People</h4>
+				</div><!-- /col-md-6-->
+			</div><!--/row -->
+			
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 mt centered">
+					<form role="form" action="http://lookmark.us12.list-manage.com/subscribe/post" method="post" enctype="plain"> 
+						<input type="hidden" name="u" value="564038ebcb932c8bbcabe1ac4">
+						<input type="hidden" name="id" value="144d3b15ab">
+	    				<input type="email" name="MERGE0" class="subscribe-input" placeholder="Enter your e-mail address..." required>
+						<button class='btn btn-lg btn-green subscribe-submit' type="submit">Subscribe</button>
+					</form>
+				</div>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/g -->
+	
+	<!-- ********** END SECTION ********** --> 
+	<div class="container">
+		<div class="row mtb">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<p class="text28">
+					<a href="#"><i class="ion-social-twitter"></i></a>
+					<a href="#"><i class="ion-social-instagram"></i></a>
+					<a href="#"><i class="ion-social-facebook"></i></a>
+				</p>
+				<hr class="aligncenter">
+				<p>LandingSumo.com | Copyright 2014</p>
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+    
+{% endblock %}
