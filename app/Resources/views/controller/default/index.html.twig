@@ -2,6 +2,7 @@
 
 {% block stylesheetsDist %}
 <style type="text/css">
+ 	{% include 'public/styles/critical/index.css' ignore missing %}
     #h {background: url({{ asset('img/header.jpg')}}) no-repeat;}
 </style>
 <script>
