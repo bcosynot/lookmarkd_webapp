@@ -22,5 +22,9 @@ If on a production machine, see SQL dump files in `sql` directory. It would be b
 
 ## Running
 
-1. Run `grunt serve`. You are ready to go. This is best for development
+1. Make sure `app/config/parameters.yml` is setup. It should contain at least the same set of configuration as in `app/config/paramters.yml.dist`
+1. You will also need to setup an Instagram client.  Go to https://instagram.com/developer/clients/manage/ and create a new client.
+1. Make sure the redirect URL is setup as ` http://localhost:8000/login/check-insta ` and your website URL is  ` http://localhost:8000 `
+1. The client ID and client secret received after setting up the new instagram client should be copy-pasted into your `parameters.yml` file. 
+1. Run `grunt serve`. You are ready to go. This is best for development.
 1. `grunt build` will preprocess and prepare files for deployment. If you have setup apache or another server to access app.php, you're good to go.
