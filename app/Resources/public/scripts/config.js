@@ -1,4 +1,5 @@
 /* jshint -W098,-W079 */
+var siteBaseURL = (typeof siteBaseURL === 'undefined') ? '' : siteBaseURL;
 var require = {
     baseUrl: siteBaseURL+'bower_components',
     paths: {
