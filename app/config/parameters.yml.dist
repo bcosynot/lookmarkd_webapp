@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    
+    # Instagram API keys
+    instagram.client.id: randomstrings
+    instagram.client.secret: randomstrings

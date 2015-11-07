@@ -8,14 +8,18 @@
 	    <meta name="author" content="">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            {% block stylesheetsCustom %}
+            {% endblock stylesheetsCustom %}
+        	{% block stylesheetsAll %}
+        		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+        	{% endblock stylesheetsAll %}
             {% if app.environment == 'node' %}
-                <link rel="stylesheet" href="styles/main.css?no-rev"/>
+                <link rel="stylesheet" href="/styles/main.css?no-rev"/>
             {% else %}
                 {% block stylesheetsDist %}
                 <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
                 {% endblock stylesheetsDist %}
             {% endif %}
-            <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -23,11 +27,15 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
             {% if app.environment == 'node' %}
-                <script type="text/javascript" src="scripts/config.js"></script>
-                <script type="text/javascript" data-main="main" src="bower_components/requirejs/require.js"></script>
+            	<script type="text/javascript">
+            		var siteBaseURL = '{{ url('homepage') }}';
+            	</script>
+                <script type="text/javascript" src="/scripts/config.js"></script>
+                <script type="text/javascript" data-main="main" src="/bower_components/requirejs/require.js"></script>
             {% else %}
                 <script type="text/javascript" src="{{ asset('scripts/main.js') }}"></script>
             {% endif %}
+            {% block customjavascripts %}{% endblock customjavascripts %}
         {% endblock %}
     </body>
 </html>

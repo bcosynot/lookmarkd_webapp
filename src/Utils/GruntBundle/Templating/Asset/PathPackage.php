@@ -84,12 +84,12 @@ class PathPackage extends BasePackage
             $regex = preg_replace('/\.([^\.]+$)/', '\.[\d\w]{8}\.$1', $fullpath);
             $base = str_replace($path, '', $fullpath);
             foreach (glob($pattern) as $filepath) {
-                if (preg_match('#' . $regex . '#', $filepath)) {
+                
                     $result = str_replace($base, '', $filepath);
                     $this->summary->set($file, $result);
 
                     return $result;
-                }
+                
             };
 
         }

@@ -29,6 +29,9 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        instagram_client_id: '%instagram.client.id%'
+        instagram_client_secret: '%instagram.client.secret%'
 doctrine:
     dbal:
         driver: pdo_mysql
@@ -49,3 +52,22 @@ swiftmailer:
     password: '%mailer.password%'
     spool:
         type: memory
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: "AppBundle\\Entity\\User"
+hwi_oauth:
+    connect:
+        account_connector: my_user_provider
+    firewall_name: main
+    resource_owners:
+        instagram:
+            type: instagram
+            client_id: '%instagram.client.id%'
+            client_secret: '%instagram.client.secret%'
+    fosub:
+        username_iterations: 30
+        properties:
+            instagram: instagramId
+    http_client:
+        verify_peer: false

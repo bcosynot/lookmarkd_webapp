@@ -21,7 +21,7 @@ require.config({
         modules: '../app/Resources/public/scripts/modules',
         jquery: 'jquery/dist/jquery',
         loglevel: 'loglevel/dist/loglevel.min',
-        bootstrap: 'bootstrap-sass-official/assets/javascripts/bootstrap',
+        bootstrap: 'bootstrap/dist/js/bootstrap',
         'bootstrap/affix': 'bootstrap-sass-official/assets/javascripts/bootstrap/affix',
         'bootstrap/alert': 'bootstrap-sass-official/assets/javascripts/bootstrap/alert',
         'bootstrap/button': 'bootstrap-sass-official/assets/javascripts/bootstrap/button',
@@ -34,7 +34,10 @@ require.config({
         'bootstrap/tab': 'bootstrap-sass-official/assets/javascripts/bootstrap/tab',
         'bootstrap/tooltip': 'bootstrap-sass-official/assets/javascripts/bootstrap/tooltip',
         'bootstrap/transition': 'bootstrap-sass-official/assets/javascripts/bootstrap/transition',
-        picturefill: 'picturefill/dist/picturefill'
+        picturefill: 'picturefill/dist/picturefill',
+        'bootstrap3-ie10-viewport-bug-workaround': 'bootstrap3-ie10-viewport-bug-workaround/ie10-viewport-bug-workaround',
+        retina: 'retina.js/build/js/retina-1.2.0',
+        'jquery-unveil': 'jquery-unveil/jquery.unveil'
     },
     shim: {
         bootstrap: {

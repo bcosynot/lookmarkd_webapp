@@ -1,9 +1,9 @@
 /* jshint -W098,-W079 */
 var require = {
-    baseUrl: 'bower_components',
+    baseUrl: siteBaseURL+'bower_components',
     paths: {
-        main: '../app/Resources/public/scripts/main',
-        app: '../app/Resources/public/scripts/app',
+        main: siteBaseURL+'../app/Resources/public/scripts/main',
+        app: siteBaseURL+'../app/Resources/public/scripts/app',
         modules: '../app/Resources/public/scripts/modules',
         jquery: 'jquery/dist/jquery',
         loglevel: 'loglevel/dist/loglevel.min',
@@ -103,7 +103,13 @@ var require = {
             deps: [
                 'jquery'
             ]
-        }
+        },
+        'jquery-unveil':{
+            exports: '$.fn.unveil',
+            deps: [
+                'jquery'
+            ]
+        },
     },
     packages: [
 

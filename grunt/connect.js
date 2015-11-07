@@ -9,7 +9,7 @@ module.exports = function(grunt, options) {
     return {
         fetch: {
             options: {
-                port: options.env.port + 1000,
+                port: options.env.port + 1100,
                 hostname: '127.0.0.1',
                 base: '<%= paths.dist %>',
                 middleware: [
