@@ -9,7 +9,8 @@ module.exports = {
             src: [
                 '*.{ico,png,txt}',
                 'img/{,*/}*.webp',
-                'fonts/{,*/}*.*'
+                'fonts/{,*/}*.*',
+                'styles/*.css'
             ]
         }]
     }

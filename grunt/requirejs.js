@@ -11,7 +11,7 @@ module.exports = {
             useStrict: true,
             wrap: true,
             optimize: 'uglify2',
-            generateSourceMaps: false
+            generateSourceMaps: false,
         }
     }
-}
+};
