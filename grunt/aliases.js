@@ -31,9 +31,9 @@ module.exports = function (grunt, options) {
             'sass',
             'autoprefixer',
             'fetch',
-            'uncss',
+            /*'uncss',
             'cssmin',
-            'critical'
+            'critical'*/
         ],
         js: [
             'clean:js', 

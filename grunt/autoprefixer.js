@@ -11,7 +11,8 @@ module.exports = {
             expand: true,
             cwd: '.tmp/sass/',
             src: '{,*/}*.css',
-            dest: '.tmp/styles/'
+            /*dest: '.tmp/styles/' -- change when critical css and uncss have been fixed. See - https://bitbucket.org/thakurroxxx/backend/issues/7/configure-critical-and-uncss-to-work*/
+            dest: '<%= paths.dist %>/styles/'
         }]
     }
 };
