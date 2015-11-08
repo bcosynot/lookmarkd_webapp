@@ -22,7 +22,7 @@ class LoginController extends Controller {
 				return $this->redirectToRoute ( 'missingEmail' );
 			} else {
 				$logger->info('dashboard');
-				return $this->redirectToRoute ( 'dashboard' );
+				return $this->redirectToRoute ( 'dashboard_influencer' );
 			}
 		} else {
 			$logger->info('going back to homepage');

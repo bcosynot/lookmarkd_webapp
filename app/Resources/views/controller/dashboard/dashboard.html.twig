@@ -18,11 +18,26 @@
 
 {% block content %}
 	<div class="row mtbox">
-                  		<div class="col-md-6 col-sm-3 col-md-offset-1 box0">
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h2>Welcome!</h2>
+					  			<h2><i class="ion-eye"></i></h2>
+					  			<h3>{{ followerCount }} followers</h3>
                   			</div>
+                  			<p>You have {{ followerCount }} followers</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<h2><i class="ion-heart"></i></h2>
+					  			<h3>{{ likesCount }} Likes</h3>
+                  			</div>
+                  			<p>{{ likesCount }} likes across {{ mediaCount }} posts</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<h2><i class="ion-chatbox"></i></h2>
+					  			<h3>{{ commentsCount }} Comments</h3>
+                  			</div>
+                  			<p>{{ commentsCount }} comments across {{ mediaCount }} posts</p>
                   		</div>
 	</div>
 {% endblock %}
