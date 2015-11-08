@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{% block title %}Welcome!{% endblock %}</title> {% block
+stylesheets %} {% block stylesheetsCustom %} {% endblock
+stylesheetsCustom %} {% block stylesheetsAll %}
+<link rel="stylesheet"
+	href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+{% endblock stylesheetsAll %} {% if app.environment == 'node' %}
+<link rel="stylesheet" href="/styles/main.css?no-rev" />
+<link rel="stylesheet" href="/styles/style.css?no-rev" />
+<link rel="stylesheet" href="/styles/style-responsive.css?no-rev" />
+<link rel="stylesheet" href="/styles/lineicons.css?no-rev" />
+{% else %} {% block stylesheetsDist %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/lineicons.css') }}" />
+{% endblock stylesheetsDist %} {% endif %} {% endblock %}
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+	{% block body %}
+	<section id="container">
+
+		{% block topbar %}
+		<!--header start-->
+		<header class="header black-bg">
+			<div class="sidebar-toggle-box">
+				<div class="ion-navicon-round tooltips fa-bars" id="nav-toggle" data-placement="right"
+					data-original-title="Toggle Navigation"></div>
+			</div>
+			{% block logo %}
+			<!--logo start-->
+			<a href="index.html" class="logo"><b>Lookmarkd</b></a>
+			<!--logo end-->
+			{% endblock logo %}
+			<div class="top-menu">
+				<ul class="nav pull-right top-menu">
+					<li class="dropdown mt">
+						<a class="dropdown-toggle" href="#" data-toggle="dropdown" id="user-settings" >
+							<i class="ion-gear-b"></i>{{ app.user.username }}
+						</a>
+						<ul class="dropdown-menu extended" >
+							<div class="notify-arrow notify-arrow-white"></div>
+                            <li>
+                                <a class="green" href="/logout">Logout</a>
+                            </li>
+                         </ul>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<!--header end-->
+		{% endblock topbar %}
+		{% block left_sidebar %}
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<li class="mt"><a class="active" href="index.html"> <i
+							class="ion-android-desktop"></i> <span>Dashboard</span>
+					</a></li>
+
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="ion-ios-calendar-outline"></i> <span>Campaigns</span>
+					</a>
+						<ul class="sub">
+							<li><a href="general.html">General</a></li>
+							<li><a href="buttons.html">Buttons</a></li>
+							<li><a href="panels.html">Panels</a></li>
+							<li><a href="google_maps.html">Google Maps</a></li>
+						</ul></li>
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+		<!--sidebar end-->
+		{% endblock left_sidebar %}
+		{% block content_wrapper %}
+		<!--main content start-->
+      	<section id="main-content">
+        	<section class="wrapper">
+	        	{% block content %}
+	        	{% endblock content %}
+        	</section>
+        </section>
+        {% endblock content_wrapper %}
+        {% block footer %}
+        <!--footer start-->
+      	<!-- <footer class="site-footer">
+      	</footer> -->
+      	<!--footer end-->
+        {% endblock footer %}
+
+	</section>
+	{% endblock body %} 
+	{% block javascripts %} 
+		{% if app.environment == 'node' %}
+			<script type="text/javascript" src="/scripts/config.js"></script>
+			<script type="text/javascript" data-main="main"
+				src="/bower_components/requirejs/require.js"></script>
+		{% else %}
+			<script type="text/javascript" src="{{ asset('scripts/main.js') }}"></script>
+		{% endif %} 
+		{% block customjavascripts %}{% endblock customjavascripts	%} 
+	{% endblock javascripts %}
+</body>
+</html>

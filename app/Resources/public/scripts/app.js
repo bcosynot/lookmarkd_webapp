@@ -1,7 +1,7 @@
 /**
  *
- * @author Ben Zörb @bezoerb https://github.com/bezoerb
- * @copyright Copyright (c) 2015 Ben Zörb
+ * @author Ben ZÃ¶rb @bezoerb https://github.com/bezoerb
+ * @copyright Copyright (c) 2015 Ben ZÃ¶rb
  *
  * Licensed under the MIT license.
  * http://bezoerb.mit-license.org/
@@ -15,6 +15,7 @@ define(function(require, exports) {
     require('bootstrap/scrollspy');
     require('jquery-unveil');
     require('bootstrap3-ie10-viewport-bug-workaround');
+    require('modules/common-scripts');
     
 
 

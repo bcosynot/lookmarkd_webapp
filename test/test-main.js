@@ -37,7 +37,14 @@ require.config({
         picturefill: 'picturefill/dist/picturefill',
         'bootstrap3-ie10-viewport-bug-workaround': 'bootstrap3-ie10-viewport-bug-workaround/ie10-viewport-bug-workaround',
         retina: 'retina.js/build/js/retina-1.2.0',
-        'jquery-unveil': 'jquery-unveil/jquery.unveil'
+        'jquery-unveil': 'jquery-unveil/jquery.unveil',
+        'bootstrap-daterangepicker': 'bootstrap-daterangepicker/daterangepicker',
+        'bootstrap-datetimepicker': 'bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
+        'bootstrap-timepicker': 'bootstrap-timepicker/js/bootstrap-timepicker',
+        'bootstrap3-wysihtml5-bower': 'bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min',
+        dcjqaccordion: 'dcjqaccordion/js/jquery.dcjqaccordion.2.7.min',
+        'jquery.scrollTo': 'jquery.scrollTo/jquery.scrollTo',
+        'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll'
     },
     shim: {
         bootstrap: {

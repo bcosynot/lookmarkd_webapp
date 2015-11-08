@@ -12,14 +12,20 @@ class LoginController extends Controller {
 	 */
 	public function loginSuccessAction() {
 		$securityContext = $this->container->get ( 'security.authorization_checker' );
-		if ($securityContext->isGranted ( 'IS_AUTHENTICATED_REMEMBERED' )) {
+		$logger = $this->get('logger');
+		$logger->info('inside login success');
+		if ($securityContext->isGranted ( 'IS_AUTHENTICATED_REMEMBERED' ) || $securityContext->isGranted ( 'ROLE_USER' )) {
 			$user = $this->getUser ();
-			
+			$logger->info('authenticated:'.$user->getUsername());
 			if (null != $user && null === $user->getEmail () || ! (null !== $user->getEmail () && strlen ( $user->getEmail () ) > 0 && strpos ( $user->getEmail (), '@' ))) {
+				$logger->info('missingemail');
 				return $this->redirectToRoute ( 'missingEmail' );
 			} else {
+				$logger->info('dashboard');
+				return $this->redirectToRoute ( 'dashboard' );
 			}
 		} else {
+			$logger->info('going back to homepage');
 			return $this->redirectToRoute ( 'homepage' );
 		}
 	}
