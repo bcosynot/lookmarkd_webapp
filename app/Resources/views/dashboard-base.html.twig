@@ -13,12 +13,12 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 	href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 {% endblock stylesheetsAll %} {% if app.environment == 'node' %}
 <link rel="stylesheet" href="/styles/main.css?no-rev" />
-<link rel="stylesheet" href="/styles/style.css?no-rev" />
+<link rel="stylesheet" href="/styles/dashboard-style.css?no-rev" />
 <link rel="stylesheet" href="/styles/style-responsive.css?no-rev" />
 <link rel="stylesheet" href="/styles/lineicons.css?no-rev" />
 {% else %} {% block stylesheetsDist %}
 <link rel="stylesheet" href="{{ asset('styles/main.css') }}" />
-<link rel="stylesheet" href="{{ asset('styles/style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
 <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
 <link rel="stylesheet" href="{{ asset('styles/lineicons.css') }}" />
 {% endblock stylesheetsDist %} {% endif %} {% endblock %}
