@@ -1,7 +1,7 @@
 # How to setup
 
 
-# Codebase
+## Codebase
 
 1. Clone the repository on your machine.
 1. Make sure you have php and MySQL installed.
@@ -28,3 +28,23 @@ If on a production machine, see SQL dump files in `sql` directory. It would be b
 1. The client ID and client secret received after setting up the new instagram client should be copy-pasted into your `parameters.yml` file. 
 1. Run `grunt serve`. You are ready to go. This is best for development.
 1. `grunt build` will preprocess and prepare files for deployment. If you have setup apache or another server to access app.php, you're good to go.
+
+
+## Branching
+
+See Branching.md for more info.
+
+
+## Deployment
+
+Deployments are currently made by pulling and building the code on the server. Steps are as follows:
+
+1. Login to the EC2 server.
+1. Navigate to the respective directory. Right now they are:
+	1. Staging: /home/ubuntu/www/poptates.lookmarkd.com
+
+    1. Production: /home/ubuntu/www/lookmarkd.com
+    
+1. Inside the directory pull the from the repository and the respective branch. 
+
+1. Run `grunt build`. 
