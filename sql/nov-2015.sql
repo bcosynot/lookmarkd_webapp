@@ -11,23 +11,23 @@ CREATE TABLE user_posting_category (user_profile_id INT NOT NULL, posting_catego
 ALTER TABLE user_posting_category ADD CONSTRAINT FK_FEDA00C26B9DD454 FOREIGN KEY (user_profile_id) REFERENCES user_profile (id) ON DELETE CASCADE;
 ALTER TABLE user_posting_category ADD CONSTRAINT FK_FEDA00C2B8AFD358 FOREIGN KEY (posting_category_id) REFERENCES posting_category (id) ON DELETE CASCADE;
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('1', 'Fashion', 'Fashion');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('1', 'Fashion', 'Fashion');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('2', 'Beauty', 'Beauty');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('2', 'Beauty', 'Beauty');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('3', 'Luxury', 'Luxury');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('3', 'Luxury', 'Luxury');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('4', 'Travel', 'Travel');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('4', 'Travel', 'Travel');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('5', 'Sports', 'Sports');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('5', 'Sports', 'Sports');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('6', 'Gadgets', 'Gadgets');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('6', 'Gadgets', 'Gadgets');
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('7', 'Entertainment', 'Entertainment');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('7', 'Entertainment', 'Entertainment');
 
-UPDATE `lookmarkd`.`posting_category` SET `categoryName` = 'Technology', `categoryDescription` = 'Technology' WHERE `posting_category`.`id` = 6;
+UPDATE `posting_category` SET `categoryName` = 'Technology', `categoryDescription` = 'Technology' WHERE `posting_category`.`id` = 6;
 
-INSERT INTO `lookmarkd`.`posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('8', 'Arts', 'Arts');
+INSERT INTO `posting_category` (`id`, `categoryName`, `categoryDescription`) VALUES ('8', 'Arts', 'Arts');
 
 ALTER TABLE user_profile ADD blogger_name VARCHAR(255) NOT NULL;
 
