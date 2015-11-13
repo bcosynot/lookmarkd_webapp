@@ -5,12 +5,13 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Core\Service\UserRepository")
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @ORM\Id
@@ -120,5 +121,13 @@ class User extends BaseUser
 
         return $this;
     }
+
+	/**
+	 * {@inheritDoc}
+	 * @see \FOS\MessageBundle\Model\ParticipantInterface::getId()
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
 }
