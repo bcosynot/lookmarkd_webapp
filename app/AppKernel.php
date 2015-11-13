@@ -19,7 +19,8 @@ class AppKernel extends Kernel {
 				new FOS\UserBundle\FOSUserBundle(),
 				new JMS\SerializerBundle\JMSSerializerBundle(),
 				new FOS\RestBundle\FOSRestBundle(),
-				new HWI\Bundle\OAuthBundle\HWIOAuthBundle()
+				new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+				new Ibrows\XeditableBundle\IbrowsXeditableBundle()
 		);
 		
 		if (in_array ( $this->getEnvironment (), array (

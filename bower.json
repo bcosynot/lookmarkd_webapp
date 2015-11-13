@@ -8,5 +8,8 @@
     "loglevel": "~1.2.0",
     "picturefill": "~2.1.0",
     "modernizr": "~2.8.3"
+  },
+  "devDependencies": {
+    "x-editable": "~1.5.1"
   }
 }

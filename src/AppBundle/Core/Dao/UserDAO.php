@@ -4,8 +4,10 @@ namespace AppBundle\Core\Dao;
 
 use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
+use AppBundle\Entity\PostingCategory;
 
 /**
  * DAO for user related entities.
@@ -33,13 +35,38 @@ class UserDAO {
 	public function saveUserProfile(UserProfile $userProfile) {
 		$this->em->beginTransaction ();
 		$this->em->persist ( $userProfile );
+		$this->em->flush();
 		$this->em->commit ();
 		return $userProfile;
 	}
 	public function saveSocialProfile(SocialProfile $socialProfile) {
 		$this->em->beginTransaction ();
 		$this->em->persist ( $socialProfile );
+		$this->em->flush();
 		$this->em->commit ();
 		return $socialProfile;
 	}
+	
+	public function getPostingCateogiresForUser(User $user){
+		return $this->em->getRepository("AppBundle:UserProfile")->findOneBy(array('user'=>$user))->getCategories();
+	}
+	
+	/**
+	 * 
+	 * @param User $user
+	 * @return UserProfile found by user
+	 */
+	public function getUserProfile(User $user) {
+		return $this->em->getRepository('AppBundle:UserProfile')->findOneBy(array('user'=>$user));
+	}
+	
+	/**
+	 * 
+	 * @param int $postingCategoryId
+	 * @return PostingCategory Found from ID.
+	 */
+	public function getPostingCategory($postingCategoryId) {
+		return $this->em->getRepository('AppBundle:PostingCategory')->find($postingCategoryId);
+	}
+	
 }

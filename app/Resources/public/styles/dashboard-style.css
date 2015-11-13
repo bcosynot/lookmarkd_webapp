@@ -467,7 +467,7 @@ a.logo span {
 }
 
 ul.top-menu > li > a {
-    color: #666666;
+    color: #ffffff;
     font-size: 16px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -477,13 +477,12 @@ ul.top-menu > li > a {
 }
 
 ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
-    border:1px solid #b6b6b6 !important;
+    border:1px solid #ffffff !important;
     background-color: transparent !important;
     border-color: #b6b6b6 !important;
     text-decoration: none;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-    color: #b6b6b6 !important;
 }
 
 .notify-row .badge {
@@ -867,7 +866,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .box0:hover p {
-	color: #ff865c;
+	color: #666;
 }
 
 .box0:hover {
@@ -3423,6 +3422,7 @@ ul.chat-available-user li a:hover {
     min-height: 900px;
 }
 
-#user-settings {
+.top-navbar-text {
 	color: #ffffff;
-
+}
+/** doropdown transitions **/

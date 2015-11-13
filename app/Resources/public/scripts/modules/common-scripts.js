@@ -3,6 +3,7 @@ define(function(require,exports) {
     var $ = require('jquery');
     require('jquery.scrollTo');
     require('jquery.nicescroll');
+    require('bootstrap/tooltip');
     /*---LEFT BAR ACCORDION----*/
     exports.init = function init() {
 
@@ -63,5 +64,34 @@ define(function(require,exports) {
 	    $('#sidebar').niceScroll({styler:'fb',cursorcolor:'#4ECDC4', cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
 
 	    $('html').niceScroll({styler:'fb',cursorcolor:'#4ECDC4', cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+	    
+	 // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
+	    $('.dropdown').on('show.bs.dropdown', '#user-settings', function(e){
+	    	e.preventDefault();
+	    });
+
+	    // ADD SLIDEUP ANIMATION TO DROPDOWN //
+	    $('.dropdown').on('hide.bs.dropdown', function(e){
+	    	e.preventDefault();
+	     // $(this).find('.dropdown-menu').first().slideUp('slow');
+	    });
+	    
+	    /**
+	     * Hacky bug fix for bootstrap dropdown not working. 
+	     * TODO: Figure out why its not working
+	     */
+	    $('#user-settings').click(function(e) {
+	    	e.preventDefault();
+	    	var parentLi = $(this).parents('li.dropdown').first();
+	    	if($(parentLi).hasClass('open')) {
+	    		$(parentLi).find('.dropdown-menu').first().slideUp('fast');
+	    		$(parentLi).removeClass('open');
+	    	} else {
+	    		$(parentLi).find('.dropdown-menu').first().slideDown('fast');
+	    		$(parentLi).addClass('open');
+	    	}
+	    });
+	    
+	    $('[data-toggle="tooltip"]').tooltip();
 	};
 });

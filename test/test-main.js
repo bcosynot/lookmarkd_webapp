@@ -19,7 +19,7 @@ require.config({
         main: '../app/Resources/public/scripts/main',
         app: '../app/Resources/public/scripts/app',
         modules: '../app/Resources/public/scripts/modules',
-        jquery: 'jquery/dist/jquery',
+        jquery: 'jquery/jquery',
         loglevel: 'loglevel/dist/loglevel.min',
         bootstrap: 'bootstrap/dist/js/bootstrap',
         'bootstrap/affix': 'bootstrap-sass-official/assets/javascripts/bootstrap/affix',

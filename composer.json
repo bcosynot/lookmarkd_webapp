@@ -23,7 +23,8 @@
 		"hwi/oauth-bundle" : "^0.3.9",
 		"doctrine/doctrine-fixtures-bundle" : "^2.2",
 		"friendsofsymfony/user-bundle" : "~2.0@dev",
-		"cosenary/instagram": "^2.3"
+		"cosenary/instagram": "^2.3",
+		"ibrows/xeditable-bundle": "^1.1"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle" : "~2.3",

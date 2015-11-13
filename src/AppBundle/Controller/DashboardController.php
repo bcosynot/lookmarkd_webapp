@@ -38,6 +38,12 @@ class DashboardController extends Controller {
 		}
 		$model['likesCount'] = $totalMediaLikes;
 		$model['commentsCount'] = $totalMediaComments;
+		$nextStep = $this->get('social_profile_util')->getNextOnboardingStep($user);
+		$model['nextStep'] = $nextStep;
+		if(null!=$nextStep && $nextStep === 'bloggername') {
+			$model['saveBloggerNameURL'] = $this->get('router')->generate('edit_profile', array('fieldName'=>'bloggerName','value'=>null), true);
+		}
 		return $this->render ( 'controller/dashboard/dashboard.html.twig', $model );
 	}
+	
 }

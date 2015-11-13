@@ -48,7 +48,7 @@ class LoginController extends Controller {
 			$form->handleRequest ( $request );
 			if ($form->isValid ()) {
 				$this->get ( 'fos_user.user_manager' )->updateUser ( $user );
-				return $this->redirectToRoute('dashboard');
+				return $this->redirectToRoute('dashboard_influencer');
 			}
 			return $this->render ( 'controller/login/missing_email.html.twig', array (
 					'userId' => $user->getId (),
