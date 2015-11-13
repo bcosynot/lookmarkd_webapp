@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "50aaf6d0b6f4945aa956dfb8467fb8dd",
-    "content-hash": "75694532d28d9f8dceb069b0b0c797dd",
+    "hash": "7f7eed4f1ad288c4c5fe9728845600dd",
+    "content-hash": "6b9ab54977bd32f35d7ac65d0fa15b21",
     "packages": [
+        {
+            "name": "cosenary/instagram",
+            "version": "v2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cosenary/Instagram-PHP-API.git",
+                "reference": "fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cosenary/Instagram-PHP-API/zipball/fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5",
+                "reference": "fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MetzWeb\\Instagram\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Metz",
+                    "email": "christian-metz1@gmx.net",
+                    "homepage": "http://metzweb.net"
+                }
+            ],
+            "description": "An easy-to-use PHP Class for accessing Instagram's API.",
+            "homepage": "https://github.com/cosenary/Instagram-PHP-API",
+            "keywords": [
+                "api",
+                "instagram"
+            ],
+            "time": "2014-11-29 13:10:42"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -1150,6 +1193,51 @@
                 "yandex"
             ],
             "time": "2015-08-28 09:57:17"
+        },
+        {
+            "name": "ibrows/xeditable-bundle",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ibrows/IbrowsXeditableBundle.git",
+                "reference": "c4a962dc90147213c22192b10228ee94a9d4e790"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ibrows/IbrowsXeditableBundle/zipball/c4a962dc90147213c22192b10228ee94a9d4e790",
+                "reference": "c4a962dc90147213c22192b10228ee94a9d4e790",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/symfony": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Ibrows\\XeditableBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Steiner",
+                    "homepage": "https://github.com/ibrows"
+                }
+            ],
+            "description": "bootstrap x-editable symfony2 forms integration",
+            "homepage": "http://www.ibrows.ch",
+            "keywords": [
+                "Symfony2",
+                "XeditableBundle",
+                "bootstrap",
+                "form",
+                "inline-edit",
+                "x-editable"
+            ],
+            "time": "2015-06-10 10:56:34"
         },
         {
             "name": "incenteev/composer-parameter-handler",

@@ -27,13 +27,13 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
             {% if app.environment == 'node' %}
-            	<script type="text/javascript">
-            		var siteBaseURL = '{{ url('homepage') }}';
-            	</script>
-                <script type="text/javascript" src="/scripts/config.js"></script>
-                <script type="text/javascript" data-main="main" src="/bower_components/requirejs/require.js"></script>
+            	{% block javascriptsDev %}
+                <script type="text/javascript" src="/requirejs-config/config.js"></script>
+                <script type="text/javascript" data-main={% block javascriptDataMain %}"{{ asset('/scripts/default-index-main.js') }}"{% endblock %}
+                	src="/bower_components/requirejs/require.js"></script>
+                {% endblock %}
             {% else %}
-                <script type="text/javascript" src="{{ asset('scripts/main.js') }}"></script>
+                {% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/default-index-main.js') }}"></script>{% endblock %}
             {% endif %}
             {% block customjavascripts %}{% endblock customjavascripts %}
         {% endblock %}

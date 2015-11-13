@@ -7,7 +7,10 @@ use AppBundle\Core\Dao\UserDAO;
 use AppBundle\Core\Service\UserServiceInterface;
 use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\User;
 use Monolog\Logger;
+use AppBundle\Entity\UserPostingCategory;
+use AppBundle\Entity\PostingCategory;
 
 /**
  * API implementations related to user
@@ -53,4 +56,28 @@ class UserService implements UserServiceInterface {
 		$this->userDAO->saveSocialProfile ( $socialProfile );
 		return $socialProfile;
 	}
+	
+	public function getPostingCateogiresForUser(User $user) {
+		return $this->userDAO->getPostingCateogiresForUser($user);
+	}
+	/**
+	 * {@inheritDoc}
+	 * @see \AppBundle\Core\Service\UserServiceInterface::addPostingCategory()
+	 */
+	public function addPostingCategory(User $user, $postingCategoryId) {
+		$userProfile = $this->userDAO->getUserProfile($user);
+		$postingCategory = $this->userDAO->getPostingCategory($postingCategoryId);
+		$userProfile->addCategory($postingCategory);
+		$this->userDAO->saveUserProfile($userProfile);
+	}
+	
+	/**
+	 * 
+	 * @param User $user
+	 * @return UserProfile found by user
+	 */
+	public function getUserProfile(User $user) {
+		return $this->userDAO->getUserProfile($user);
+	}
+
 }

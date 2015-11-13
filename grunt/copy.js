@@ -10,7 +10,8 @@ module.exports = {
                 '*.{ico,png,txt}',
                 'img/{,*/}*.webp',
                 'fonts/{,*/}*.*',
-                'styles/*.css'
+                'styles/*.css',
+                '../../bower_components/requirejs/require.js'
             ]
         }]
     }

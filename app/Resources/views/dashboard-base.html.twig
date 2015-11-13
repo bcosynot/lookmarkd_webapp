@@ -43,15 +43,21 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 			<div class="top-menu">
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown mt">
-						<a class="dropdown-toggle" href="#" data-toggle="dropdown" id="user-settings" >
-							<i class="ion-gear-b"></i>{{ app.user.username }}
+						<a class="ion-android-notifications-none top-navbar-text"></a>
+					</li>
+					<li class="dropdown mt">
+						<a href="#" id="user-settings" class="top-navbar-text">
+							{{ app.user.username }}&nbsp;&nbsp;<i class="ion-gear-b"></i>
 						</a>
-						<ul class="dropdown-menu extended" >
+						<ul class="dropdown-menu">
 							<div class="notify-arrow notify-arrow-white"></div>
                             <li>
                                 <a class="green" href="/logout">Logout</a>
                             </li>
-                         </ul>
+                            <li>
+                                <a class="green" href="/profile">Profile</a>
+                            </li>
+                        </ul>
 					</li>
 				</ul>
 			</div>
@@ -102,11 +108,13 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 	{% endblock body %} 
 	{% block javascripts %} 
 		{% if app.environment == 'node' %}
-			<script type="text/javascript" src="/scripts/config.js"></script>
-			<script type="text/javascript" data-main="main"
+			{% block javascriptsDev %}
+			<script type="text/javascript" src="{{ asset('requirejs-config/config.js') }}"></script>
+			<script type="text/javascript" data-main={% block javascriptDataMain %}"{{ asset('scripts/dashboard-influencer-main.js') }}"{% endblock %}
 				src="/bower_components/requirejs/require.js"></script>
+			{% endblock %}
 		{% else %}
-			<script type="text/javascript" src="{{ asset('scripts/main.js') }}"></script>
+			{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/dashboard-influencer-main.js') }}"></script>{% endblock %}
 		{% endif %} 
 		{% block customjavascripts %}{% endblock customjavascripts	%} 
 	{% endblock javascripts %}

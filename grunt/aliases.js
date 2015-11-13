@@ -64,7 +64,7 @@ module.exports = function (grunt, options) {
             'exec:sfcl'
         ],
         test: [
-            'jshint','wiredep:test','bowerRequirejs:test','karma','phpunit'
+            'jshint','wiredep:test','bowerRequirejs:test',/*'karma',*/'phpunit'
         ],
         fetch: function(){
             grunt.connectMiddleware = getMiddleware();

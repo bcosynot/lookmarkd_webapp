@@ -29,6 +29,11 @@ class User extends BaseUser
      * @ORM\Column(type="string")
      */
     protected $instagramId;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $instagramAccessToken;
         
     /**
      * Set instagramId

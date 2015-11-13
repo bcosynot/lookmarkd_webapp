@@ -5,7 +5,7 @@ module.exports = {
         baseUrl: 'bower_components'
     },
     dist: {
-        rjsConfig: '<%= paths.app %>/scripts/config.js'
+        rjsConfig: '<%= paths.app %>/requirejs-config/config.js'
     },
     test: {
         rjsConfig: 'test/test-main.js'

@@ -5,9 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {% if app.environment == 'node' %}
+                <link rel="stylesheet" href="styles/custom-animation.css?no-rev"/>
                 <link rel="stylesheet" href="styles/main.css?no-rev"/>
             {% else %}
                 {% block stylesheetsDist %}
+                <link rel="stylesheet" href="{{ asset('styles/custom-animation.css') }}"/>
                 <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
                 {% endblock stylesheetsDist %}
             {% endif %}

@@ -3,7 +3,6 @@
 {% block title %}Dashboard{% endblock %}
 {% block stylesheetsDist %}
 <style type="text/css">
- 	{% include 'public/styles/critical/index.css' ignore missing %}
 </style>
 <script>
     (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/dashboard-style.css') }}","{{ asset('styles/style-responsive.css') }}","{{ asset('styles/lineicons.css') }}"]));
@@ -17,16 +16,75 @@
 {% endblock stylesheetsDist %}
 
 {% block content %}
-	<div class="row mtbox">
-                  		<div class="col-md-6 col-sm-3 col-md-offset-1 box0">
-                  			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h2>Welcome!</h2>
-                  			</div>
-                  		</div>
+	<div class="row mt">
+		{% if nextStep == 'postingcategories' %}
+		<div class="col-lg-offset-2 col-lg-6">
+			<div class="alert alert-success">
+				<p><strong>You're doing great!</strong></p>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+				    <span class="sr-only">Two more steps</span>
+				  </div>
+				</div>
+				<p>Two more steps to being discovered by amazing brands..</p>
+				<p>
+					<a href="{{ url('add_posting_category') }}" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Brands need to know what you post about. Add categories to your profile so they can easily search and discover you.">
+					Step 3/4: Add a category
+					</a>
+				</p>
+			</div>
+		</div>
+		{% endif %}
+		{% if nextStep == 'bloggername' %}
+		<div class="col-lg-offset-2 col-lg-6">
+			<div class="alert alert-success">
+				<p><strong>Look at you go!</strong></p>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+				    <span class="sr-only">One more step</span>
+				  </div>
+				</div>
+				<p>Step 4/4: What's your brand/blogging/stage name?</p>
+				<p>
+					<input type="text" class="form-control" id="bloggerName" placeholder="Enter brand/blogging/stage name here"/>
+				</p>
+				<p>
+					<button class='btn btn-primary btn-lg' id="saveBloggerName" data-url="{{ saveBloggerNameURL }}">Save</button>
+				</p>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+	<div class="row mt">
+		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+        	<div class="box1">
+				<h2><i class="ion-eye"></i></h2>
+				<h3>{{ followerCount }} followers</h3>
+            </div>
+            <p>You have {{ followerCount }} followers</p>
+       </div>
+       <div class="col-md-2 col-sm-2 box0">
+       	<div class="box1">
+			<h2><i class="ion-heart"></i></h2>
+			<h3>{{ likesCount }} Likes</h3>
+        </div>
+        <p>{{ likesCount }} likes across {{ mediaCount }} posts</p>
+      </div>
+      
+     <div class="col-md-2 col-sm-2 box0">
+      	<div class="box1">
+			<h2><i class="ion-chatbox"></i></h2>
+			<h3>{{ commentsCount }} Comments</h3>
+        </div>
+        <p>{{ commentsCount }} comments across {{ mediaCount }} posts</p>
+     </div>
+     
+     <div class="col-md-2 col-sm-2 box0">
+      	<div class="box1">
+			<h2><i class="ion-social-instagram-outline"></i></h2>
+			<h3>{{ mediaCount }} posts</h3>
+        </div>
+        <p>You have {{ mediaCount }} posts</p>
+     </div>
 	</div>
 {% endblock %}
-
-{% block customjavascripts %}
-<script type="text/javascript"></script>
-{% endblock customjavascripts %}
