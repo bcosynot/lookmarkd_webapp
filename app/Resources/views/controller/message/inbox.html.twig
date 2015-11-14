@@ -10,7 +10,7 @@
 		border-right: #ecf0f1 2px solid;
 	}
 	
-	#threads #threads-header, #message-body #new-message-header {
+	#threads #threads-header, #message-body #new-message-header, #messages-header, #message-footer {
 		background: #ecf0f1;
 	}
 	
@@ -35,10 +35,14 @@
 		margin-top: 5px;
 	}
 	
-	#new-msg-row, #new-message-form {
+	#new-msg-row, #new-message-form, #messages-list {
 		display: none;
 	}
 	
+	.message.recieved {
+		border: #5B6271 solid 1px;
+		padding: 5px;
+	}
 	
 </style>
 <link rel="stylesheet" href="{{ asset('styles/typeahead.css') }}" />
@@ -83,9 +87,11 @@
 		</div>
 		{% endif %}
 		{% for thread in threads %}
-		<div class="row thread-details cursor-pointer" id="{{ thread.id }}">
+		<div class="row existing thread-details cursor-pointer" 
+			id="{{ thread.id }}"
+			data-thread-fetch-url="{{ url('messages_get',{'threadId':thread.id}) }}">
 			<div class="col-sm-8">
-				<p><strong>{{ thread.associatedUser }}</strong></p> 
+				<p><strong class="participant">{{ thread.associatedUser }}</strong></p> 
 			</div>
 			<div class="col-sm-offset-2 col-sm-2">
 				<p><span class="ion-ios-close-outline cursor-pointer thread-delete"></span></p>
@@ -116,8 +122,28 @@
 							<textarea placeholder="Enter message..." class="form-control"></textarea>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-md btn-success pull-right">Send&nbsp;&nbsp<span class="ion-ios-paperplane"></span></button>
+							<button class="btn btn-md btn-success pull-right">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="messages-list">
+			<div class="col-sm-12 col-lg-12 col-md-12 container-fluid">
+				<div class="row" id="messages-header">
+						<h4></h4>
+				</div>
+				<div class="row mt">
+					<div class="col-sm-12 col-lg-12 col-md-12 container-fluid" id="msg-body">
+					</div>
+				</div>
+				<div class="row mt" id="message-footer">
+					<div class="col-sm-10 col-lg-10 col-md-10">
+						<input type="text" placeholder="Enter message..." class="form-control" id="existing-thread-msg" />
+					</div>
+					<div class="col-sm-2 col-lg-2 col-md-2">
+						<button class="btn btn-md btn-success pull-right" id="send-existing-thread-msg"
+							data-send-url="{{ url('messages_send') }}">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
 					</div>
 				</div>
 			</div>

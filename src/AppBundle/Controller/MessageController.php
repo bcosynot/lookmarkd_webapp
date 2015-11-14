@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class MessageController extends Controller {
 	
@@ -21,9 +22,9 @@ class MessageController extends Controller {
 						'id' => $threadOriginal->getId () 
 				);
 				$associatedUser = null;
-				$threadOriginal->getMetadata ()->initialize();
-				foreach ( $threadOriginal->getMetadata () as $metadata) {
-					$participant = $metadata->getParticipant();
+				$threadOriginal->getMetadata ()->initialize ();
+				foreach ( $threadOriginal->getMetadata () as $metadata ) {
+					$participant = $metadata->getParticipant ();
 					if ($participant != $this->getUser ()) {
 						$associatedUser = $participant;
 						break;
@@ -41,7 +42,7 @@ class MessageController extends Controller {
 	
 	/**
 	 * @Route("/messages/recipients/list/{userNameLike}", name="message_get_recipients_list", defaults={"userNameLike"=null})
-	 * 
+	 *
 	 * @param null|string $userNameLike        	
 	 */
 	public function getRecpientsListAction($userNameLike) {
@@ -61,5 +62,45 @@ class MessageController extends Controller {
 		return new JsonResponse ( array (
 				'success' => true 
 		) );
+	}
+	
+	/**
+	 * @Route("messages/get/{threadId}", name="messages_get")
+	 * 
+	 * @param int $threadId        	
+	 */
+	public function getMessagesAction($threadId) {
+		$provider = $this->get ( 'fos_message.provider' );
+		$thread = $provider->getThread ( $threadId );
+		$thread->getMessages ()->initialize ();
+		$messages = array ();
+		foreach ( $thread->getMessages() as $message ) {
+			$sentOrRecieved = $message->getSender()->getId() == $this->getUser()->getId() ? 'sent' : 'recieved';
+			$messages [] = array (
+					'id' => $message->getId (),
+					'sender' => $message->getSender()->getId(),
+					'created' => $message->getCreatedAt(),
+					'body' => $message->getBody(),
+					'sentOrRecieved' => $sentOrRecieved,
+			);
+		}
+		return new JsonResponse ( $messages );
+	}
+	
+	/**
+	 * @Route("/messages/send/", name="messages_send")
+	 * @param Request $request
+	 */
+	public function sendMessageAction(Request $request) {
+		$threadId = $request->request->get('threadId');
+		$message = $request->request->get('message');
+		$provider = $this->get ( 'fos_message.provider' );
+		$thread = $provider->getThread ( $threadId );
+		$messageBuilder = $this->get('fos_message.composer')->reply($thread)
+            ->setSender($this->getUser())
+            ->setBody($message);
+        $senderService = $this->get ( 'fos_message.sender' );
+        $senderService->send ( $messageBuilder->getMessage () );
+		return new JsonResponse('success');
 	}
 }
