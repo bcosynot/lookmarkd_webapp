@@ -222,4 +222,17 @@ class MessageController extends Controller {
 				'success' => $success 
 		) );
 	}
+	
+	/**
+	 * @Route("/messages/unread/count/", name="messages_unread_count")
+	 */
+	public function getTotalUnreadMessagesAction() {
+		$provider = $this->get ( 'fos_message.provider' );
+		$unreadCount = $provider->getNbUnreadMessages();
+		return new JsonResponse ( array (
+				'success' => true,
+				'unreadCount' => $unreadCount,
+		) );
+	}
+	
 }

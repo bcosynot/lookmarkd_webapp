@@ -81,6 +81,8 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 					<li class="sub-menu">
 						<a href="{{ url('message_inbox') }}"> <i
 								class="ion-ios-chatboxes"></i> <span>Messages</span>
+								<span class="badge" id="total-unread-messages-count"
+							data-unread-messages-count-url="{{ url('messages_unread_count') }}"></span>
 						</a>
 					</li>
 				</ul>
