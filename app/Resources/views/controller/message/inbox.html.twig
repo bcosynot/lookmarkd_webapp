@@ -10,7 +10,7 @@
 		border-right: #ecf0f1 2px solid;
 	}
 	
-	#threads #threads-header {
+	#threads #threads-header, #message-body #new-message-header {
 		background: #ecf0f1;
 	}
 	
@@ -58,7 +58,7 @@
 </noscript>
 {% endblock stylesheetsDist %} {% block content %}
 <div class="row mt">
-	<div class="col-lg-3 col-md-3 col-sm-1 col-sm-offset-1" id="threads">
+	<div class="col-lg-3 col-md-3 col-sm-1 col-sm-offset-1 container-fluid" id="threads">
 		<div class="row" id="threads-header">
 			<div class="col-sm-8">
 				<h4>Inbox</h4>
@@ -83,7 +83,7 @@
 		</div>
 		{% endif %}
 		{% for thread in threads %}
-		<div class="row thread-details" id="{{ thread.id }}">
+		<div class="row thread-details cursor-pointer" id="{{ thread.id }}">
 			<div class="col-sm-8">
 				<p><strong>{{ thread.associatedUser }}</strong></p> 
 			</div>
@@ -93,25 +93,32 @@
 		</div>
 		{% endfor %}
 	</div>
-	<div class="col-lg-7 col-md-7 col-sm-9" id="message-body">
+	<div class="col-lg-7 col-md-7 col-sm-7 container-fluid" id="message-body">
 		<div class="row mt" id="no-threads-alert">
 			<h1 class="ion-alert"></h1>
 			<h3>No message selected</h3>
 		</div>
-		<div class="row mt" id="new-message-form">
-			<div class="col-sm-12 col-lg-12 col-md-12">
-				<div class="form-group">
-					<input type="text" 
-						class="form-control typeahead" 
-						placeholder="Enter recepient name"
-						data-recipients-url="{{ url('message_get_recipients_list') }}"
-						id="recipient" />
+		<div class="row" id="new-message-form">
+			<div class="col-sm-12 col-lg-12 col-md-12 container-fluid">
+				<div class="row" id="new-message-header">
+						<h4>New Message</h4>
 				</div>
-				<div class="form-group">
-					<textarea placeholder="Enter message..." class="form-control"></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-md btn-success pull-right">Send&nbsp;&nbsp<span class="ion-ios-paperplane"></span></button>
+				<div class="row mt">
+					<div class="col-sm-12 col-lg-12 col-md-12">
+						<div class="form-group">
+							<input type="text" 
+								class="form-control typeahead" 
+								placeholder="Enter recepient name"
+								data-recipients-url="{{ url('message_get_recipients_list') }}"
+								id="recipient" />
+						</div>
+						<div class="form-group">
+							<textarea placeholder="Enter message..." class="form-control"></textarea>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-md btn-success pull-right">Send&nbsp;&nbsp<span class="ion-ios-paperplane"></span></button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
