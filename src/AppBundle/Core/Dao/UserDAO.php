@@ -92,4 +92,12 @@ class UserDAO {
 		return $threads;
 	}
 	
+	public function getUsersWithNameLike($userNameLike) {
+		$this->em->beginTransaction ();
+		$query = $this->em->createQuery('Select u FROM AppBundle\Entity\User WHERE u.username LIKE :userNameLike');
+		$query->setParameter('userNameLike', '%'.$userNameLike.'%');
+		$users = $query->getResult();
+		return $users;
+	}
+	
 }

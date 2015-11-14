@@ -40,8 +40,19 @@
 	}
 	
 	.message.recieved {
-		border: #5B6271 solid 1px;
-		padding: 5px;
+		background: #ecf0f1;
+		border-color: #ecf0f1;
+	}
+	
+	.message.sent {
+		background: #1abc9c;
+		color: #ffffff;
+		border-color: #1abc9c;
+	}
+	
+	.message {
+		padding: 1em;
+		border-radius: 2px;
 	}
 	
 </style>
@@ -62,7 +73,10 @@
 </noscript>
 {% endblock stylesheetsDist %} {% block content %}
 <div class="row mt">
-	<div class="col-lg-3 col-md-3 col-sm-1 col-sm-offset-1 container-fluid" id="threads">
+	<div class="col-lg-3 col-md-3 col-sm-1 col-sm-offset-1 container-fluid" 
+		id="threads" 
+		data-current-thread-id=""
+		data-new-messages-url="{{ url('get_new_messages') }}">
 		<div class="row" id="threads-header">
 			<div class="col-sm-8">
 				<h4>Inbox</h4>
@@ -119,10 +133,14 @@
 								id="recipient" />
 						</div>
 						<div class="form-group">
-							<textarea placeholder="Enter message..." class="form-control"></textarea>
+							<textarea placeholder="Enter message..." class="form-control" id="new-message-body"></textarea>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-md btn-success pull-right">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
+							<button class="btn btn-md btn-success pull-right"
+								data-send-new-msg-url="{{ url('messages_send_new') }}"
+								data-validate-recipient-url="{{ url('messages_validate_recipient', {'recipientName':null}) }}"
+								data-loading-text="Sending..."
+								id="send-new-msg">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
 						</div>
 					</div>
 				</div>
