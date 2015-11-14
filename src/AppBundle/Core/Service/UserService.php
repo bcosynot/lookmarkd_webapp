@@ -101,7 +101,7 @@ class UserService implements UserServiceInterface {
 				$participants = $associatedThread->getParticipants ();
 				if (null != $participants && sizeof ( $participants ) > 0) {
 					foreach ( $participants as $participant ) {
-						if ($participant != $user && null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $participant->getUsername (), $userNameLike )))) {
+						if ($participant->getId () != $user->getId () && (null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $participant->getUsername (), $userNameLike ))))) {
 							$recipients [] = $participant->getUsername ();
 						}
 					}
@@ -111,7 +111,7 @@ class UserService implements UserServiceInterface {
 		$connections = $user->getConnections ();
 		if (null != $connections && sizeof ( $connections ) > 0) {
 			foreach ( $connections as $connection ) {
-				if ($connection != $user && null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $connection->getUsername (), $userNameLike )))) {
+				if ($connection->getId () != $user->getId () && (null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $connection->getUsername (), $userNameLike ))))) {
 					$recipients [] = $connection->getUsername ();
 				}
 			}
