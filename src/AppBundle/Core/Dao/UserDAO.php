@@ -2,12 +2,13 @@
 
 namespace AppBundle\Core\Dao;
 
+use AppBundle\Entity\PostingCategory;
 use AppBundle\Entity\SocialProfile;
-use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\ThreadMetadata;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserProfile;
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
-use AppBundle\Entity\PostingCategory;
 
 /**
  * DAO for user related entities.
@@ -67,6 +68,28 @@ class UserDAO {
 	 */
 	public function getPostingCategory($postingCategoryId) {
 		return $this->em->getRepository('AppBundle:PostingCategory')->find($postingCategoryId);
+	}
+	
+	/**
+	 * 
+	 * @param string $username
+	 * return User
+	 */
+	public function getUser($username) {
+		return $this->em->getRepository('AppBundle:User')->findOneBy(array('username'=>$username));
+	}
+	
+	/**
+	 * @param User $user
+	 * @return array Threads user is a part of
+	 */
+	public function getAssociatedThreads(User $user) {
+		$threadMetadatas = $this->em->getRepository('AppBundle:ThreadMetadata')->findBy(array('participant'=>$user));
+		$threads = array();
+		foreach ($threadMetadatas as $threadMetadata) {
+			$threads[] = $threadMetadata->getThread();
+		}
+		return $threads;
 	}
 	
 }

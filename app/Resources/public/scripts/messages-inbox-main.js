@@ -1,4 +1,4 @@
-require(['modules/common-scripts','jquery'],function(common, jquery) {
+require(['modules/common-scripts','jquery','typeahead','bloodhound'],function(common, jquery,typeahead,bd) {
     'use strict';
     common.init();
     var $ = jquery;
@@ -18,5 +18,20 @@ require(['modules/common-scripts','jquery'],function(common, jquery) {
     		$('#new-msg-helper,#no-threads-alert').slideDown('fast');
     	}
     	$("#new-message-form").slideUp();
+    });
+    
+    var recipients = new Bloodhound({
+    	  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    	  queryTokenizer: Bloodhound.tokenizers.whitespace,
+    	  prefetch: $('#recipient').attr('data-recipients-url')+'/null',
+    	  remote: {
+    	    url: $('#recipient').attr('data-recipients-url')+'/%QUERY',
+    	    wildcard: '%QUERY'
+    	  }
+    	});
+    
+    $('#recipient').typeahead(null,{
+    	name:'recipient',
+    	source: recipients,
     });
 });

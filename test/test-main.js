@@ -44,7 +44,9 @@ require.config({
         'bootstrap3-wysihtml5-bower': 'bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min',
         dcjqaccordion: 'dcjqaccordion/js/jquery.dcjqaccordion.2.7.min',
         'jquery.scrollTo': 'jquery.scrollTo/jquery.scrollTo',
-        'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll'
+        'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll',
+        select2: 'select2/dist/js/select2',
+        typeahead: 'typeahead.js/dist/typeahead.bundle'
     },
     shim: {
         bootstrap: {

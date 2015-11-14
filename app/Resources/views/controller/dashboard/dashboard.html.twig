@@ -49,7 +49,11 @@
 					<input type="text" class="form-control" id="bloggerName" placeholder="Enter brand/blogging/stage name here"/>
 				</p>
 				<p>
-					<button class='btn btn-primary btn-lg' id="saveBloggerName" data-url="{{ saveBloggerNameURL }}">Save</button>
+					<button class='btn btn-primary btn-lg' 
+						id="saveBloggerName" 
+						data-url="{{ saveBloggerNameURL }}" 
+						data-loading-text="Saving..."
+						data-welcome-msg-url="{{ url('send_welcome_message') }}">Save</button>
 				</p>
 			</div>
 		</div>
