@@ -19,11 +19,11 @@ class MessageController extends Controller {
 		$allThreadIds = array ();
 		$threads = array ();
 		$allOriginalThreads = array_merge ( $threadsOriginal, $sentThreadsOriginal );
-		dump($allOriginalThreads);
-		dump(sizeof ( $allOriginalThreads ));
+		dump ( $allOriginalThreads );
+		dump ( sizeof ( $allOriginalThreads ) );
 		if (null != $allOriginalThreads && sizeof ( $allOriginalThreads ) > 0) {
 			foreach ( $allOriginalThreads as $threadOriginal ) {
-				dump($threadOriginal);
+				dump ( $threadOriginal );
 				$threadId = $threadOriginal->getId ();
 				if (! in_array ( $threadId, $allThreadIds )) {
 					$thread = array (
@@ -32,14 +32,28 @@ class MessageController extends Controller {
 					$allThreadIds [] = $threadId;
 					$associatedUser = null;
 					$threadOriginal->getMetadata ()->initialize ();
+					$userId = $this->getUser ()->getId ();
 					foreach ( $threadOriginal->getMetadata () as $metadata ) {
 						$participant = $metadata->getParticipant ();
-						if ($participant->getId() != $this->getUser ()->getId()) {
+						if ($participant->getId () != $userId) {
 							$associatedUser = $participant;
 							break;
 						}
 					}
 					$thread ['associatedUser'] = $associatedUser->getUsername ();
+					$threadOriginal->getMessages ()->initialize ();
+					$unreadCount = 0;
+					foreach ( $threadOriginal->getMessages () as $message ) {
+						if($message->getSender()->getId() !== $userId) {
+							$message->getMetadata ()->initialize ();
+							foreach ($message->getMetadata () as $messageMetadata ) {
+								if ($messageMetadata->getParticipant ()->getId () === $userId && !$messageMetadata->getIsRead ()) {
+									$unreadCount ++;
+								}
+							}
+						}
+					}
+					$thread ['unreadCount'] = $unreadCount;
 					$threads [] = $thread;
 				}
 			}
@@ -65,9 +79,9 @@ class MessageController extends Controller {
 	 */
 	public function sendWelcomeMessageAction() {
 		$sender = $this->get ( 'user_service' )->getUser ( 'lookmarkd' );
-		$existingThreadId = $this->getExistingThreadsForParticipants($sender->getId());
+		$existingThreadId = $this->getExistingThreadsForParticipants ( $sender->getId () );
 		$threadBuilder = null;
-		if(null == $existingThreadId) {
+		if (null == $existingThreadId) {
 			$threadBuilder = $this->get ( 'fos_message.composer' )->newThread ();
 		} else {
 			$thread = $this->get ( 'fos_message.provider' )->getThread ( $existingThreadId );
@@ -147,17 +161,17 @@ class MessageController extends Controller {
 	
 	/**
 	 * @Route("/messages/send/new", name="messages_send_new")
-	 * 
-	 * @param Request $request
+	 *
+	 * @param Request $request        	
 	 */
 	public function sendNewMessageAction(Request $request) {
 		$recipientUserName = $request->request->get ( 'recipientUserName' );
-		$recipient = $this->get('user_service')->getUser($recipientUserName);
-		$sender = $this->getUser();
+		$recipient = $this->get ( 'user_service' )->getUser ( $recipientUserName );
+		$sender = $this->getUser ();
 		$message = $request->request->get ( 'message' );
-		$existingThreadId = $this->getExistingThreadsForParticipants($recipient->getId());
-		if(null == $existingThreadId) {
-			$messageBuilder = $this->get ( 'fos_message.composer' )->newThread ()->addRecipient($recipient)->setSubject ( '' );
+		$existingThreadId = $this->getExistingThreadsForParticipants ( $recipient->getId () );
+		if (null == $existingThreadId) {
+			$messageBuilder = $this->get ( 'fos_message.composer' )->newThread ()->addRecipient ( $recipient )->setSubject ( '' );
 		} else {
 			$thread = $this->get ( 'fos_message.provider' )->getThread ( $existingThreadId );
 			$messageBuilder = $this->get ( 'fos_message.composer' )->reply ( $thread );
@@ -167,7 +181,6 @@ class MessageController extends Controller {
 		$senderService->send ( $messageBuilder->getMessage () );
 		return new JsonResponse ( 'success' );
 	}
-	
 	private function getExistingThreadsForParticipants($recipientParticipantId) {
 		$provider = $this->get ( 'fos_message.provider' );
 		$threadsOriginal = $provider->getInboxThreads ();
@@ -177,16 +190,16 @@ class MessageController extends Controller {
 		if (null != $allOriginalThreads && sizeof ( $threadsOriginal ) > 0) {
 			foreach ( $threadsOriginal as $threadOriginal ) {
 				$threadOriginal->getMetadata ()->initialize ();
-				if (sizeof ( $threadOriginal->getMetadata ()) == 2 ) {
+				if (sizeof ( $threadOriginal->getMetadata () ) == 2) {
 					foreach ( $threadOriginal->getMetadata () as $metadata ) {
-						$participantId = $metadata->getParticipant()->getId();
-						if($participantId == $recipientParticipantId) {
-							$threadId = $threadOriginal->getId();
+						$participantId = $metadata->getParticipant ()->getId ();
+						if ($participantId == $recipientParticipantId) {
+							$threadId = $threadOriginal->getId ();
 							break;
 						}
 					}
 				}
-				if(null!=$threadId) {
+				if (null != $threadId) {
 					break;
 				}
 			}
@@ -196,16 +209,17 @@ class MessageController extends Controller {
 	
 	/**
 	 * @Route("/messages/is/valid/recieipent/{recipientName}", name="messages_validate_recipient", defaults={"recipientName"=null})
-	 * @param string $recipientName
+	 *
+	 * @param string $recipientName        	
 	 */
 	public function isValidRecipientAction($recipientName) {
 		$possibleRecipients = $this->get ( 'user_service' )->getPossibleRecipientsForUser ( $this->getUser (), null );
 		$success = false;
-		if(in_array($recipientName, $possibleRecipients)) {
+		if (in_array ( $recipientName, $possibleRecipients )) {
 			$success = true;
 		}
 		return new JsonResponse ( array (
-				'success' => $success,
+				'success' => $success 
 		) );
 	}
 }
