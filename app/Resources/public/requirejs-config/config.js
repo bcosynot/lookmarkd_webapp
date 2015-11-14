@@ -33,7 +33,7 @@ var require = {
         'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll',
         appScripts: '../app/Resources/public/scripts/',
         select2: 'select2/dist/js/select2',
-        typeahead: 'typeahead.js/dist/typeahead.jquery.min',
+        typeahead: 'typeahead.js/dist/typeahead.bundle',
         bloodhound: 'typeahead.js/dist/bloodhound.min'
     },
     shim: {
@@ -148,15 +148,13 @@ var require = {
                 'bootstrap/dropdown'
             ]
         },
-        typeahead:  {
+        typeahead: {
             deps: [
                 'jquery'
             ],
-            init: function ($) {
-            	return require.s.contexts._.registry['typeahead.js'].factory( $ );
-            }
+            exports: '$.fn.typeahead'
         },
-        bloodhound:  {
+        bloodhound: {
             exports: 'Bloodhound',
             deps: [
                 'jquery'

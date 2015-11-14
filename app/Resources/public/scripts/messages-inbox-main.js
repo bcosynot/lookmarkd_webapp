@@ -1,5 +1,6 @@
+/* jshint laxbreak:true */
 require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootstrap' ],
-		function(common, jquery, typeahead, bd, bootstrap) {
+		function(common, jquery, typeahead, Bloodhound) {
 			'use strict';
 			common.init();
 			var $ = jquery;
@@ -81,7 +82,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 					'click',
 					function() {
 						var threadId = $(this).attr('id');
-						if($('#threads').attr('data-current-thread-id') != threadId) {
+						if($('#threads').attr('data-current-thread-id') !== threadId) {
 							var fetchURL = $(this).attr(
 									'data-thread-fetch-url');
 							var participantName = $(this).find('strong.participant').text().trim();
@@ -98,7 +99,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 							$.getJSON(fetchURL, {}, function(data) {
 								$('#msg-body').empty();
 								for(var i =0;i<data.length;i++) {
-									if($('#threads').attr('data-current-thread-id') == threadId) {
+									if($('#threads').attr('data-current-thread-id') === threadId) {
 										addMessageToInbox(data[i].body, data[i].sentOrRecieved, data[i].id);
 									}
 								}
@@ -117,7 +118,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 						message:message,
 					},function(data){
 						if(data === 'success') {
-							if($('#threads').attr('data-current-thread-id') == threadId) {
+							if($('#threads').attr('data-current-thread-id') === threadId) {
 								addMessageToInbox(message, 'sent', '');
 							}
 						}
@@ -128,7 +129,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 			});
 			
 			$('#existing-thread-msg').on('keypress',function(e){
-				if(e.which == 13) {
+				if(e.which === 13) {
 					$('#send-existing-thread-msg').click();
 			    }
 			});
@@ -148,19 +149,21 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 				}
 			}
 			
-			var messageRetriever = setInterval(getNewMessagesForThread,30000);
-			
 			function getNewMessagesForThread() {
 				var threadId = $('#threads').attr('data-current-thread-id');
 				if(threadId.length && threadId !== -9999) {
 					var getNewMessagesURL = $('#threads').attr('data-new-messages-url')+'/'+threadId;
 					$.getJSON(getNewMessagesURL, {}, function(data) {
 						for(var i =0;i<data.length;i++) {
-							if($('#threads').attr('data-current-thread-id') == threadId) {
+							if($('#threads').attr('data-current-thread-id') === threadId) {
 								addMessageToInbox(data[i].body, data[i].sentOrRecieved, data[i].id);
 							}
 						}
 					});
 				}
 			}
+			
+			setInterval(getNewMessagesForThread,30000);
+			
+			
 		});

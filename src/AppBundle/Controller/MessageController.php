@@ -19,11 +19,8 @@ class MessageController extends Controller {
 		$allThreadIds = array ();
 		$threads = array ();
 		$allOriginalThreads = array_merge ( $threadsOriginal, $sentThreadsOriginal );
-		dump ( $allOriginalThreads );
-		dump ( sizeof ( $allOriginalThreads ) );
 		if (null != $allOriginalThreads && sizeof ( $allOriginalThreads ) > 0) {
 			foreach ( $allOriginalThreads as $threadOriginal ) {
-				dump ( $threadOriginal );
 				$threadId = $threadOriginal->getId ();
 				if (! in_array ( $threadId, $allThreadIds )) {
 					$thread = array (
