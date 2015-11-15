@@ -172,7 +172,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 				row.attr('data-thread-fetch-url',threadFetchUrl);
 				var participantParent = $('<div class="col-sm-8">');
 				var participant = $('<strong class="participant">');
-				participant.text(data.associatedUser);
+				participant.text(thread.associatedUser);
 				var badge = $('<span class="badge">');
 				badge.text(thread.unreadCount);
 				var p = $('p');
