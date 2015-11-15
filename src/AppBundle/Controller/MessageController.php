@@ -13,6 +13,14 @@ class MessageController extends Controller {
 	 * @Route("/messages/", name="message_inbox")
 	 */
 	public function inboxAction() {
+		$threads = $this->getThreads ();
+		$model = array ();
+		$model ['threads'] = $threads;
+		$model ['totalThreads'] = sizeof ( $threads );
+		return $this->render ( 'controller/message/inbox.html.twig', $model );
+	}
+	
+	private function getThreads() {
 		$provider = $this->get ( 'fos_message.provider' );
 		$threadsOriginal = $provider->getInboxThreads ();
 		$sentThreadsOriginal = $provider->getSentThreads ();
@@ -55,11 +63,9 @@ class MessageController extends Controller {
 				}
 			}
 		}
-		$model = array ();
-		$model ['threads'] = $threads;
-		$model ['totalThreads'] = sizeof ( $threads );
-		return $this->render ( 'controller/message/inbox.html.twig', $model );
+		return $threads;
 	}
+
 	
 	/**
 	 * @Route("/messages/recipients/list/{userNameLike}", name="message_get_recipients_list", defaults={"userNameLike"=null})
@@ -93,7 +99,7 @@ class MessageController extends Controller {
 	}
 	
 	/**
-	 * @Route("messages/get/{threadId}", name="messages_get")
+	 * @Route("messages/get/{threadId}", name="messages_get", defaults={"threadId"=null})
 	 *
 	 * @param int $threadId        	
 	 */
@@ -230,6 +236,14 @@ class MessageController extends Controller {
 				'success' => true,
 				'unreadCount' => $unreadCount,
 		) );
+	}
+	
+	/**
+	 * @Route("/messages/threads/information/", name="messages_threads_information")
+	 */
+	public function getThreadsInformationAction() {
+		$threads = $this->getThreads();
+		return new JsonResponse($threads);
 	}
 	
 }

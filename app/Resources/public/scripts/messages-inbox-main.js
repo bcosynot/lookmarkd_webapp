@@ -165,5 +165,43 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 			
 			setInterval(getNewMessagesForThread,30000);
 			
+			function addThreadToInbox(thread) {
+				var row = $('<div class="row existing thread-details cursor-pointer">');
+				row.attr('id',thread.id);
+				var threadFetchUrl = $('#threads').attr('data-thread-fetch-url')+'/'+thread.id;
+				row.attr('data-thread-fetch-url',threadFetchUrl);
+				var participantParent = $('<div class="col-sm-8">');
+				var participant = $('<strong class="participant">');
+				participant.text(data.associatedUser);
+				var badge = $('<span class="badge">');
+				badge.text(thread.unreadCount);
+				var p = $('p');
+				p.append(participant);
+				p.append(badge);
+				participantParent.append(p);
+				row.append(participantParent);
+				row.append('<div class="col-sm-offset-2 col-sm-2">');
+				$('#threads').append(row);
+			}
+			
+			function updateThreadsUnreadCounts() {
+				var threadsInformationURL = $('#threads').attr('data-threads-information-url');
+				$.getJSON(threadsInformationURL,{},function(threads){
+					for(var i = 0; i<threads.length;i++) {
+						var existingThreadLink = $('.existing.thread-details[id='+threads[i].id+']');
+						if(existingThreadLink.length) {
+							var unreadCount = threads[i].unreadCount;
+							if(unreadCount > 0) {
+								existingThreadLink.find('span.badge').text(unreadCount);
+							}
+						} else {
+							addThreadToInbox(threads[i]);
+						}
+					}
+				});
+			}
+			
+			setInterval(updateThreadsUnreadCounts,30000);
+			
 			
 		});
