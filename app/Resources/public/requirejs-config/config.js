@@ -31,7 +31,10 @@ var require = {
         dcjqaccordion: 'dcjqaccordion/js/jquery.dcjqaccordion.2.7.min',
         'jquery.scrollTo': 'jquery.scrollTo/jquery.scrollTo',
         'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll',
-        appScripts: '../app/Resources/public/scripts/'
+        appScripts: '../app/Resources/public/scripts/',
+        select2: 'select2/dist/js/select2',
+        typeahead: 'typeahead.js/dist/typeahead.bundle',
+        bloodhound: 'typeahead.js/dist/bloodhound.min'
     },
     shim: {
         bootstrap: {
@@ -143,6 +146,18 @@ var require = {
                 'jquery.nicescroll',
                 'jquery.scrollTo',
                 'bootstrap/dropdown'
+            ]
+        },
+        typeahead: {
+            deps: [
+                'jquery'
+            ],
+            exports: '$.fn.typeahead'
+        },
+        bloodhound: {
+            exports: 'Bloodhound',
+            deps: [
+                'jquery'
             ]
         }
     },

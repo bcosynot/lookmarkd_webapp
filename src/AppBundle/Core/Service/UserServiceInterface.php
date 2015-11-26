@@ -36,4 +36,18 @@ interface UserServiceInterface {
 	 * @param int $postingCategoryId
 	 */
 	public function addPostingCategory(User $user, $postingCategoryId);
+	
+	/**
+	 * @param string $username
+	 * @return User
+	 */
+	public function getUser($username);
+	
+	/**
+	 * 
+	 * @param User $user
+	 * @param null|string $userNameLike Fetch recipients whose username contains this string
+	 * @return array
+	 */
+	public function getPossibleRecipientsForUser(User $user, $userNameLike);
 }

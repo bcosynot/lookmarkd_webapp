@@ -71,3 +71,8 @@ hwi_oauth:
             instagram: instagramId
     http_client:
         verify_peer: false
+        
+fos_message:
+    db_driver: orm
+    thread_class: AppBundle\Entity\Thread
+    message_class: AppBundle\Entity\Message
