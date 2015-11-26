@@ -215,5 +215,9 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 			
 			$('#new-msg-row, #new-message-form, #messages-list').hide();
 			
-			
+			$(window).on('beforeunload', function() {
+				if($('#new-message-body').val().length > 0 || $('#existing-thread-msg').val().length > 0 ) {
+					return 'You have not sent your messages yet.';
+				}
+			});
 		});
