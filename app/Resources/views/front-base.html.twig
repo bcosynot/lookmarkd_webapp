@@ -23,7 +23,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body id="front-base">
         {% block body %}{% endblock %}
         {% block javascripts %}
             {% if app.environment == 'node' %}

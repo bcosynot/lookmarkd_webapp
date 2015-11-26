@@ -78,6 +78,29 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 				source : recipients,
 			});
 
+			$('#existing-thread-msg').on('keypress',function(e){
+				if(e.which === 13) {
+					$('#send-existing-thread-msg').click();
+			    }
+			});
+			
+			function addMessageToInbox(body, sentOrRecieved, id) {
+				if(null === id || (null!== id && (id.length === 0 || id === '' || $('#msg-body ul li.row#'+id).length===0))) {
+					var row = $('<li class="row thread-msg">');
+					row.attr('id',id);
+					var messageBody = $('<div class="col-md-5 message">');
+					var p = $('<p>');
+					p.text(body);
+					messageBody.append(p);
+					messageBody.addClass(sentOrRecieved);
+					if(sentOrRecieved === 'sent') {
+						messageBody.addClass('pull-right col-md-pull-1');
+					}
+					row.append(messageBody);
+					$('#msg-body ul').append(row);
+				}
+			}
+			
 			$('.existing.thread-details').on(
 					'click',
 					function() {
@@ -89,19 +112,27 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 	
 							$('#threads').attr('data-current-thread-id',threadId);
 							$('#message-body > .row').slideUp('fast');
-							$('#messages-list #messages-header h4').text(participantName);
+							$('#messages-list #messages-header h4')
+								.text(participantName)
+								.append('<div class="spinner-loader" style="font-size:5px;">');
 							$('#messages-list, #messages-list #messages-header').slideDown('fast');
 							$('#send-existing-thread-msg').attr('data-thread-id',threadId);
 							$('#existing-thread-msg').val('');
 							$('#threads .thread-details.active').removeClass('active');
 							$(this).addClass('active');
-							
+							var loadingMsg = $('<li class="row mt" id="msgs-loading-helper">')
+												.append('<div class="col-sm-12"><p>Loading...</p></div>');
+							$('#msg-body ul')
+								.empty()
+								.append(loadingMsg);
 							$.getJSON(fetchURL, {}, function(data) {
-								$('#msg-body').empty();
+								$('#messages-list #messages-header h4 .spinner-loader').remove();
+								$('#msgs-loading-helper').remove();
 								for(var i =0;i<data.length;i++) {
 									if($('#threads').attr('data-current-thread-id') === threadId) {
 										addMessageToInbox(data[i].body, data[i].sentOrRecieved, data[i].id);
 									}
+									$('#msg-body ul').niceScroll({styler:'fb',cursorcolor:'#4ECDC4', cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
 								}
 							});
 						}
@@ -128,27 +159,6 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 				}
 			});
 			
-			$('#existing-thread-msg').on('keypress',function(e){
-				if(e.which === 13) {
-					$('#send-existing-thread-msg').click();
-			    }
-			});
-			
-			function addMessageToInbox(body, sentOrRecieved, id) {
-				if(null === id || (null!== id && (id.length === 0 || id === '' || $('#msg-body .row#'+id).length===0))) {
-					var row = $('<div class="row mt">');
-					row.attr('id',id);
-					var messageBody = $('<div class="col-md-offset-1 col-md-5 message">');
-					messageBody.text(body);
-					messageBody.addClass(sentOrRecieved);
-					if(sentOrRecieved === 'sent') {
-						messageBody.addClass('pull-right col-md-pull-1');
-					}
-					row.append(messageBody);
-					$('#msg-body').append(row);
-				}
-			}
-			
 			function getNewMessagesForThread() {
 				var threadId = $('#threads').attr('data-current-thread-id');
 				if(threadId.length && threadId !== -9999) {
@@ -166,7 +176,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 			setInterval(getNewMessagesForThread,30000);
 			
 			function addThreadToInbox(thread) {
-				var row = $('<div class="row existing thread-details cursor-pointer">');
+				var row = $('<li class="row existing thread-details cursor-pointer">');
 				row.attr('id',thread.id);
 				var threadFetchUrl = $('#threads').attr('data-thread-fetch-url')+'/'+thread.id;
 				row.attr('data-thread-fetch-url',threadFetchUrl);
@@ -181,7 +191,7 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 				participantParent.append(p);
 				row.append(participantParent);
 				row.append('<div class="col-sm-offset-2 col-sm-2">');
-				$('#threads').append(row);
+				$('#threads ul').append(row);
 			}
 			
 			function updateThreadsUnreadCounts() {
@@ -202,6 +212,8 @@ require([ 'modules/common-scripts', 'jquery', 'typeahead', 'bloodhound', 'bootst
 			}
 			
 			setInterval(updateThreadsUnreadCounts,30000);
+			
+			$('#new-msg-row, #new-message-form, #messages-list').hide();
 			
 			
 		});
