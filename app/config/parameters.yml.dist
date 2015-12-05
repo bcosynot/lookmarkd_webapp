@@ -11,9 +11,11 @@ parameters:
     # database.path: "%kernel.root_dir%/data.db3"
 
     mailer.transport:  smtp
-    mailer.host:       127.0.0.1
+    mailer.host:       smtp.sendgrid.net
+    mailer.port:	   587
     mailer.user:       ~
     mailer.password:   ~
+    mail.encryption:   ~
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
@@ -21,3 +23,4 @@ parameters:
     # Instagram API keys
     instagram.client.id: randomstrings
     instagram.client.secret: randomstrings
+   
