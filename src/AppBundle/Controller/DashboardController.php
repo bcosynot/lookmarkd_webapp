@@ -27,15 +27,18 @@ class DashboardController extends Controller {
 		$followers = $instagram->getUserFollower();
 		$followerCount = count($followers->data);
 		$model['followerCount'] = $followerCount;
-		$media = $instagram->getUserMedia();
-		$mediaCount = count($media->data);
-		$model['mediaCount'] = $mediaCount;
+		$mediaCount = 0;
 		$totalMediaLikes = 0;
 		$totalMediaComments = 0;
-		foreach ($media->data as $post) {
-			$totalMediaLikes += $post->likes->count;
-			$totalMediaComments += $post->comments->count;
-		}
+		do {
+			$media = $instagram->getUserMedia();
+			$mediaCount += count($media->data);
+			foreach ($media->data as $post) {
+				$totalMediaLikes += $post->likes->count;
+				$totalMediaComments += $post->comments->count;
+			}
+		} while($media = $instagram->pagination($media));
+		$model['mediaCount'] = $mediaCount;
 		$model['likesCount'] = $totalMediaLikes;
 		$model['commentsCount'] = $totalMediaComments;
 		$nextStep = $this->get('social_profile_util')->getNextOnboardingStep($user);
