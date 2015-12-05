@@ -40,4 +40,38 @@ class Message extends BaseMessage
 	 * @var MessageMetadata[]|\Doctrine\Common\Collections\Collection
 	 */
 	protected $metadata;
+
+    /**
+     * Add metadatum
+     *
+     * @param \AppBundle\Entity\MessageMetadata $metadatum
+     *
+     * @return Message
+     */
+    public function addMetadatum(\AppBundle\Entity\MessageMetadata $metadatum)
+    {
+        $this->metadata[] = $metadatum;
+
+        return $this;
+    }
+
+    /**
+     * Remove metadatum
+     *
+     * @param \AppBundle\Entity\MessageMetadata $metadatum
+     */
+    public function removeMetadatum(\AppBundle\Entity\MessageMetadata $metadatum)
+    {
+        $this->metadata->removeElement($metadatum);
+    }
+
+    /**
+     * Get metadata
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
 }

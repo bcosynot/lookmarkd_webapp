@@ -6,6 +6,7 @@ use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\UserProfile;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserPreference;
+use AppBundle\Entity\UserPreferenceType;
 
 /**
  * APIs related to the user.
@@ -75,4 +76,10 @@ interface UserServiceInterface {
 	 * @return array
 	 */
 	public function getAllUserPreferenceTypes();
+	
+	/**
+	 * @var string $preferenceKey
+	 * @return UserPreferenceType
+	 */
+	public function getUserPreferenceType($preferenceKey);
 }

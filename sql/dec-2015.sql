@@ -5,3 +5,9 @@ ALTER TABLE user_preference ADD preference_type_id INT DEFAULT NULL, DROP prefer
 ALTER TABLE user_preference ADD CONSTRAINT FK_FA0E76BFA5A08383 FOREIGN KEY (preference_type_id) REFERENCES user_preference (id);
 CREATE UNIQUE INDEX UNIQ_FA0E76BFA5A08383 ON user_preference (preference_type_id);
 CREATE UNIQUE INDEX unique_preference ON user_preference (user_id, preference_type_id);
+
+
+INSERT INTO `user_preference_type` (`id`, `preferenceKey`, `description`) VALUES (NULL, 'email_updates', 'Receive email about important updates and announcements from Lookmarkd.'), (NULL, 'email_notification_messages', 'Receive notifications for new messages.');
+
+ALTER TABLE user_preference DROP FOREIGN KEY FK_FA0E76BFA5A08383;
+ALTER TABLE user_preference ADD CONSTRAINT FK_FA0E76BFA5A08383 FOREIGN KEY (preference_type_id) REFERENCES user_preference_type (id);

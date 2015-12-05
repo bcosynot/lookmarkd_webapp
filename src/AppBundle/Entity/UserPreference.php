@@ -30,7 +30,7 @@ class UserPreference {
 	private $user;
 	
 	/**
-	 * @OneToOne(targetEntity="AppBundle\Entity\UserPreference")
+	 * @OneToOne(targetEntity="AppBundle\Entity\UserPreferenceType")
 	 * @JoinColumn(name="preference_type_id", referencedColumnName="id")
 	 * 
 	 * @var UserPreferenceType identifier or key for the setting

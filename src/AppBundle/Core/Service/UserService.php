@@ -154,7 +154,15 @@ class UserService implements UserServiceInterface {
 	 * @see \AppBundle\Core\Service\UserServiceInterface::getAllUserPreferenceTypes()
 	 */
 	public function getAllUserPreferenceTypes() {
-		$this->userDAO->getAllUserPreferenceTypes();
+		return $this->userDAO->getAllUserPreferenceTypes();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getUserPreferenceType()
+	 */
+	public function getUserPreferenceType($preferenceKey) {
+		return $this->userDAO->getUserPreferenceType ( $preferenceKey ) ;
 	}
 
 }

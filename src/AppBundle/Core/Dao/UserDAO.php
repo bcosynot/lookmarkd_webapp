@@ -147,7 +147,7 @@ class UserDAO {
 	 * @param string $preferenceKey
 	 */
 	public function getUserPreferenceType($preferenceKey) {
-		return $this->em->getRepository ( 'AppBundle:UserPreference' )->findOneBy ( array (
+		return $this->em->getRepository ( 'AppBundle:UserPreferenceType' )->findOneBy ( array (
 				'preferenceKey' => $preferenceKey 
 		) );
 	}
