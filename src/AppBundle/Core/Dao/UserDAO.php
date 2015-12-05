@@ -4,8 +4,10 @@ namespace AppBundle\Core\Dao;
 
 use AppBundle\Entity\PostingCategory;
 use AppBundle\Entity\SocialProfile;
-use AppBundle\Entity\ThreadMetadata;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserPreference;
+use AppBundle\Entity\UserPreferenceType;
+use AppBundle\Entity\ThreadMetadata;
 use AppBundle\Entity\UserProfile;
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
@@ -36,42 +38,45 @@ class UserDAO {
 	public function saveUserProfile(UserProfile $userProfile) {
 		$this->em->beginTransaction ();
 		$this->em->persist ( $userProfile );
-		$this->em->flush();
+		$this->em->flush ();
 		$this->em->commit ();
 		return $userProfile;
 	}
 	public function saveSocialProfile(SocialProfile $socialProfile) {
 		$this->em->beginTransaction ();
 		$this->em->persist ( $socialProfile );
-		$this->em->flush();
+		$this->em->flush ();
 		$this->em->commit ();
 		return $socialProfile;
 	}
-	
-	public function getPostingCateogiresForUser(User $user){
-		return $this->em->getRepository("AppBundle:UserProfile")->findOneBy(array('user'=>$user))->getCategories();
+	public function getPostingCateogiresForUser(User $user) {
+		return $this->em->getRepository ( "AppBundle:UserProfile" )->findOneBy ( array (
+				'user' => $user 
+		) )->getCategories ();
 	}
 	
 	/**
-	 * 
-	 * @param User $user
+	 *
+	 * @param User $user        	
 	 * @return UserProfile found by user
 	 */
 	public function getUserProfile(User $user) {
-		return $this->em->getRepository('AppBundle:UserProfile')->findOneBy(array('user'=>$user));
+		return $this->em->getRepository ( 'AppBundle:UserProfile' )->findOneBy ( array (
+				'user' => $user 
+		) );
 	}
 	
 	/**
-	 * 
-	 * @param int $postingCategoryId
+	 *
+	 * @param int $postingCategoryId        	
 	 * @return PostingCategory Found from ID.
 	 */
 	public function getPostingCategory($postingCategoryId) {
-		return $this->em->getRepository('AppBundle:PostingCategory')->find($postingCategoryId);
+		return $this->em->getRepository ( 'AppBundle:PostingCategory' )->find ( $postingCategoryId );
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param string $username
 	 * return User
 	 */
@@ -98,6 +103,60 @@ class UserDAO {
 		$query->setParameter('userNameLike', '%'.$userNameLike.'%');
 		$users = $query->getResult();
 		return $users;
+	}
+	
+	/**
+	 *
+	 * @param User $user        	
+	 * @param UserPreferenceType $preferenceType
+	 *        	the preference to fetch
+	 */
+	public function getUserPreference(User $user, UserPreferenceType $preferenceType) {
+		return $this->em->getRepository ( 'AppBundle:UserPreference' )->findOneBy ( array (
+				'user' => $user,
+				'preferenceType' => $preferenceType 
+		) );
+	}
+	
+	/**
+	 *
+	 * @param UserPreference $userPreference        	
+	 */
+	public function setUserPreference(UserPreference $userPreference) {
+		$this->em->beginTransaction ();
+		$this->em->persist ( $userPreference );
+		$this->em->flush ();
+		$this->em->commit ();
+		return $userPreference;
+	}
+	
+	/**
+	 * Get all existing preferences for user
+	 * 
+	 * @param User $user        	
+	 * @return array of @link UserPreferences
+	 */
+	public function getUserPreferences(User $user) {
+		return $this->em->getRepository ( 'AppBundle:UserPreference' )->findAll ( array (
+				'user' => $user 
+		) );
+	}
+	
+	/**
+	 * Get @link UserPreferenceType
+	 * @param string $preferenceKey
+	 */
+	public function getUserPreferenceType($preferenceKey) {
+		return $this->em->getRepository ( 'AppBundle:UserPreferenceType' )->findOneBy ( array (
+				'preferenceKey' => $preferenceKey 
+		) );
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getAllUserPreferenceTypes() {
+		return $this->em->getRepository('AppBundle:UserPreferenceType')->findAll();
 	}
 	
 }

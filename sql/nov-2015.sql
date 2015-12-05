@@ -54,3 +54,6 @@ ALTER TABLE connections ADD CONSTRAINT FK_BFF6FC15233D34C1 FOREIGN KEY (user_tar
 ALTER TABLE `fos_user` CHANGE `instagram_id` `instagram_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL, CHANGE `instagram_access_token` `instagram_access_token` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL;
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `instagram_id`, `instagram_access_token`) VALUES (NULL, 'lookmarkd', 'lookmarkd', 'lookmarkd@gmail.com', 'lookmarkd@gmail.com', '1', 'nivmcgis2msowgsko8goowkcoogskkg', '$2y$13$nivmcgis2msowgsko8goouB1VJwoixn6Noj8QAkgFGHuwdggttzma', NULL, '0', '0', NULL, NULL, NULL, 'a:0:{}', '0', NULL, NULL, NULL);
+
+CREATE TABLE user_preference (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, preference_key VARCHAR(255) NOT NULL, value VARCHAR(255) NOT NULL, INDEX IDX_FA0E76BFA76ED395 (user_id), UNIQUE INDEX unique_preference (user_id, preference_key), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
+ALTER TABLE user_preference ADD CONSTRAINT FK_FA0E76BFA76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id);

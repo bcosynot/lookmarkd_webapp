@@ -5,6 +5,8 @@ namespace AppBundle\Core\Service;
 use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\UserProfile;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserPreference;
+use AppBundle\Entity\UserPreferenceType;
 
 /**
  * APIs related to the user.
@@ -44,10 +46,40 @@ interface UserServiceInterface {
 	public function getUser($username);
 	
 	/**
-	 * 
+	 *
 	 * @param User $user
 	 * @param null|string $userNameLike Fetch recipients whose username contains this string
 	 * @return array
 	 */
 	public function getPossibleRecipientsForUser(User $user, $userNameLike);
+	
+	/**
+	 * 
+	 * @param User $user
+	 * @param string $preferenceKey the preference to fetch
+	 */
+	public function getUserPreference(User $user, $preferenceKey);
+	
+	/**
+	 * @param UserPreference $userPreference
+	 */
+	public function setUserPreference(UserPreference $userPreference);
+	
+	/**
+	 * Get all existing preferences for user
+	 * @param User $user
+	 * @return array
+	 */
+	public function getUserPreferences(User $user);
+	
+	/**
+	 * @return array
+	 */
+	public function getAllUserPreferenceTypes();
+	
+	/**
+	 * @var string $preferenceKey
+	 * @return UserPreferenceType
+	 */
+	public function getUserPreferenceType($preferenceKey);
 }

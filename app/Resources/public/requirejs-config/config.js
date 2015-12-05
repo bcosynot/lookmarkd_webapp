@@ -34,7 +34,8 @@ var require = {
         appScripts: '../app/Resources/public/scripts/',
         select2: 'select2/dist/js/select2',
         typeahead: 'typeahead.js/dist/typeahead.bundle',
-        bloodhound: 'typeahead.js/dist/bloodhound.min'
+        bloodhound: 'typeahead.js/dist/bloodhound.min',
+        toastr: 'toastr/toastr'
     },
     shim: {
         bootstrap: {
@@ -156,6 +157,12 @@ var require = {
         },
         bloodhound: {
             exports: 'Bloodhound',
+            deps: [
+                'jquery'
+            ]
+        },
+        toastr: {
+            exports: '$',
             deps: [
                 'jquery'
             ]

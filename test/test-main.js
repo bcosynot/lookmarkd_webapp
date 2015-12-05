@@ -46,7 +46,8 @@ require.config({
         'jquery.scrollTo': 'jquery.scrollTo/jquery.scrollTo',
         'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll',
         select2: 'select2/dist/js/select2',
-        typeahead: 'typeahead.js/dist/typeahead.bundle'
+        typeahead: 'typeahead.js/dist/typeahead.bundle',
+        toastr: 'toastr/toastr'
     },
     shim: {
         bootstrap: {

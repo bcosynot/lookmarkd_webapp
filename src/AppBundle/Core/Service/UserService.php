@@ -7,6 +7,7 @@ use AppBundle\Core\Dao\UserDAO;
 use AppBundle\Core\Service\UserServiceInterface;
 use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserPreference;
 use AppBundle\Entity\UserProfile;
 use Monolog\Logger;
 
@@ -76,7 +77,7 @@ class UserService implements UserServiceInterface {
 	public function getUserProfile(User $user) {
 		return $this->userDAO->getUserProfile ( $user );
 	}
-	
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -118,4 +119,50 @@ class UserService implements UserServiceInterface {
 		}
 		return $recipients;
 	}
+	
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getUserPreference()
+	 */
+	public function getUserPreference(User $user, $preferenceKey) {
+		return $this->userDAO->getUserPreference ( $user, $this->userDAO->getUserPreferenceType ( $preferenceKey ) );
+	}
+	
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \AppBundle\Core\Service\UserServiceInterface::setUserPreference()
+	 */
+	public function setUserPreference(UserPreference $userPreference) {
+		return $this->userDAO->setUserPreference ( $userPreference );
+	}
+	
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getUserPreferences()
+	 */
+	public function getUserPreferences(User $user) {
+		return $this->userDAO->getUserPreferences ( $user );
+	}
+	/**
+	 * {@inheritDoc}
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getAllUserPreferenceTypes()
+	 */
+	public function getAllUserPreferenceTypes() {
+		return $this->userDAO->getAllUserPreferenceTypes();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getUserPreferenceType()
+	 */
+	public function getUserPreferenceType($preferenceKey) {
+		return $this->userDAO->getUserPreferenceType ( $preferenceKey ) ;
+	}
+
 }

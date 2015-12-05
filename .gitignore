@@ -18,3 +18,4 @@ UPGRADE*.md
 npm-debug.log
 LICENSE
 .tmp/
+src/Utils/GruntBundle/Resources/config/filerev.json
