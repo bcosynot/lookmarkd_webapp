@@ -34,3 +34,6 @@ ALTER TABLE user_profile ADD blogger_name VARCHAR(255) NOT NULL;
 ALTER TABLE `user_profile` CHANGE `first_name` `first_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL, CHANGE `last_name` `last_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL, CHANGE `blogger_name` `blogger_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL;
 
 ALTER TABLE `social_profile` CHANGE `profile_picture` `profile_picture` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL;
+
+CREATE TABLE user_preference (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, preference_key VARCHAR(255) NOT NULL, value VARCHAR(255) NOT NULL, INDEX IDX_FA0E76BFA76ED395 (user_id), UNIQUE INDEX unique_preference (user_id, preference_key), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
+ALTER TABLE user_preference ADD CONSTRAINT FK_FA0E76BFA76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id);
