@@ -3,14 +3,17 @@
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\MessageBundle\Model\ParticipantInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Core\Service\UserRepository")
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @ORM\Id
@@ -34,6 +37,13 @@ class User extends BaseUser
      * @ORM\Column(type="string")
      */
     protected $instagramAccessToken;
+    
+    /**
+     *
+     * @ManyToMany(targetEntity="User")
+     * @JoinTable(name="connections")
+     */
+    private $connections;
         
     /**
      * Set instagramId
@@ -121,4 +131,46 @@ class User extends BaseUser
         return $this;
     }
 
+	/**
+	 * {@inheritDoc}
+	 * @see \FOS\MessageBundle\Model\ParticipantInterface::getId()
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+
+    /**
+     * Add connection
+     *
+     * @param \AppBundle\Entity\User $connection
+     *
+     * @return User
+     */
+    public function addConnection(\AppBundle\Entity\User $connection)
+    {
+        $this->connections[] = $connection;
+
+        return $this;
+    }
+
+    /**
+     * Remove connection
+     *
+     * @param \AppBundle\Entity\User $connection
+     */
+    public function removeConnection(\AppBundle\Entity\User $connection)
+    {
+        $this->connections->removeElement($connection);
+    }
+
+    /**
+     * Get connections
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConnections()
+    {
+        return $this->connections;
+    }
 }

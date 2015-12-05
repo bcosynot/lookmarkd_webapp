@@ -93,5 +93,19 @@ define(function(require,exports) {
 	    });
 	    
 	    $('[data-toggle="tooltip"]').tooltip();
+
+	    function getTotalUnreadCount() {
+	    	var unreadCountURL = $('#total-unread-messages-count').attr('data-unread-messages-count-url');
+	    	$.getJSON(unreadCountURL, {}, function(data){
+	    		if(data.success && data.unreadCount > 0) {
+	    			$('#total-unread-messages-count').text(data.unreadCount);
+	    		}
+	    	});
+	    }
+	    
+	    getTotalUnreadCount();
+	    
+	    setInterval(getTotalUnreadCount, 30000);
+	    
 	};
 });

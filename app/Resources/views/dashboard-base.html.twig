@@ -11,6 +11,7 @@ stylesheets %} {% block stylesheetsCustom %} {% endblock
 stylesheetsCustom %} {% block stylesheetsAll %}
 <link rel="stylesheet"
 	href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
 {% endblock stylesheetsAll %} {% if app.environment == 'node' %}
 <link rel="stylesheet" href="/styles/main.css?no-rev" />
 <link rel="stylesheet" href="/styles/dashboard-style.css?no-rev" />
@@ -69,19 +70,22 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<li class="mt"><a class="active" href="index.html"> <i
+					<li class="mt"><a class="active" href="{{ url('dashboard_influencer') }}"> <i
 							class="ion-android-desktop"></i> <span>Dashboard</span>
 					</a></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="ion-ios-calendar-outline"></i> <span>Campaigns</span>
 					</a>
-						<ul class="sub">
-							<li><a href="general.html">General</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="panels.html">Panels</a></li>
-							<li><a href="google_maps.html">Google Maps</a></li>
-						</ul></li>
+					</li>
+					
+					<li class="sub-menu">
+						<a href="{{ url('message_inbox') }}"> <i
+								class="ion-ios-chatboxes"></i> <span>Messages</span>
+								<span class="badge" id="total-unread-messages-count"
+							data-unread-messages-count-url="{{ url('messages_unread_count') }}"></span>
+						</a>
+					</li>
 				</ul>
 				<!-- sidebar menu end-->
 			</div>

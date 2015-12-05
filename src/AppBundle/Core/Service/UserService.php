@@ -77,6 +77,48 @@ class UserService implements UserServiceInterface {
 	public function getUserProfile(User $user) {
 		return $this->userDAO->getUserProfile ( $user );
 	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getUser()
+	 */
+	public function getUser($username) {
+		return $this->userDAO->getUser ( $username );
+	}
+	
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \AppBundle\Core\Service\UserServiceInterface::getPossibleRecipientsForUser()
+	 */
+	public function getPossibleRecipientsForUser(User $user, $userNameLike) {
+		$recipients = array ();
+		$associatedThreads = $this->userDAO->getAssociatedThreads ( $user );
+		if (null != $associatedThreads && sizeof ( $associatedThreads ) > 0) {
+			foreach ( $associatedThreads as $associatedThread ) {
+				$participants = $associatedThread->getParticipants ();
+				if (null != $participants && sizeof ( $participants ) > 0) {
+					foreach ( $participants as $participant ) {
+						if ($participant->getId () != $user->getId () && (null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $participant->getUsername (), $userNameLike ))))) {
+							$recipients [] = $participant->getUsername ();
+						}
+					}
+				}
+			}
+		}
+		$connections = $user->getConnections ();
+		if (null != $connections && sizeof ( $connections ) > 0) {
+			foreach ( $connections as $connection ) {
+				if ($connection->getId () != $user->getId () && (null == $userNameLike || (null != $userNameLike && ($userNameLike === '' || ! strpos ( $connection->getUsername (), $userNameLike ))))) {
+					$recipients [] = $connection->getUsername ();
+				}
+			}
+		}
+		return $recipients;
+	}
 	
 	/**
 	 *

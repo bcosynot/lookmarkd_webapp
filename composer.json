@@ -24,7 +24,8 @@
 		"doctrine/doctrine-fixtures-bundle" : "^2.2",
 		"friendsofsymfony/user-bundle" : "~2.0@dev",
 		"cosenary/instagram": "^2.3",
-		"ibrows/xeditable-bundle": "^1.1"
+		"ibrows/xeditable-bundle": "^1.1",
+		"friendsofsymfony/message-bundle": "^1.2"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle" : "~2.3",

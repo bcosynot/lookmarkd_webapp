@@ -7,6 +7,7 @@ use AppBundle\Entity\SocialProfile;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserPreference;
 use AppBundle\Entity\UserPreferenceType;
+use AppBundle\Entity\ThreadMetadata;
 use AppBundle\Entity\UserProfile;
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
@@ -76,6 +77,36 @@ class UserDAO {
 	
 	/**
 	 *
+	 * @param string $username
+	 * return User
+	 */
+	public function getUser($username) {
+		return $this->em->getRepository('AppBundle:User')->findOneBy(array('username'=>$username));
+	}
+	
+	/**
+	 * @param User $user
+	 * @return array Threads user is a part of
+	 */
+	public function getAssociatedThreads(User $user) {
+		$threadMetadatas = $this->em->getRepository('AppBundle:ThreadMetadata')->findBy(array('participant'=>$user));
+		$threads = array();
+		foreach ($threadMetadatas as $threadMetadata) {
+			$threads[] = $threadMetadata->getThread();
+		}
+		return $threads;
+	}
+	
+	public function getUsersWithNameLike($userNameLike) {
+		$this->em->beginTransaction ();
+		$query = $this->em->createQuery('Select u FROM AppBundle\Entity\User WHERE u.username LIKE :userNameLike');
+		$query->setParameter('userNameLike', '%'.$userNameLike.'%');
+		$users = $query->getResult();
+		return $users;
+	}
+	
+	/**
+	 *
 	 * @param User $user        	
 	 * @param UserPreferenceType $preferenceType
 	 *        	the preference to fetch
@@ -127,4 +158,5 @@ class UserDAO {
 	public function getAllUserPreferenceTypes() {
 		return $this->em->getRepository('AppBundle:UserPreferenceType')->findAll();
 	}
+	
 }

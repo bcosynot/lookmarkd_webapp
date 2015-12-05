@@ -30,6 +30,7 @@ module.exports = function(config) {
             {pattern: 'bower_components/almond/almond.js', included: false},
             {pattern: 'bower_components/loglevel/dist/loglevel.min.js', included: false},
             {pattern: 'bower_components/picturefill/dist/picturefill.js', included: false},
+            {pattern: 'bower_components/typeahead.js/dist/typeahead.bundle.js', included: false},
             //endbower
             {pattern: 'app/Resources/public/scripts/**/*.js', included: false},
             /*{pattern: 'test/**/*Spec.js', included: false}*/
