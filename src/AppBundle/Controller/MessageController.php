@@ -163,7 +163,7 @@ class MessageController extends Controller {
 					->setSubject ( 'New message' )
 					->setFrom ( 'hello@lookmarkd.com' )
 					->setTo ($recipient->getEmail())
-					->setBody ( 'You have a new message from '.$user->getUsername().'<a href="' );
+					->setBody ( 'You have a new message from '.$user->getUsername() );
 		
 		$this->get('mailer')->send($email);
 						
