@@ -19,7 +19,6 @@ class MessageController extends Controller {
 		$model ['totalThreads'] = sizeof ( $threads );
 		return $this->render ( 'controller/message/inbox.html.twig', $model );
 	}
-	
 	private function getThreads() {
 		$provider = $this->get ( 'fos_message.provider' );
 		$threadsOriginal = $provider->getInboxThreads ();
@@ -49,10 +48,10 @@ class MessageController extends Controller {
 					$threadOriginal->getMessages ()->initialize ();
 					$unreadCount = 0;
 					foreach ( $threadOriginal->getMessages () as $message ) {
-						if($message->getSender()->getId() !== $userId) {
+						if ($message->getSender ()->getId () !== $userId) {
 							$message->getMetadata ()->initialize ();
-							foreach ($message->getMetadata () as $messageMetadata ) {
-								if ($messageMetadata->getParticipant ()->getId () === $userId && !$messageMetadata->getIsRead ()) {
+							foreach ( $message->getMetadata () as $messageMetadata ) {
+								if ($messageMetadata->getParticipant ()->getId () === $userId && ! $messageMetadata->getIsRead ()) {
 									$unreadCount ++;
 								}
 							}
@@ -65,7 +64,6 @@ class MessageController extends Controller {
 		}
 		return $threads;
 	}
-
 	
 	/**
 	 * @Route("/messages/recipients/list/{userNameLike}", name="message_get_recipients_list", defaults={"userNameLike"=null})
@@ -90,9 +88,20 @@ class MessageController extends Controller {
 			$thread = $this->get ( 'fos_message.provider' )->getThread ( $existingThreadId );
 			$threadBuilder = $this->get ( 'fos_message.composer' )->reply ( $thread );
 		}
-		$threadBuilder->addRecipient ( $this->getUser () )->setSender ( $sender )->setSubject ( 'Welcome!' )->setBody ( 'Hey there! Thanks for trying us out. If you have any thoughts, questions or concerns, please feel free to reply to this message.' );
+		$recipient = $this->getUser ();
+		$messageBody = 'Hey there! Thanks for trying out Lookmarkd! If you have any thoughts, questions or concerns, please feel free to reply to this message.';
+		$threadBuilder->addRecipient ( $recipient )->setSender ( $sender )->setSubject ( 'Welcome!' )->setBody ( $messageBody );
 		$senderService = $this->get ( 'fos_message.sender' );
 		$senderService->send ( $threadBuilder->getMessage () );
+		
+		$email = \Swift_Message::newInstance ()
+					->setSubject ( 'Welcome to Lookmarkd!' )
+					->setFrom ( 'hello@lookmarkd.com' )
+					->setTo ($recipient->getEmail())
+					->setBody ( $messageBody );
+		
+		$this->get('mailer')->send($email);
+		
 		return new JsonResponse ( array (
 				'success' => true 
 		) );
@@ -104,10 +113,12 @@ class MessageController extends Controller {
 	 * @param int $threadId        	
 	 */
 	public function getMessagesAction($threadId) {
+		
 		$provider = $this->get ( 'fos_message.provider' );
 		$thread = $provider->getThread ( $threadId );
 		$thread->getMessages ()->initialize ();
 		$messages = array ();
+		
 		foreach ( $thread->getMessages () as $message ) {
 			$sentOrRecieved = $message->getSender ()->getId () == $this->getUser ()->getId () ? 'sent' : 'recieved';
 			$messages [] = array (
@@ -118,6 +129,7 @@ class MessageController extends Controller {
 					'sentOrRecieved' => $sentOrRecieved 
 			);
 		}
+		
 		return new JsonResponse ( $messages );
 	}
 	
@@ -127,13 +139,34 @@ class MessageController extends Controller {
 	 * @param Request $request        	
 	 */
 	public function sendMessageAction(Request $request) {
+		
 		$threadId = $request->request->get ( 'threadId' );
 		$message = $request->request->get ( 'message' );
 		$provider = $this->get ( 'fos_message.provider' );
 		$thread = $provider->getThread ( $threadId );
-		$messageBuilder = $this->get ( 'fos_message.composer' )->reply ( $thread )->setSender ( $this->getUser () )->setBody ( $message );
+		
+		$user = $this->getUser ();
+		$messageBuilder = $this->get ( 'fos_message.composer' )->reply ( $thread )->setSender ( $user )->setBody ( $message );
 		$senderService = $this->get ( 'fos_message.sender' );
 		$senderService->send ( $messageBuilder->getMessage () );
+		
+		$recipient = null;
+		foreach ( $thread->getMetadata () as $metadata ) {
+			$participant = $metadata->getParticipant ();
+			if ($participant->getId () != $user->getId()) {
+				$recipient = $participant;
+				break;
+			}
+		}
+		
+		$email = \Swift_Message::newInstance ()
+					->setSubject ( 'New message' )
+					->setFrom ( 'hello@lookmarkd.com' )
+					->setTo ($recipient->getEmail())
+					->setBody ( 'You have a new message from '.$user->getUsername().'<a href="' );
+		
+		$this->get('mailer')->send($email);
+						
 		return new JsonResponse ( 'success' );
 	}
 	
@@ -231,10 +264,10 @@ class MessageController extends Controller {
 	 */
 	public function getTotalUnreadMessagesAction() {
 		$provider = $this->get ( 'fos_message.provider' );
-		$unreadCount = $provider->getNbUnreadMessages();
+		$unreadCount = $provider->getNbUnreadMessages ();
 		return new JsonResponse ( array (
 				'success' => true,
-				'unreadCount' => $unreadCount,
+				'unreadCount' => $unreadCount 
 		) );
 	}
 	
@@ -242,8 +275,7 @@ class MessageController extends Controller {
 	 * @Route("/messages/threads/information/", name="messages_threads_information")
 	 */
 	public function getThreadsInformationAction() {
-		$threads = $this->getThreads();
-		return new JsonResponse($threads);
+		$threads = $this->getThreads ();
+		return new JsonResponse ( $threads );
 	}
-	
 }
