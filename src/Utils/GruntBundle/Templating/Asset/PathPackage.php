@@ -36,11 +36,9 @@ class PathPackage extends BasePackage
      * @param string  $cacheDir    Kernel cache dir
      * @param string  $debug       Debug?
      */
-    public function __construct(Request $request, $rootDir, $summaryFile, $cacheDir, $debug)
+    public function __construct($basePath, $rootDir, $summaryFile, $cacheDir, $debug)
     {
         parent::__construct($rootDir, $summaryFile, $cacheDir, $debug);
-
-        $basePath = $request->getBasePath();
 
         if (!$basePath) {
             $this->basePath = '/';
@@ -84,12 +82,12 @@ class PathPackage extends BasePackage
             $regex = preg_replace('/\.([^\.]+$)/', '\.[\d\w]{8}\.$1', $fullpath);
             $base = str_replace($path, '', $fullpath);
             foreach (glob($pattern) as $filepath) {
-                
+                if (preg_match('#' . $regex . '#', $filepath)) {
                     $result = str_replace($base, '', $filepath);
                     $this->summary->set($file, $result);
 
                     return $result;
-                
+                }
             };
 
         }
