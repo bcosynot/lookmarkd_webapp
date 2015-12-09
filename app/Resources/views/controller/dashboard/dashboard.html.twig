@@ -60,35 +60,39 @@
 		{% endif %}
 	</div>
 	<div class="row mt">
-		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+		<div class="col-md-2 col-sm-2 col-md-offset-1 box0 insta-stats"
+		 id="followerCount" data-url="{{ url('insta_stats_followers_count') }}">
         	<div class="box1">
 				<h2><i class="ion-eye"></i></h2>
-				<h3>{{ followerCount }} followers</h3>
+				<h3>Loading followers...</h3>
             </div>
-            <p>You have {{ followerCount }} followers</p>
+            <p>Loading info...</p>
        </div>
-       <div class="col-md-2 col-sm-2 box0">
+       <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="likesCount">
        	<div class="box1">
 			<h2><i class="ion-heart"></i></h2>
-			<h3>{{ likesCount }} Likes</h3>
+			<h3>Loading likes...</h3>
         </div>
-        <p>{{ likesCount }} likes across {{ mediaCount }} posts</p>
+        <p>Loading info...</p>
       </div>
       
-     <div class="col-md-2 col-sm-2 box0">
+     <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="commentsCount">
       	<div class="box1">
 			<h2><i class="ion-chatbox"></i></h2>
-			<h3>{{ commentsCount }} Comments</h3>
+			<h3>Loading comments...</h3>
         </div>
-        <p>{{ commentsCount }} comments across {{ mediaCount }} posts</p>
+        <p>Loading info..</p>
      </div>
      
-     <div class="col-md-2 col-sm-2 box0">
+     <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="mediaCount"  data-url="{{ url('insta_stats_media_counts') }}">
       	<div class="box1">
 			<h2><i class="ion-social-instagram-outline"></i></h2>
-			<h3>{{ mediaCount }} posts</h3>
+			<h3>Loading  posts...</h3>
         </div>
-        <p>You have {{ mediaCount }} posts</p>
+        <p>Loading info...</p>
      </div>
 	</div>
 {% endblock %}
