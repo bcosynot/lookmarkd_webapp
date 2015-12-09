@@ -24,20 +24,31 @@ class DashboardController extends Controller {
 					    'apiCallback' => $this->generateUrl('instagram_login')
 					));
 		$instagram->setAccessToken($user->getInstagramAccessToken());
+		$instagram->setSignedHeader(true);
 		$followers = $instagram->getUserFollower();
-		$followerCount = count($followers->data);
+		$followerCount = 0;
+		do {
+			if(null!=$followers) {
+				$followerCount += count($followers->data);
+				$followers = $instagram->pagination($followers);
+			}
+		} while($followers);
 		$model['followerCount'] = $followerCount;
 		$mediaCount = 0;
 		$totalMediaLikes = 0;
 		$totalMediaComments = 0;
+		$media = $instagram->getUserMedia();
 		do {
-			$media = $instagram->getUserMedia();
-			$mediaCount += count($media->data);
-			foreach ($media->data as $post) {
-				$totalMediaLikes += $post->likes->count;
-				$totalMediaComments += $post->comments->count;
+			if(null!=$media) {
+				$mediaCount += count($media->data);
+				//dump($media);
+				foreach ($media->data as $post) {
+					$totalMediaLikes += $post->likes->count;
+					$totalMediaComments += $post->comments->count;
+				}
 			}
-		} while($media = $instagram->pagination($media));
+			$media = $instagram->pagination($media);
+		} while($media);
 		$model['mediaCount'] = $mediaCount;
 		$model['likesCount'] = $totalMediaLikes;
 		$model['commentsCount'] = $totalMediaComments;
