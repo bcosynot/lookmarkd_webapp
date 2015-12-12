@@ -38,7 +38,7 @@ class LoginController extends Controller {
 		if ($securityContext->isGranted ( 'IS_AUTHENTICATED_REMEMBERED' )) {
 			$user = $this->getUser ();
 			$user = $this->getUser ();
-			$form = $this->createFormBuilder ( $user )->add ( 'email', 'email' )->add ( 'save', 'submit', array (
+			$form = $this->createFormBuilder ( $user )->add ( 'email', 'Symfony\Component\Form\Extension\Core\Type\EmailType' )->add ( 'save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array (
 					'label' => 'All done!',
 					'attr' => array (
 							'class' => 'btn btn-lg btn-green subscribe-submit' 
@@ -48,6 +48,12 @@ class LoginController extends Controller {
 			$form->handleRequest ( $request );
 			if ($form->isValid ()) {
 				$this->get ( 'fos_user.user_manager' )->updateUser ( $user );
+				$email = \Swift_Message::newInstance ()
+							->setSubject ( 'Welcome to Lookmarkd!' )
+							->setFrom ( array('hello@lookmarkd.com'=>'Lookmarkd') )
+							->setTo ($user->getEmail())
+							->setBody ( $this->renderView('email/welcome.html.twig'),'text/html' );
+				$this->get('mailer')->send($email);
 				return $this->redirectToRoute('dashboard_influencer');
 			}
 			return $this->render ( 'controller/login/missing_email.html.twig', array (

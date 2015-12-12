@@ -94,14 +94,6 @@ class MessageController extends Controller {
 		$senderService = $this->get ( 'fos_message.sender' );
 		$senderService->send ( $threadBuilder->getMessage () );
 		
-		$email = \Swift_Message::newInstance ()
-					->setSubject ( 'Welcome to Lookmarkd!' )
-					->setFrom ( 'hello@lookmarkd.com' )
-					->setTo ($recipient->getEmail())
-					->setBody ( $messageBody );
-		
-		$this->get('mailer')->send($email);
-		
 		return new JsonResponse ( array (
 				'success' => true 
 		) );
