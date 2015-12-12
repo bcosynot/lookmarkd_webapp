@@ -152,10 +152,11 @@ class MessageController extends Controller {
 		}
 		
 		$email = \Swift_Message::newInstance ()
-					->setSubject ( 'New message' )
-					->setFrom ( 'hello@lookmarkd.com' )
+					->setSubject ( 'New message on Lookmarkd from '.$user->getUsername() )
+					->setFrom ( array('hello@lookmarkd.com'=>'Lookmarkd' ))
 					->setTo ($recipient->getEmail())
-					->setBody ( 'You have a new message from '.$user->getUsername() );
+					->setBody ( $this->renderView('email/new-message.html.twig', 
+							array('message'=>$message,'sender'=>$user->getUsername())), 'text/html' );
 		
 		$this->get('mailer')->send($email);
 						
