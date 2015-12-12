@@ -11,9 +11,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class DashboardController extends Controller {
 	
 	/**
+	 * @Route("/dashboard", name="dashboard")
+	 */
+	public function dashboardIndecAction() {
+		$user = $this->getUser();
+		if(null!=$user && User::USER_TYPE_INFLUENCER === $user->getUserType()) {
+			return $this->redirectToRoute('dashboard_influencer');
+		} else if(null!=$user && User::USER_TYPE_BRAND === $user->getUserType()) {
+			//TODO: Add dashboard for brand
+			return $this->redirectToRoute('dashboard_influencer');
+		} else {
+			return $this->redirectToRoute('missing_user_type');
+		}
+	}
+	
+	/**
 	 * @Route("/dashboard/influencer", name="dashboard_influencer")
 	 */
-	public function dashboardIndexAction() {
+	public function dashboardInfluencerAction() {
 
 		$model = array();
 		$user = $this->getUser();
