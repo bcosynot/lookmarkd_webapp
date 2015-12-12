@@ -11,3 +11,5 @@ INSERT INTO `user_preference_type` (`id`, `preferenceKey`, `description`) VALUES
 
 ALTER TABLE user_preference DROP FOREIGN KEY FK_FA0E76BFA5A08383;
 ALTER TABLE user_preference ADD CONSTRAINT FK_FA0E76BFA5A08383 FOREIGN KEY (preference_type_id) REFERENCES user_preference_type (id);
+
+ALTER TABLE fos_user ADD user_type INT DEFAULT NULL;

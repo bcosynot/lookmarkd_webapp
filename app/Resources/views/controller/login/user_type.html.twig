@@ -1,0 +1,65 @@
+{% extends 'front-base.html.twig' %}
+
+{% block title %}Are you...{% endblock %}
+{% block stylesheetsCustom %}
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/add_category.css') }}">
+<style>
+.pr2-social h3{
+	color:#ffffff;
+}
+.category-picture {
+	cursor:hand;
+	cursor: pointer;
+}
+</style>
+{% endblock stylesheetsCustom %}
+{% block stylesheetsDist %}
+<script>
+    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/dashboard-style.css') }}","{{ asset('styles/add_category.css') }}"]));
+</script>
+<noscript>
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}">
+</noscript>
+{% endblock stylesheetsDist %}
+
+{% block body %}
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<h2>Are you...</h2>
+				<hr class="aligncenter">
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+		
+		<div class="row centered">
+			<a href="{{ url('set_missing_user_type', {'type':1}) }}">
+				<div class="col-lg-4 col-lg-offset-1 mb category-picture">
+					<div class="twitter-panel pn">
+						<div class="pr2-social centered">
+							<h3>Influencer</h3>
+						</div>
+						<div class="checkmark">
+							<h3 class="ion-android-checkmark-circle"></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+			
+			<a href="{{ url('set_missing_user_type', {'type':2}) }}">
+				<div class="col-lg-offset-2 col-lg-4 mb category-picture">
+					<div class="twitter-panel pn">
+						<div class="pr2-social centered">
+							<h3>Brand</h3>
+						</div>
+						<div class="checkmark">
+							<h3 class="ion-android-checkmark-circle"></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+			
+		</div><!--/row -->
+	</div><!--/container -->
+{% endblock body %}

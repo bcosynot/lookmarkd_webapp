@@ -15,6 +15,10 @@ use Doctrine\ORM\Mapping\JoinTable;
  */
 class User extends BaseUser implements ParticipantInterface
 {
+	
+	const USER_TYPE_INFLUENCER = 1;
+	const USER_TYPE_BRAND = 2;
+	
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -44,6 +48,12 @@ class User extends BaseUser implements ParticipantInterface
      * @JoinTable(name="connections")
      */
     private $connections;
+    
+    /**
+     * @ORM\Column(type="integer", name="user_type", nullable=true)
+     * @var integer
+     */
+    private $userType;
         
     /**
      * Set instagramId
@@ -172,5 +182,30 @@ class User extends BaseUser implements ParticipantInterface
     public function getConnections()
     {
         return $this->connections;
+    }
+
+
+    /**
+     * Set userType
+     *
+     * @param integer $userType
+     *
+     * @return User
+     */
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get userType
+     *
+     * @return integer
+     */
+    public function getUserType()
+    {
+        return $this->userType;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +21,12 @@ class LoginController extends Controller {
 			if (null != $user && null === $user->getEmail () || ! (null !== $user->getEmail () && strlen ( $user->getEmail () ) > 0 && strpos ( $user->getEmail (), '@' ))) {
 				$logger->info('missingemail');
 				return $this->redirectToRoute ( 'missingEmail' );
-			} else {
+			} else if(null != $user && null === $user->getUserType()) {
+				$logger->info('missing usertype');
+				return $this->redirectToRoute ( 'missing_user_type' );
+			}else {
 				$logger->info('dashboard');
-				return $this->redirectToRoute ( 'dashboard_influencer' );
+				return $this->redirectToRoute ( 'dashboard' );
 			}
 		} else {
 			$logger->info('going back to homepage');
@@ -54,7 +58,7 @@ class LoginController extends Controller {
 							->setTo ($user->getEmail())
 							->setBody ( $this->renderView('email/welcome.html.twig'),'text/html' );
 				$this->get('mailer')->send($email);
-				return $this->redirectToRoute('dashboard_influencer');
+				return $this->redirectToRoute('loginSuccess');
 			}
 			return $this->render ( 'controller/login/missing_email.html.twig', array (
 					'userId' => $user->getId (),
@@ -63,5 +67,24 @@ class LoginController extends Controller {
 		} else {
 			return $this->redirectToRoute ( 'homepage' );
 		}
+	}
+	
+	
+	/**
+	 * @Route("/login/missing/user_type", name="missing_user_type")
+	 */
+	public function missingUserTypeAction() {
+		return $this->render('controller/login/user_type.html.twig');
+	}
+	
+	/**
+	 * @Route("/login/missing/user_type/set/{type}", name="set_missing_user_type")
+	 * @param integer $type The user type. @see User
+	 */
+	public function setMissingUserTypeAction($type) {
+		$user = $this->getUser();
+		$user->setUserType($type);
+		$this->get ( 'fos_user.user_manager' )->updateUser ( $user );
+		return $this->redirectToRoute('loginSuccess');
 	}
 }
