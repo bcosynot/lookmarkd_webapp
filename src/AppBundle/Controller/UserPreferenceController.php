@@ -23,7 +23,7 @@ class UserPreferenceController extends Controller {
 					$userPreference = new UserPreference();
 					$userPreference->setUser($user);
 					$userPreference->setPreferenceType($type);
-					$userPreference->setValue(null);
+					$userPreference->setValue(1);
 				}
 				$userPreferences[]=$userPreference;
 			}
