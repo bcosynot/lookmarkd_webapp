@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\User;
 
 class MessageController extends Controller {
 	
@@ -151,14 +152,7 @@ class MessageController extends Controller {
 			}
 		}
 		
-		$email = \Swift_Message::newInstance ()
-					->setSubject ( 'New message on Lookmarkd from '.$user->getUsername() )
-					->setFrom ( array('hello@lookmarkd.com'=>'Lookmarkd' ))
-					->setTo ($recipient->getEmail())
-					->setBody ( $this->renderView('email/new-message.html.twig', 
-							array('message'=>$message,'sender'=>$user->getUsername())), 'text/html' );
-		
-		$this->get('mailer')->send($email);
+		$this->sendEmailNotificationForMessage ($user, $recipient, $message);
 						
 		return new JsonResponse ( 'success' );
 	}
@@ -208,8 +202,31 @@ class MessageController extends Controller {
 		$messageBuilder->setSender ( $sender )->setBody ( $message );
 		$senderService = $this->get ( 'fos_message.sender' );
 		$senderService->send ( $messageBuilder->getMessage () );
+		
+		$user = $this->getUser();
+		
+		$this->sendEmailNotificationForMessage ($user, $recipient, $message);
+
+		
 		return new JsonResponse ( 'success' );
 	}
+	/**
+	 * 
+	 */
+	 private function sendEmailNotificationForMessage(User $user, User $recipient, $message) {
+	 	$userPreference = $this->get('user_service')->getUserPreference($recipient, 'email_notification_messages');
+	 	if(null === $userPreference || (null!=$userPreference && $userPreference->getValue() == 1)) {
+			$email = \Swift_Message::newInstance ()
+						->setSubject ( 'New message on Lookmarkd from '.$user->getUsername() )
+						->setFrom ( array('hello@lookmarkd.com'=>'Lookmarkd' ))
+						->setTo ($recipient->getEmail())
+						->setBody ( $this->renderView('email/new-message.html.twig',
+								array('message'=>$message,'sender'=>$user->getUsername())), 'text/html' );
+			
+			$this->get('mailer')->send($email);
+	 	}
+	}
+
 	private function getExistingThreadsForParticipants($recipientParticipantId) {
 		$provider = $this->get ( 'fos_message.provider' );
 		$threadsOriginal = $provider->getInboxThreads ();
