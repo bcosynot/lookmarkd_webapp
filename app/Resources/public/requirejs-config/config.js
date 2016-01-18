@@ -36,7 +36,8 @@ var require = {
         typeahead: 'typeahead.js/dist/typeahead.bundle',
         bloodhound: 'typeahead.js/dist/bloodhound.min',
         toastr: 'toastr/toastr',
-        wow: 'wow/dist/wow'
+        wow: 'wow/dist/wow',
+        animatescroll: 'animatescroll/animatescroll'
     },
     shim: {
         bootstrap: {
@@ -169,8 +170,14 @@ var require = {
             ]
         },
         wow: {
-        	exports: 'WOW'
-        }
+            exports: 'WOW'
+        },
+        animatescroll: {
+        	exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
     },
     packages: [
 

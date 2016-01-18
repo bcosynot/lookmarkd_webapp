@@ -9,15 +9,20 @@
  */
 define(function(require, exports) {
     'use strict';
-    // var $ = require('jquery');
+    var $ = require('jquery');
     var log = require('loglevel');
     require('bootstrap');
     require('bootstrap/scrollspy');
     require('bootstrap3-ie10-viewport-bug-workaround');
     var WOW = require('wow');
+    require('animatescroll');
 
     exports.init = function init() {
         log.setLevel(0);
         new WOW().init();
+        $('#hero-learn-more').click(function(e){
+        	e.preventDefault();
+        	$('#how-it-works-title').animatescroll();
+        });
     };
 });
