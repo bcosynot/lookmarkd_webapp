@@ -179,8 +179,9 @@ h4 {
 	color: white;
 	margin-bottom: 120px;
 	border: 3px solid white;
-	width: 150px;
+	width: 10em;
 	padding: 12px;
+	border-bottom: dashed;
 }
 
 #h h1 {
@@ -269,4 +270,13 @@ input {
 
 .of {
 	overflow: hidden;
+}
+
+.nav-pills > li > a, .nav-pills > li > a:visited {
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-pills > li > a:hover, .nav-pills > li.open > a {
+  color: #666;
 }
