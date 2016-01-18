@@ -155,11 +155,10 @@ h4 {
 
 /* HEADER SECTION */
 #h {
-	padding-top: 60px;
+	padding-top: 15px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 700px;
 	width: 100%;
 	
     -webkit-background-size: 100%;
@@ -177,7 +176,6 @@ h4 {
 	font-weight: 900;
 	text-align: center;
 	color: white;
-	margin-bottom: 120px;
 	border: 3px solid white;
 	width: 10em;
 	padding: 12px;
@@ -200,8 +198,8 @@ h4 {
 #cta {
 	background: #2f2f2f;
 	color: white;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 #cta h2 {
@@ -279,4 +277,52 @@ input {
 
 .nav-pills > li > a:hover, .nav-pills > li.open > a {
   color: #666;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.circle-border {
+  border-radius: 50%;
+}
+
+.thin-border {
+  border: 2px solid;
+}
+
+.green-background {
+  background-color:#1abc9c
+}
+
+.dark-background {
+  background-color: #2f2f2f;
+}
+
+.comfortable {
+  padding: 0.5em;
+}
+
+.green-border {
+  border-color: #1abc9c;
+}
+
+.dark-border {
+  border-color: #2f2f2f;
+}
+
+ #steps-success p, #steps-success h2 {
+   color: #ffffff;
+   margin-top: 2em;
+ }
+ 
+ /*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
 }

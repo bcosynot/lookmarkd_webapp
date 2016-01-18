@@ -173,11 +173,11 @@ var require = {
             exports: 'WOW'
         },
         animatescroll: {
-        	exports: '$',
+            exports: '$',
             deps: [
                 'jquery'
             ]
-        },
+        }
     },
     packages: [
 

@@ -14,11 +14,10 @@
         		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
         	{% endblock stylesheetsAll %}
             {% if app.environment == 'node' %}
-                <link rel="stylesheet" href="/styles/main.css?no-rev"/>
-                <link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
+            	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        		<link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
             {% else %}
                 {% block stylesheetsDist %}
-                <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
                 {% endblock stylesheetsDist %}
             {% endif %}
         {% endblock %}

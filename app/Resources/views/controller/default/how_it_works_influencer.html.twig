@@ -1,0 +1,218 @@
+{% extends 'front-base.html.twig' %}
+{% block title %}How Lookmarkd Works For Influencers{% endblock %}
+{% block stylesheetsCustom %}
+<style>
+ #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url('{{ asset('img/hero_influencer.jpg')}}') no-repeat;}
+</style>
+{% endblock stylesheetsCustom %}
+{% block stylesheetsDist %}
+<script>
+    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/animate.css') }}"]));
+</script>
+<noscript>
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
+</noscript>
+{% endblock stylesheetsDist %}
+
+{% block body %}
+    
+   <!-- ********** HEADER SECTION ********** --> 
+	<div id="h">
+		<div class="container">
+			<div class="row">
+			<ul class="nav nav-pills navbar-right">
+				<li><a href="{{ url('homepage') }}" class="text16">Home</a></li>
+				<li role="presentation" class="dropdown">
+					<a class="dropdown-toggle text16 active"
+						data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+						aria-expanded="false">How It Works<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url('how_it_works_brand') }}" class="text16">For Brands</a></li>
+						<li><a href="{{ url('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
+					</ul>
+				</li>
+				<li><a href="about-us" class="text16">About</a></li>
+				<li role="presentation" class="dropdown">
+					<a class="dropdown-toggle text16"
+						data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+						aria-expanded="false">Sign In<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="login/brand" class="text16">Brand</a></li>
+						<li><a href="login" class="text16">Influencer</a></li>
+					</ul>
+				</li>
+			</ul>
+			<h3 class="logo">LOOKMARKD</h3>
+				<h1>You have the power to influence.<br/> Use it wisely.</h1>	
+			</div><!--/row -->
+			
+			<div class="row">
+				<div class="col-md-12">
+					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
+						href="https://api.instagram.com/oauth/authorize/?client_id={{ instagram_client_id }}&redirect_uri={{ url('instagram_login') | url_encode(true) }}&response_type=code">
+					  <span class="ion-social-instagram-outline"></span>
+					  Sign in with Instagram
+					</a>
+					<br />
+					<a href="#" id="hero-learn-more">Learn More</a>
+				</div>
+			</div>			
+		</div><!--/container -->
+	</div><!--/header -->	  
+
+	<!-- ********** CALL TO ACTION SECTION ********** --> 
+	<div id="cta">
+		<div class="container">
+			<div class="row">
+				<h2 class="wow fadeIn">Get discovered by brands loved by your followers and be a part of
+				their digital campaigns. Keep a track of brands and campaigns with
+				our tools so you can have more time to do the things you love.</h2>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+
+	<!-- ********** INTRODUCTION SECTION ********** --> 
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered wow fadeIn">
+				<h2 id="how-it-works-title">Steps To Success</h2>
+				<hr class="aligncenter">
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+		
+		<div class="row row-eq-height tex-center" id="steps-success">
+			<div class="col-md-2 green-background white wow fadeIn">
+				<h2 class="white">Step <span class="comfortable thin-border circle-border white dark-background dark-border" >1</span></h2>
+				<p class="wow slideInUp">
+					Sign up with your social media account
+				</p>
+				<p class="text-center">
+					<i class="ion-social-instagram-outline big wow slideInUp"></i>
+				</p>
+			</div>
+			<div class="col-md-2 text-center dark-background white wow fadeIn">
+				<h2 class="white">Step <span class="comfortable thin-border circle-border white green-background green-border" >2</span></h2>
+				<p class="wow slideInUp">
+					Receive campaign invites from brands. Be a part of leading brand's campaigns
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-email-unread big wow slideInUp"></i>
+				</p>
+			</div>
+			<div class="col-md-2 text-center green-background white wow fadeIn">
+				<h2 class="white">Step <span class="thin-border comfortable circle-border white dark-background dark-border" >3</span></h2>
+				<p class="wow slideInUp">
+					Our tools help you view and generate schedules for campaigns you have accepted, upcoming shoots, pending posts, etc
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-settings big wow slideInUp"></i>
+				</p>
+			</div>
+			<div class="col-md-2 text-center dark-background white wow fadeIn">
+				<h2 class="white">Step <span class="thin-border circle-border comfortable white green-background green-border" >4</span></h2>
+				<p class="wow slideInUp">
+					Connect with your favorite brands
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-android-wifi big wow slideInUp"></i>
+				</p>
+			</div>
+			<div class="col-md-2 text-center green-background white wow fadeIn">
+				<h2 class="white">Step <span class="thin-border circle-border white comfortable dark-background dark-border" >5</span></h2>
+				<p class="wow slideInUp">
+					Link your profile with all your social handles and update your profile for better chances of getting Lookmarkd by the brands
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-person-add big wow slideInUp"></i>
+				</p>
+			</div>
+			<div class="col-md-2 text-center dark-background white wow fadeIn">
+				<h2 class="white">Step <span class="thin-border circle-border white green-background green-border comfortable" >6</span></h2>
+				<p class="wow slideInUp">
+					Profit!
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-cash big wow slideInUp"></i>
+				</p>
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+	<!-- ********** CALL TO ACTION SECTION ********** --> 
+	<div id="cta">
+		<div class="container">
+			<div class="row centered">
+				<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
+						href="https://api.instagram.com/oauth/authorize/?client_id={{ instagram_client_id }}&redirect_uri={{ url('instagram_login') | url_encode(true) }}&response_type=code">
+					  <span class="ion-social-instagram-outline"></span>
+					  Sign in with Instagram
+				</a>
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+	<!-- ********** FEATURES SECTION - Part 1 ********** -->
+	<div id="g"> 
+		<div class="container mt">
+			<div class="row">
+				<div class="col-md-4 centered">
+					<i class="ion-help-circled green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Awesome Support</p>
+					<p class="text16 wow fadeIn">Great support for timely and delightful help, if you need it.
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-ios-analytics-outline green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Genuine Metrics</p>
+					<p class="text16 wow fadeIn">Metrics that give you the right picture to track your campaigns and hashtags.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-pie-graph green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Detailed Reports</p>
+					<p class="text16 wow fadeIn">Get detailed reports and analytics about campaigns and followers.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->		
+		</div><!--/container -->
+	</div>
+	
+	<div id="cta">
+		<div class="container">
+			<div class="row centered">
+				<h2>Brands On Our Platform</h2>
+				<hr class="aligncenter">
+				<br />
+				<img src="{{ asset('img/accessorizelogopink.png') }}" style="margin-right: 10px;" />
+				<img src="{{ asset('img/beinghuman_logo.gif') }}" style="margin-right: 10px;" />
+				<img src="{{ asset('img/wacoal_logo.gif') }}" style="margin-right: 10px;" />
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+	
+	<div id="g">
+		<div class="container">
+			<div class="row mt">
+				<div class="col-md-6 col-md-offset-3 centered">
+					<h2>Stay In Contact</h2>
+					<hr class="aligncenter">
+					<h4>We Are Social People</h4>
+					<p class="text28">
+					<a href="#"><i class="ion-social-twitter big"></i></a>
+					<a href="#"><i class="ion-social-instagram big"></i></a>
+					<a href="#"><i class="ion-social-facebook big"></i></a>
+					</p>
+				</div><!-- /col-md-6-->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/g -->
+	
+	<!-- ********** END SECTION ********** --> 
+	<div class="container">
+		<div class="row mtb">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<hr class="aligncenter">
+				<p>Lookmarkd | Copyright 2016</p>
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+    
+{% endblock %}

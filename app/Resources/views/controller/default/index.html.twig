@@ -22,14 +22,15 @@
 		<div class="container">
 			<div class="row">
 			<ul class="nav nav-pills navbar-right">
+				<li><a href="{{ url('homepage') }}" class="text16">Home</a></li>
 				<li role="presentation" class="dropdown">
 					<a class="dropdown-toggle text16"
 						data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
 						aria-expanded="false">How It Works<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="login/brand" class="text16">Brand</a></li>
-						<li><a href="login" class="text16">Influencer</a></li>
+						<li><a href="{{ url('how_it_works_brand') }}" class="text16">For Brands</a></li>
+						<li><a href="{{ url('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
 					</ul>
 				</li>
 				<li><a href="about-us" class="text16">About</a></li>
@@ -56,17 +57,11 @@
 					    <span class="caret"></span>
 					  </a>
 					  <ul class="dropdown-menu" style="right:50%;left:auto;" aria-labelledby="dropdownMenu2">
-					    <li><a href="#">Brand</a></li>
-					    <li><a href="#">Influencer</a></li>
+					    <li><a href="">Brand</a></li>
+					    <li><a href="{{ url('how_it_works_influencer') }}">Influencer</a></li>
 					  </ul>
 					</div>
 					<a href="#" id="hero-learn-more">Learn More</a>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="continue">
-					<i class="ion-chevron-down big"></i>
 				</div>
 			</div><!--/row -->
 		</div><!--/container -->
@@ -76,7 +71,7 @@
 	<div id="cta">
 		<div class="container">
 			<div class="row">
-				<h2>Save time + increase revenue with best in class communication/management tools for brands and influencers.</h2>
+				<h2 class="wow fadeIn">Save time &amp; increase revenue with best in class communication/management tools for brands and influencers.</h2>
 			</div><!--/row -->
 		</div><!--/container -->
 	</div><!--/CTA -->
@@ -110,11 +105,11 @@
 					Get the best insights and stats for your campaign to squeeze the maximum ROI.
 				</p>
 				<p>
-					<a href="/brands/how-it-works" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
+					<a href="{{ url('how_it_works_brand') }}" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
 				</p>
 			</div>
 			<div class="col-md-2 text-center">
-				<span class="wow slideInDown" style="font-size: 10em;font-weight:800;"><i class="ion-arrow-swap"></i></span>
+				<span class="wow fadeIn" style="font-size: 10em;font-weight:800;"><i class="ion-arrow-swap"></i></span>
 			</div>
 			<div class="col-md-5 of text-center">
 				<h3 class="wow fadeIn">Influencers</h3>
@@ -125,20 +120,16 @@
 					<i class="ion-person" style="margin-left:0.25em;"></i>
 				</span>
 				<br />
-				<p class="wow slideInRight">Get discovered by brands loved by your followers and be a part of
-				their digital campaigns. Keep a track of brands and campaigns with
-				our tools so you can have more time to do the things you love.
-				</p>
 				<p class="wow slideInRight">Connect with brands in a few clicks and get detailed
 				instructions about their campaigns. Get reminded of upcoming deadlines with
-				schedulers and and submit deliverables - All Automated</p>
+				schedulers and and submit deliverables - All Automated. Save time to do things more important to you.</p>
 				<p  class="wow slideInUp">
 					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
 						href="https://api.instagram.com/oauth/authorize/?client_id={{ instagram_client_id }}&redirect_uri={{ url('instagram_login') | url_encode(true) }}&response_type=code">
 					  <span class="ion-social-instagram-outline"></span>
 					  Sign in with Instagram
 					</a>
-					<a class="wow slideInUp btn btn-lg btn-green" href="/influencer/how-it-works">Learn More</a>
+					<a class="wow slideInUp btn btn-lg btn-green" href="{{ url('how_it_works_influencer') }}">Learn More</a>
 				</p>
 			</div>
 		</div><!--/row -->
