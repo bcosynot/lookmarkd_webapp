@@ -18,4 +18,18 @@ class DefaultController extends Controller {
 		
 		return $this->render ( 'controller/default/index.html.twig' );
 	}
+	
+	/**
+	 * @Route("/influencer/how-it-works", name="how_it_works_influencer")
+	 */
+	public function howItWorksInfluencerAction() {	
+		return $this->render ( 'controller/default/how_it_works_influencer.html.twig' );
+	}
+	
+	/**
+	 * @Route("/brand/how-it-works", name="how_it_works_brand")
+	 */
+	public function howItWorksBrandAction() {
+		return $this->render ( 'controller/default/how_it_works_brand.html.twig' );
+	}
 }
