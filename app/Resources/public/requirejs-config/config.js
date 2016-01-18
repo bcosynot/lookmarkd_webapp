@@ -35,7 +35,8 @@ var require = {
         select2: 'select2/dist/js/select2',
         typeahead: 'typeahead.js/dist/typeahead.bundle',
         bloodhound: 'typeahead.js/dist/bloodhound.min',
-        toastr: 'toastr/toastr'
+        toastr: 'toastr/toastr',
+        wow: 'wow/dist/wow'
     },
     shim: {
         bootstrap: {
@@ -166,6 +167,9 @@ var require = {
             deps: [
                 'jquery'
             ]
+        },
+        wow: {
+        	exports: 'WOW'
         }
     },
     packages: [

@@ -2,16 +2,16 @@
 {% block title %}Lookmarkd{% endblock %}
 {% block stylesheetsCustom %}
 <style>
- #h {background: url({{ asset('img/header.jpg')}}) no-repeat;}
+ #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url('{{ asset('img/header-hand-camera.jpg')}}') no-repeat;}
 </style>
 {% endblock stylesheetsCustom %}
 {% block stylesheetsDist %}
 <script>
-    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/custom-animations.css') }}"]));
+    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/animate.css') }}"]));
 </script>
 <noscript>
     <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/custom-animations.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
 </noscript>
 {% endblock stylesheetsDist %}
 
@@ -81,53 +81,53 @@
 		
 		<div class="row">
 			<div class="col-md-5 text-center">
-				<h3>Brands</h3>
+				<h3 class="wow fadeIn">Brands</h3>
 				<hr class="aligncenter">
-				<h4>Create - Manage - Track</h4>
+				<h4 class="wow fadeIn">Create - Manage - Track</h4>
 				<br />
-				<span style="font-size: 10em;font-weight:800; border: solid 5px;">
+				<span class="wow slideInLeft" style="font-size: 10em;font-weight:800; border: solid 5px;">
 					<i class="ion-stats-bars" style="margin-left:0.25em;"></i>
 				</span>
 				<br />
-				<p>
+				<p class="wow slideInLeft">
 					Tap on influencer based marketing. Confidently, find the right
 					influencers that can help you reach your target audience quickly and
 					effectively.
 				</p>
-				<p>
+				<p class="wow slideInLeft">
 					Armed with India's most popular bloggers and influencers - create, manage and track your campaigns with our easy and rich tools.
 					Get the best insights and stats for your campaign to squeeze the maximum ROI.
 				</p>
 				<p>
-					<a href="/brands/how-it-works" class="btn btn-lg btn-green">Learn More</a>
+					<a href="/brands/how-it-works" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
 				</p>
 			</div>
 			<div class="col-md-2 text-center">
-				<span style="font-size: 10em;font-weight:800;"><i class="ion-arrow-swap"></i></span>
+				<span class="wow slideInDown" style="font-size: 10em;font-weight:800;"><i class="ion-arrow-swap"></i></span>
 			</div>
 			<div class="col-md-5 of text-center">
-				<h3>Influencers</h3>
+				<h3 class="wow fadeIn">Influencers</h3>
 				<hr class="aligncenter">
-				<h4>Influence - Share - Earn</h4>
+				<h4 class="wow fadeIn">Influence - Share - Earn</h4>
 				<br />
-				<span style="font-size: 10em;font-weight:800; border: solid 5px;border-radius:50%;">
+				<span class="wow slideInRight" style="font-size: 10em;font-weight:800; border: solid 5px;border-radius:50%;">
 					<i class="ion-person" style="margin-left:0.25em;"></i>
 				</span>
 				<br />
-				<p>Get discovered by brands loved by your followers and be a part of
+				<p class="wow slideInRight">Get discovered by brands loved by your followers and be a part of
 				their digital campaigns. Keep a track of brands and campaigns with
 				our tools so you can have more time to do the things you love.
 				</p>
-				<p>Connect with brands in a few clicks and get detailed
+				<p class="wow slideInRight">Connect with brands in a few clicks and get detailed
 				instructions about their campaigns. Get reminded of upcoming deadlines with
 				schedulers and and submit deliverables - All Automated</p>
-				<p>
-					<a class="btn btn-lg btn-social btn-instagram" 
+				<p  class="wow slideInUp">
+					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
 						href="https://api.instagram.com/oauth/authorize/?client_id={{ instagram_client_id }}&redirect_uri={{ url('instagram_login') | url_encode(true) }}&response_type=code">
 					  <span class="ion-social-instagram-outline"></span>
 					  Sign in with Instagram
 					</a>
-					<a class="btn btn-lg btn-green" href="/influencer/how-it-works">Learn More</a>
+					<a class="wow slideInUp btn btn-lg btn-green" href="/influencer/how-it-works">Learn More</a>
 				</p>
 			</div>
 		</div><!--/row -->
@@ -138,19 +138,19 @@
 		<div class="container mt">
 			<div class="row">
 				<div class="col-md-4 centered">
-					<i class="ion-help-circled green big"></i>
-					<p class="green">Awesome Support</p>
-					<p class="text16">Great support for timely and delightful help, if you need it.
+					<i class="ion-help-circled green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Awesome Support</p>
+					<p class="text16 wow fadeIn">Great support for timely and delightful help, if you need it.
 				</div><!--/col-md-4-->
 				<div class="col-md-4 centered">
-					<i class="ion-ios-analytics-outline green big"></i>
-					<p class="green">Genuine Metrics</p>
-					<p class="text16">Metrics that give you the right picture to track your campaigns and hashtags.</p>
+					<i class="ion-ios-analytics-outline green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Genuine Metrics</p>
+					<p class="text16 wow fadeIn">Metrics that give you the right picture to track your campaigns and hashtags.</p>
 				</div><!--/col-md-4-->
 				<div class="col-md-4 centered">
-					<i class="ion-pie-graph green big"></i>
-					<p class="green">Detailed Reports</p>
-					<p class="text16">Get detailed reports and analytics about campaigns and followers.</p>
+					<i class="ion-pie-graph green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Detailed Reports</p>
+					<p class="text16 wow fadeIn">Get detailed reports and analytics about campaigns and followers.</p>
 				</div><!--/col-md-4-->
 			</div><!--/row -->		
 		</div><!--/container -->
