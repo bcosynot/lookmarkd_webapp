@@ -37,7 +37,8 @@ var require = {
         bloodhound: 'typeahead.js/dist/bloodhound.min',
         toastr: 'toastr/toastr',
         wow: 'wow/dist/wow',
-        animatescroll: 'animatescroll/animatescroll'
+        animatescroll: 'animatescroll/animatescroll',
+        scrollup: 'scrollup/dist/jquery.scrollUp.min'
     },
     shim: {
         bootstrap: {
@@ -173,6 +174,12 @@ var require = {
             exports: 'WOW'
         },
         animatescroll: {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
+        scrollup: {
             exports: '$',
             deps: [
                 'jquery'

@@ -299,6 +299,10 @@ input {
   background-color: #2f2f2f;
 }
 
+.dark-background.translucent {
+  background-color: rgba(47, 47, 47, 0.6);
+}
+
 .comfortable {
   padding: 0.5em;
 }
@@ -311,18 +315,30 @@ input {
   border-color: #2f2f2f;
 }
 
- #steps-success p, #steps-success h2 {
+#front-base div.steps p, #front-base div.steps h2 {
    color: #ffffff;
    margin-top: 2em;
- }
- 
- /*
- * Row with equal height columns
- * --------------------------------------------------
- */
-.row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
+}
+
+#front-base div.steps i {
+  margin-right: 0;
+}
+
+.underline {
+  text-decoration: none;
+  border-bottom: 1px solid dotted;
+}
+
+#scrollUp {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid #555;
+}
+
+#scrollUp i {
+  margin-right: 0;
 }
