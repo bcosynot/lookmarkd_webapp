@@ -10,16 +10,9 @@
         {% block stylesheets %}
             {% block stylesheetsCustom %}
             {% endblock stylesheetsCustom %}
-        	{% block stylesheetsAll %}
         		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-        	{% endblock stylesheetsAll %}
-            {% if app.environment == 'node' %}
-                <link rel="stylesheet" href="/styles/main.css?no-rev"/>
-            {% else %}
-                {% block stylesheetsDist %}
-                <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
-                {% endblock stylesheetsDist %}
-            {% endif %}
+            	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        		<link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>

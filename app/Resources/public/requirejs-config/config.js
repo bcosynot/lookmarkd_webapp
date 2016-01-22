@@ -35,7 +35,10 @@ var require = {
         select2: 'select2/dist/js/select2',
         typeahead: 'typeahead.js/dist/typeahead.bundle',
         bloodhound: 'typeahead.js/dist/bloodhound.min',
-        toastr: 'toastr/toastr'
+        toastr: 'toastr/toastr',
+        wow: 'wow/dist/wow',
+        animatescroll: 'animatescroll/animatescroll',
+        scrollup: 'scrollup/dist/jquery.scrollUp.min'
     },
     shim: {
         bootstrap: {
@@ -162,6 +165,21 @@ var require = {
             ]
         },
         toastr: {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
+        wow: {
+            exports: 'WOW'
+        },
+        animatescroll: {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
+        scrollup: {
             exports: '$',
             deps: [
                 'jquery'

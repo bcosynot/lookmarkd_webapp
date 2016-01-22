@@ -155,11 +155,10 @@ h4 {
 
 /* HEADER SECTION */
 #h {
-	padding-top: 60px;
+	padding-top: 15px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 700px;
 	width: 100%;
 	
     -webkit-background-size: 100%;
@@ -177,10 +176,10 @@ h4 {
 	font-weight: 900;
 	text-align: center;
 	color: white;
-	margin-bottom: 120px;
 	border: 3px solid white;
-	width: 150px;
+	width: 10em;
 	padding: 12px;
+	border-bottom: dashed;
 }
 
 #h h1 {
@@ -199,8 +198,8 @@ h4 {
 #cta {
 	background: #2f2f2f;
 	color: white;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 #cta h2 {
@@ -269,4 +268,77 @@ input {
 
 .of {
 	overflow: hidden;
+}
+
+.nav-pills > li > a, .nav-pills > li > a:visited {
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-pills > li > a:hover, .nav-pills > li.open > a {
+  color: #666;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.circle-border {
+  border-radius: 50%;
+}
+
+.thin-border {
+  border: 2px solid;
+}
+
+.green-background {
+  background-color:#1abc9c
+}
+
+.dark-background {
+  background-color: #2f2f2f;
+}
+
+.dark-background.translucent {
+  background-color: rgba(47, 47, 47, 0.6);
+}
+
+.comfortable {
+  padding: 0.5em;
+}
+
+.green-border {
+  border-color: #1abc9c;
+}
+
+.dark-border {
+  border-color: #2f2f2f;
+}
+
+#front-base div.steps p, #front-base div.steps h2 {
+   color: #ffffff;
+   margin-top: 2em;
+}
+
+#front-base div.steps i {
+  margin-right: 0;
+}
+
+.underline {
+  text-decoration: none;
+  border-bottom: 1px solid dotted;
+}
+
+#scrollUp {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid #555;
+}
+
+#scrollUp i {
+  margin-right: 0;
 }

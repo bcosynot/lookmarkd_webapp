@@ -1,7 +1,7 @@
 /**
  *
- * @author Ben ZÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶rb @bezoerb https://github.com/bezoerb
- * @copyright Copyright (c) 2015 Ben ZÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶rb
+ * @author Ben ZÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rb @bezoerb https://github.com/bezoerb
+ * @copyright Copyright (c) 2015 Ben ZÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rb
  *
  * Licensed under the MIT license.
  * http://bezoerb.mit-license.org/
@@ -13,14 +13,18 @@ define(function(require, exports) {
     var log = require('loglevel');
     require('bootstrap');
     require('bootstrap/scrollspy');
-    require('jquery-unveil');
     require('bootstrap3-ie10-viewport-bug-workaround');
+    var WOW = require('wow');
+    require('animatescroll');
+    require('scrollup');
 
     exports.init = function init() {
         log.setLevel(0);
-        log.debug('\'Allo \'Allo');
-        log.debug('Running jQuery:', $().jquery);
-        log.debug('Running Bootstrap:',!!$.fn.scrollspy? '~3.3.0' : false);
-        $('img').unveil();
+        new WOW().init();
+        $('#hero-learn-more').click(function(e){
+        	e.preventDefault();
+        	$('#how-it-works-title').animatescroll();
+        });
+        $.scrollUp({'scrollText':'<i class="ion-chevron-up"></i>'});
     };
 });

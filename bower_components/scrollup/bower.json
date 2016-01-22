@@ -1,0 +1,14 @@
+{
+  "name": "scrollup",
+  "version": "2.4.1",
+  "main": "dist/jquery.scrollUp.min.js",
+  "ignore": [
+    "css",
+    "img",
+    ".travis.yml",
+    "index.html"
+  ],
+  "dependencies": {
+    "jquery": ">=1.11.0"
+  }
+}
