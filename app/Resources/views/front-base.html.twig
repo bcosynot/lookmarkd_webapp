@@ -17,7 +17,62 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body id="front-base">
-        {% block body %}{% endblock %}
+        {% block body %}
+
+        <!-- ********** HEADER SECTION ********** -->
+        <div id="h">
+            <div class="container">
+                <div class="row">
+                    <ul class="nav nav-pills navbar-right">
+                        <li><a href="{{ url('homepage') }}" class="text16">Home</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">How It Works<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('how_it_works_brand') }}" class="text16">For Brands</a></li>
+                                <li><a href="{{ url('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about-us" class="text16">About</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">Sign In<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="login/brand" class="text16">Brand</a></li>
+                                <li><a href="login" class="text16">Influencer</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3 class="logo">LOOKMARKD</h3>
+                    <h1>{% block heromsg %}{% endblock %}</h1>
+                </div><!--/row -->
+                {% block herocta %}{% endblock %}
+                <div class="row dark-background translucent mt">
+                    <h2 class="wow fadeIn white">{% block persuasivemsg %}{% endblock %}</h2>
+                </div>
+
+            </div><!--/container -->
+
+        </div><!--/header -->
+
+        <div id="cta">
+            <div class="container">
+            </div><!--/container -->
+        </div><!--/CTA -->
+
+        {% block content %}{% endblock %}
+
+        {% include '::front-brands-with-us.html.twig' %}
+
+        {% include '::front-social.html.twig' %}
+
+        {% include '::front-footer.html.twig' %}
+
+        {% endblock %}
         {% block javascripts %}
             {% if app.environment == 'node' %}
             	{% block javascriptsDev %}
