@@ -1,3 +1,8 @@
 ALTER TABLE `fos_user` CHANGE `instagram_id` `instagram_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL;
 
 ALTER TABLE `fos_user` CHANGE `instagram_access_token` `instagram_access_token` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL;
+
+CREATE TABLE campaign (id INT AUTO_INCREMENT NOT NULL, campaignName VARCHAR(255) NOT NULL, owner BIGINT NOT NULL, start DATETIME NOT NULL, end DATETIME NOT NULL, reward_type INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
+
+CREATE TABLE campaign_participants (id INT AUTO_INCREMENT NOT NULL, campaign BIGINT NOT NULL, participant BIGINT NOT NULL, status INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
+
