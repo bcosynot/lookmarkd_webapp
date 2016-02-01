@@ -23,6 +23,21 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        brand:
+            anonymous: true
+
+            pattern: ^/
+
+            form_login:
+              provider: fos_userbundle
+              csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+              login_path: brand_login
+              check_path: brand_login_check
+              always_use_default_target_path: true
+              default_target_path: brand_login_success
+
+            logout: true
+
         main:
             anonymous: true
             # activate different ways to authenticate
@@ -38,21 +53,21 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                login_path: /login
-                check_path: /login_check
+                login_path: /influencer/login
+                check_path: /influencer/login_check
                 always_use_default_target_path: true
-                default_target_path: /login/success/
+                default_target_path: /influencer/login/success/
 
             logout: true
 
             oauth:
                 resource_owners:
                     instagram:     "/login/check-insta"
-                login_path:        /login
+                login_path:        /influencer/login
                 use_forward:       false
-                failure_path:      /login
+                failure_path:      /influencer/login
                 always_use_default_target_path: true
-                default_target_path: /login/success/
+                default_target_path: /influencer/login/success/
 
                 oauth_user_provider:
                     service: my_user_provider
@@ -62,7 +77,7 @@ security:
             security: false
 
             remember_me:
-                key: "%secret%"
+                secret: "%secret%"
                 lifetime: 31536000 # 365 days in seconds
                 path: /
                 domain: ~ # Defaults to the current domain from $_SERVER
