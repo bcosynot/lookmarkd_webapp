@@ -38,7 +38,8 @@ var require = {
         toastr: 'toastr/toastr',
         wow: 'wow/dist/wow',
         animatescroll: 'animatescroll/animatescroll',
-        scrollup: 'scrollup/dist/jquery.scrollUp.min'
+        scrollup: 'scrollup/dist/jquery.scrollUp.min',
+        tweenlite: 'tweenlite/TweenLite.min'
     },
     shim: {
         bootstrap: {
@@ -184,7 +185,20 @@ var require = {
             deps: [
                 'jquery'
             ]
+        },
+        tweenlite: {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
+        'bootstrap-datetimepicker': {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
         }
+
     },
     packages: [
 
