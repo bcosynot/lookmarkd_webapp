@@ -1,18 +1,10 @@
-/**
- *
- * @author Ben ZÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rb @bezoerb https://github.com/bezoerb
- * @copyright Copyright (c) 2015 Ben ZÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rb
- *
- * Licensed under the MIT license.
- * http://bezoerb.mit-license.org/
- * All rights reserved.
- */
 define(function(require, exports) {
     'use strict';
     var $ = require('jquery');
     var log = require('loglevel');
     require('bootstrap');
     require('bootstrap/scrollspy');
+    require('bootstrap/collapse');
     require('bootstrap3-ie10-viewport-bug-workaround');
     var WOW = require('wow');
     require('animatescroll');
@@ -26,5 +18,15 @@ define(function(require, exports) {
         	$('#how-it-works-title').animatescroll();
         });
         $.scrollUp({'scrollText':'<i class="ion-chevron-up"></i>'});
+
+        //Stack menu when collapsed
+        $('#bs-example-navbar-collapse-1').on('show.bs.collapse', function() {
+            $('.nav-pills').addClass('nav-stacked');
+        });
+
+        //Unstack menu when not collapsed
+        $('#bs-example-navbar-collapse-1').on('hide.bs.collapse', function() {
+            $('.nav-pills').removeClass('nav-stacked');
+        });
     };
 });
