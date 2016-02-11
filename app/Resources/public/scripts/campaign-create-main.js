@@ -1,5 +1,4 @@
-require([ 'modules/common-scripts', 'jquery', 'bootstrap/tab','bootstrap/transition','bootstrap-daterangepicker'
-            ,'textarea-autosize'], function(common, jquery) {
+require([ 'modules/common-scripts', 'jquery', 'bootstrap/tab','bootstrap/transition','bootstrap-daterangepicker','textarea-autosize'], function(common, jquery) {
 
     'use strict';
     common.init();
