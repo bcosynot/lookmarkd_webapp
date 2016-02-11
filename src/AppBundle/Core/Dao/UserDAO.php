@@ -158,5 +158,26 @@ class UserDAO {
 	public function getAllUserPreferenceTypes() {
 		return $this->em->getRepository('AppBundle:UserPreferenceType')->findAll();
 	}
-	
+
+
+	/**
+	 * @return \AppBundle\Entity\User[]|array
+	 */
+	public function getAllInfluencers()
+	{
+		return $this->em->getRepository('AppBundle:User')->findBy(array(
+			'userType' => 1
+		));
+	}
+
+	/**
+	 * @param User $user
+	 * @return SocialProfile|null|object
+	 */
+	public function getSocialProfile($user) {
+		return $this->em->getRepository('AppBundle:SocialProfile')->findOneBy(
+			array('user'=>$user)
+		);
+	}
+
 }

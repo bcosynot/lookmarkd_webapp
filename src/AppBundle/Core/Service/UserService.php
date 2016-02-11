@@ -165,4 +165,17 @@ class UserService implements UserServiceInterface {
 		return $this->userDAO->getUserPreferenceType ( $preferenceKey ) ;
 	}
 
+	/**
+	 * @return \AppBundle\Entity\User[]|array
+	 */
+	public function getAllInfluencers()
+	{
+		return $this->userDAO->getAllInfluencers();
+	}
+
+	public function getSocialProfile($user)
+	{
+		return $this->userDAO->getSocialProfile($user);
+	}
+
 }

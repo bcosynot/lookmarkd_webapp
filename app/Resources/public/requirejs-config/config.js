@@ -39,7 +39,11 @@ var require = {
         wow: 'wow/dist/wow',
         animatescroll: 'animatescroll/animatescroll',
         scrollup: 'scrollup/dist/jquery.scrollUp.min',
-        tweenlite: 'tweenlite/TweenLite.min'
+        tweenlite: 'tweenlite/TweenLite.min',
+        'jquery-hoverintent': 'jquery-hoverintent/jquery.hoverIntent',
+        'jquery.cookie': 'jquery.cookie/jquery.cookie',
+        moment: 'moment/min/moment.min',
+        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize'
     },
     shim: {
         bootstrap: {
@@ -129,7 +133,9 @@ var require = {
         dcjqaccordion: {
             exports: '$',
             deps: [
-                'jquery'
+                'jquery',
+                'jquery.cookie',
+                'jquery-hoverintent'
             ]
         },
         'jquery.scrollTo': {
@@ -197,8 +203,21 @@ var require = {
             deps: [
                 'jquery'
             ]
-        }
-
+        },
+        'bootstrap-daterangepicker': {
+            exports: '$',
+            deps: [
+                'jquery',
+                'moment',
+                'bootstrap'
+            ]
+        },
+        'textarea-autosize': {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
     },
     packages: [
 

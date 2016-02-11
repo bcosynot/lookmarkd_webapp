@@ -1,36 +1,45 @@
-require([ 'modules/common-scripts', 'jquery', 'bootstrap-datetimepicker','bootstrap/tab','bootstrap/transition' ], function(common, jquery) {
+require([ 'modules/common-scripts', 'jquery', 'bootstrap/tab','bootstrap/transition','bootstrap-daterangepicker'
+            ,'textarea-autosize'], function(common, jquery) {
 
     'use strict';
     common.init();
     var $ = jquery;
 
-    $( '#from' ).datetimepicker({
-        defaultDate: '+1w',
-        changeMonth: true,
-        numberOfMonths: 3,
-        onClose: function( selectedDate ) {
-            $( '#to' ).datepicker( 'option', 'minDate', selectedDate );
-        }
-    });
-    $( '#to' ).datetimepicker({
-        defaultDate: '+1w',
-        changeMonth: true,
-        numberOfMonths: 3,
-        onClose: function( selectedDate ) {
-            $( '#from' ).datepicker( 'option', 'maxDate', selectedDate );
-        }
-    });
+    $( '#schedule-input' ).daterangepicker();
 
     $('.next-button').click(function (e) {
         e.preventDefault();
 
-        $($(this).attr('href')).addClass('in').addClass('active');
+        $('.nav-tabs li.active').removeClass('active');
+        $('.nav-tabs li a[href='+$(this).attr('href')+']').parents('li').first()
+            .addClass('active');
 
-        $(this).parents('.tab-pane').first()
-                                        .removeClass('in')
-                                        .removeClass('active')
-                                        .addClass('out');
+    });
 
+    var textMax = 1200;
+    $('#brief-description').keyup(function() {
+        var textLength = $(this).val().length;
+        var textRemaining = textMax - textLength;
+
+        $('#char-counter').html(textRemaining + ' remaining');
+    }).textareaAutoSize();
+
+    $('button.selection').click(function(){
+        if(!$(this).hasClass('active')) {
+            $(this).addClass('active');
+            $(this).find('span')
+                    .addClass('ion-checkmark-circled')
+                    .removeClass('ion-checkmark');
+        } else {
+            $(this).removeClass('active');
+            $(this).find('span')
+                    .removeClass('ion-checkmark-circled')
+                    .addClass('ion-checkmark');
+        }
+    });
+
+    $('a[data-toggle="tab"][href="#message"]').on('shown.bs.tab', function(){
+        // TODO: Logic for creating message based on provided fields
     });
 
 });
