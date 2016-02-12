@@ -1,8 +1,6 @@
 {% extends 'dashboard-base.html.twig' %}
 {% block title %}Create Campaign{% endblock %}
 {% block stylesheetsDist %}
-    <style type="text/css">
-    </style>
     <script>
         (function (u) {
             function loadCSS(e, t, n) {
@@ -19,12 +17,13 @@
             for (var i in u) {
                 loadCSS(u[i]);
             }
-        }(["{{ asset('styles/dashboard-style.css') }}", "{{ asset('styles/style-responsive.css') }}"]));
+        }( ["{{ asset('styles/main.css') }}","{{ asset('styles/dashboard-style.css') }}", "{{ asset('styles/style-responsive.css') }}"]));
     </script>
     <noscript>
-        <link rel="stylesheet" href="{{ asset('dashboard-style/style.css') }}"/>
-        <link rel="stylesheet"
-              href="{{ asset('styles/style-responsive.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('styles/dashboard-style/style.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}"/>
+    </noscript>
 {% endblock stylesheetsDist %}
 {% block stylesheetsCustom %}
     <link rel="stylesheet" href="{{ asset('styles/daterangepicker.css') }}"/>
@@ -119,6 +118,17 @@
             background: #fff !important;
             border: 2px solid #ddd;
             color: #999;
+        }
+
+        span.round-tabs.six {
+            color: #000;
+            border: 2px solid #000;
+        }
+
+        li.active span.round-tabs.six {
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: #000;
         }
 
         .nav-tabs > li.active > a span.round-tabs {
