@@ -1,4 +1,4 @@
-https://codeship.com/projects/9b1d5190-b7c9-0133-ab74-4a886ebdee0b/status?branch=development
+[codeship build status](https://codeship.com/projects/9b1d5190-b7c9-0133-ab74-4a886ebdee0b/status?branch=development)
 # How to setup
 
 
