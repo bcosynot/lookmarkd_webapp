@@ -1,4 +1,4 @@
-[codeship build status](https://codeship.com/projects/9b1d5190-b7c9-0133-ab74-4a886ebdee0b/status?branch=development)
+[ ![Codeship Status for thakurroxxx/backend](https://codeship.com/projects/9b1d5190-b7c9-0133-ab74-4a886ebdee0b/status?branch=master)](https://codeship.com/projects/134884)
 # How to setup
 
 
