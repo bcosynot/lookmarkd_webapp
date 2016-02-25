@@ -2,6 +2,8 @@ parameters:
     database.host:     127.0.0.1
     database.port:     3306
     database.name:     test
+    database.user:     '%cs.database.user%'
+    database.password: '%cs.database.password%'
     # You should uncomment this if you want use pdo_sqlite
     # database.path: "%kernel.root_dir%/data.db3"
 
