@@ -15,9 +15,11 @@ class LoginController extends Controller {
 		$securityContext = $this->container->get ( 'security.authorization_checker' );
 		$logger = $this->get('logger');
 		$logger->info('inside login success');
-		if ($securityContext->isGranted ( 'IS_AUTHENTICATED_REMEMBERED' ) || $securityContext->isGranted ( 'ROLE_USER' )) {
+		if ($securityContext->isGranted ( 'IS_AUTHENTICATED_REMEMBERED' ) || $securityContext->isGranted ( 'ROLE_USER' )
+				|| $securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
 			$user = $this->getUser ();
 			$logger->info('authenticated:'.$user->getUsername());
+			$this->get('social_profile_util')->updateSocialStatisticsIfNecessary($user);
 			if (null != $user && null === $user->getEmail () || ! (null !== $user->getEmail () && strlen ( $user->getEmail () ) > 0 && strpos ( $user->getEmail (), '@' ))) {
 				$logger->info('missingemail');
 				return $this->redirectToRoute ( 'missingEmail' );

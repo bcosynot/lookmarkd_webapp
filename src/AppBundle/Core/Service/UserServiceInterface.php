@@ -38,6 +38,13 @@ interface UserServiceInterface {
 	 * @param int $postingCategoryId
 	 */
 	public function addPostingCategory(User $user, $postingCategoryId);
+
+	/**
+	 *
+	 * @param User $user
+	 * @return UserProfile found by user
+	 */
+	public function getUserProfile(User $user);
 	
 	/**
 	 * @param string $username
