@@ -73,9 +73,17 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 							class="ion-android-desktop"></i> <span>Dashboard</span>
 					</a></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu">
+						<a href="javascript:;"> <i
 							class="ion-ios-calendar-outline"></i> <span>Campaigns</span>
-					</a>
+						</a>
+						<ul class="sub">
+							<li>
+								<a href="{{ url('campaign_create') }}">
+									Create
+								</a>
+							</li>
+						</ul>
 					</li>
 					
 					<li class="sub-menu">

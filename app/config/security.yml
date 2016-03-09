@@ -26,7 +26,7 @@ security:
         brand:
             anonymous: true
 
-            pattern: ^/
+            pattern: ^/(brand|dashboard|login/success)
 
             form_login:
               provider: fos_userbundle
@@ -34,9 +34,11 @@ security:
               login_path: brand_login
               check_path: brand_login_check
               always_use_default_target_path: true
-              default_target_path: brand_login_success
+              default_target_path: loginSuccess
 
             logout: true
+
+            switch_user: true
 
         main:
             anonymous: true
@@ -49,6 +51,8 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
             pattern: ^/
+
+            switch_user: true
             
             form_login:
                 provider: fos_userbundle
@@ -56,18 +60,18 @@ security:
                 login_path: /influencer/login
                 check_path: /influencer/login_check
                 always_use_default_target_path: true
-                default_target_path: /influencer/login/success/
+                default_target_path: loginSuccess
 
             logout: true
 
             oauth:
                 resource_owners:
-                    instagram:     "/login/check-insta"
+                    instagram:     "/influencer/login/check-insta"
                 login_path:        /influencer/login
                 use_forward:       false
                 failure_path:      /influencer/login
                 always_use_default_target_path: true
-                default_target_path: /influencer/login/success/
+                default_target_path: loginSuccess
 
                 oauth_user_provider:
                     service: my_user_provider

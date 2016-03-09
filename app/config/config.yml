@@ -41,10 +41,14 @@ doctrine:
         user: '%database.user%'
         password: '%database.password%'
         charset: UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            SonataNotificationBundle: ~
 swiftmailer:
     transport: '%mailer.transport%'
     host: '%mailer.host%'
@@ -60,12 +64,15 @@ fos_user:
 hwi_oauth:
     connect:
         account_connector: my_user_provider
-    firewall_name: main
+    firewall_names: [main]
     resource_owners:
         instagram:
             type: instagram
             client_id: '%instagram.client.id%'
             client_secret: '%instagram.client.secret%'
+            scope: basic follower_list
+            options:
+                csrf: true
     fosub:
         username_iterations: 30
         properties:
@@ -77,3 +84,19 @@ fos_message:
     db_driver: orm
     thread_class: AppBundle\Entity\Thread
     message_class: AppBundle\Entity\Message
+
+sonata_notification:
+    admin:
+      enabled: false
+    backend: sonata.notification.backend.rabbitmq
+    backends:
+            rabbitmq:
+                exchange:     router
+                connection:
+                    host: localhost
+                    port: 5672
+                    user: guest
+                    pass: guest
+                    vhost: lookmarkd
+    queues:
+            - { queue: asyncstats, routing_key: asyncstats.fetcher, default: true }

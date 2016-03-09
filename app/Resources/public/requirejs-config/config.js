@@ -217,7 +217,7 @@ var require = {
             deps: [
                 'jquery'
             ]
-        },
+        }
     },
     packages: [
 

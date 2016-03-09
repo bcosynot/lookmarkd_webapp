@@ -21,6 +21,7 @@ class AppKernel extends Kernel {
 				new FOS\RestBundle\FOSRestBundle(),
 				new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 				new FOS\MessageBundle\FOSMessageBundle(),
+				new Sonata\NotificationBundle\SonataNotificationBundle(),
 		);
 		
 		if (in_array ( $this->getEnvironment (), array (

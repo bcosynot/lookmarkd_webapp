@@ -477,14 +477,16 @@
                                                                     url('{{ profilePictures[loop.index-1] }}')
                                                                     no-repeat;
                                                         background-size: cover;">
-                                                 <h4 class="panel-title white">@{{ influencer.username }}</h4>
-                                                {#<div class="row">
-                                                    <img src="{{ profilePictures[loop.index-1] }}"
-                                                       width="100%"/>
-                                                </div>#}
+                                                 <h4 class="panel-title white">
+                                                    <a href="https://instagram.com/{{ influencer.username }}">
+                                                        @{{ influencer.username }}
+                                                    </a>
+                                                 </h4>
                                                 <div class="row mt">
                                                     <div class="col-md-12">
-                                                        <p class="white"><span class="ion-eye white"></span>&nbsp;&nbsp;500</p>
+                                                        <p class="white">
+                                                            <span class="ion-eye white"></span>&nbsp;&nbsp;{{ followers[loop.index-1] }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-block btn-primary selection">

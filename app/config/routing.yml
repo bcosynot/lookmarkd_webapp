@@ -36,5 +36,4 @@ fos_user_change_password:
     prefix: /profile
 
 instagram_login:
-    pattern: /login/check-insta
-    defaults: { _remember_me: on }
+    pattern: /influencer/login/check-insta

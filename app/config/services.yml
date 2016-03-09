@@ -5,6 +5,9 @@ parameters:
     user_service.class: AppBundle\Core\Service\UserService
     user_dao.class: AppBundle\Core\Dao\UserDAO
     social_profile_util.class: AppBundle\Util\SocialProfileUtil
+    social_service.class: AppBundle\Core\Service\SocialService
+    social_statistic_dao.class: AppBundle\Core\Dao\SocialStatisticDAO
+    consumer.async_instagrams_stats.class: AppBundle\Consumer\AsyncInstagramStatsConsumer
 
 services:
   
@@ -22,10 +25,17 @@ services:
         arguments: ["@fos_user.user_manager",{instagram: instagramId},"%instagram.client.id%","%instagram.client.secret%","@logger", "@user_service"]
         tags:
             - { name: monolog.logger }
-            
+
+    social_statistic_dao:
+            class: "%social_statistic_dao.class%"
+            arguments: ["@doctrine.orm.entity_manager","@logger"]
+
+    social_service:
+        class: "%social_service.class%"
+        arguments: ["@social_statistic_dao","@logger"]
             
     social_profile_util:
         class: "%social_profile_util.class%"
-        arguments: ["@user_service","@logger"]
-      
-      
+        arguments: ["@user_service","@logger", "@social_service","@sonata.notification.backend"]
+
+
