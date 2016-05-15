@@ -17,7 +17,68 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body id="front-base">
-        {% block body %}{% endblock %}
+        {% block body %}
+
+        <!-- ********** HEADER SECTION ********** -->
+        <div id="h">
+            <nav role="navigation">
+                <div class="navbar-header">
+                        <i class="ion-navicon-round white navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></i>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav nav-pills navbar-right">
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">How It Works<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('how_it_works_brand') }}" class="text16">For Brands</a></li>
+                                <li><a href="{{ url('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">Sign In<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('brand_login') }}" class="text16">Brand</a></li>
+                                <li><a href="login" class="text16">Influencer</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about-us" class="text16">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <a href="{{ url('homepage') }}"><h3 class="logo">LOOKMARKD</h3></a>
+                    <h1>{% block heromsg %}{% endblock %}</h1>
+                </div><!--/row -->
+                {% block herocta %}{% endblock %}
+                <div class="row dark-background translucent mt">
+                    <h2 class="wow fadeIn white">{% block persuasivemsg %}{% endblock %}</h2>
+                </div>
+
+            </div><!--/container -->
+
+        </div><!--/header -->
+
+        <div id="cta">
+            <div class="container">
+            </div><!--/container -->
+        </div><!--/CTA -->
+
+        {% block content %}{% endblock %}
+
+        {% include '::front-brands-with-us.html.twig' %}
+
+        {% include '::front-social.html.twig' %}
+
+        {% include '::front-footer.html.twig' %}
+
+        {% endblock %}
         {% block javascripts %}
             {% if app.environment == 'node' %}
             	{% block javascriptsDev %}

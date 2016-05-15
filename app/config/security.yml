@@ -34,25 +34,27 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
             pattern: ^/
+
+            switch_user: true
             
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                login_path: /login
-                check_path: /login_check
+                login_path: brand_login
+                check_path: brand_login_check
                 always_use_default_target_path: true
-                default_target_path: /login/success/
+                default_target_path: loginSuccess
 
             logout: true
 
             oauth:
                 resource_owners:
-                    instagram:     "/login/check-insta"
-                login_path:        /login
+                    instagram:     "/influencer/login/check-insta"
+                login_path:        /influencer/login
                 use_forward:       false
-                failure_path:      /login
+                failure_path:      /influencer/login
                 always_use_default_target_path: true
-                default_target_path: /login/success/
+                default_target_path: loginSuccess
 
                 oauth_user_provider:
                     service: my_user_provider
@@ -62,7 +64,7 @@ security:
             security: false
 
             remember_me:
-                key: "%secret%"
+                secret: "%secret%"
                 lifetime: 31536000 # 365 days in seconds
                 path: /
                 domain: ~ # Defaults to the current domain from $_SERVER

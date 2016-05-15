@@ -80,7 +80,7 @@ class MessageController extends Controller {
 	 * @Route("/messages/welcome/user", name="send_welcome_message")
 	 */
 	public function sendWelcomeMessageAction() {
-		$sender = $this->get ( 'user_service' )->getUser ( 'lookmarkd' );
+		$sender = $this->get ( 'user_service' )->getUserFromUsername( 'lookmarkd' );
 		$existingThreadId = $this->getExistingThreadsForParticipants ( $sender->getId () );
 		$threadBuilder = null;
 		if (null == $existingThreadId) {
@@ -189,7 +189,7 @@ class MessageController extends Controller {
 	 */
 	public function sendNewMessageAction(Request $request) {
 		$recipientUserName = $request->request->get ( 'recipientUserName' );
-		$recipient = $this->get ( 'user_service' )->getUser ( $recipientUserName );
+		$recipient = $this->get ( 'user_service' )->getUserFromUsername( $recipientUserName );
 		$sender = $this->getUser ();
 		$message = $request->request->get ( 'message' );
 		$existingThreadId = $this->getExistingThreadsForParticipants ( $recipient->getId () );

@@ -8,6 +8,8 @@
 			"" : "src/"
 		}
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"require" : {
 		"php" : ">=5.3.9",
 		"symfony/symfony" : "2.8.*",
@@ -20,12 +22,14 @@
 		"incenteev/composer-parameter-handler" : "~2.0",
 		"friendsofsymfony/rest-bundle" : "^1.7",
 		"jms/serializer-bundle" : "^1.0",
-		"hwi/oauth-bundle" : "^0.3.9",
+		"hwi/oauth-bundle" : "0.4.*",
 		"doctrine/doctrine-fixtures-bundle" : "^2.2",
 		"friendsofsymfony/user-bundle" : "~2.0@dev",
 		"cosenary/instagram" : "^2.3",
 		"ibrows/xeditable-bundle" : "^1.1",
-		"friendsofsymfony/message-bundle" : "^1.2"
+		"friendsofsymfony/message-bundle" : "^1.2",
+		"sonata-project/notification-bundle" : "2.3.2",
+		"php-amqplib/php-amqplib": "2.5.*"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle" : "~2.3",

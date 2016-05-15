@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\UserProfile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +72,14 @@ class ProfileController extends Controller {
 	public function addPostingCategorySubmitAction($postingCategoryId) {
 		if (null != $postingCategoryId && $postingCategoryId > 0) {
 			$user = $this->getUser ();
-			$this->get ( 'user_service' )->addPostingCategory ( $user, $postingCategoryId );
+			$userService = $this->get('user_service');
+			$userProfile = $userService->getUserProfile($user);
+			if(null==$userProfile) {
+				$userProfile = new UserProfile();
+				$userProfile->setUser($user);
+				$userService->saveUserProfile($userProfile);
+			}
+			$userService->addPostingCategory ( $user, $postingCategoryId );
 			return new JsonResponse ( array (
 					'success' => true 
 			) );

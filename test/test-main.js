@@ -47,7 +47,14 @@ require.config({
         'jquery.nicescroll': 'jquery.nicescroll/jquery.nicescroll',
         select2: 'select2/dist/js/select2',
         typeahead: 'typeahead.js/dist/typeahead.bundle',
-        toastr: 'toastr/toastr'
+        toastr: 'toastr/toastr',
+        animatescroll: 'animatescroll/animatescroll',
+        'jquery-hoverintent': 'jquery-hoverintent/jquery.hoverIntent',
+        scrollup: 'scrollup/dist/jquery.scrollUp.min',
+        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
+        tweenlite: 'tweenlite/TweenLite.min',
+        wow: 'wow/dist/wow',
+        moment: 'moment/moment'
     },
     shim: {
         bootstrap: {

@@ -11,7 +11,6 @@ stylesheets %} {% block stylesheetsCustom %} {% endblock
 stylesheetsCustom %} {% block stylesheetsAll %}
 <link rel="stylesheet"
 	href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-<link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
 {% endblock stylesheetsAll %} {% if app.environment == 'node' %}
 <link rel="stylesheet" href="/styles/main.css?no-rev" />
 <link rel="stylesheet" href="/styles/dashboard-style.css?no-rev" />
@@ -74,9 +73,19 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 							class="ion-android-desktop"></i> <span>Dashboard</span>
 					</a></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="ion-ios-calendar-outline"></i> <span>Campaigns</span>
-					</a>
+					<li class="sub-menu">
+						<a href="javascript:;"> <i
+							class="ion-ios-calendar-outline"></i> <span>Collaboration</span>
+						</a>
+						<ul class="sub">
+							{% if app.user.userType == 2 %}
+							<li>
+								<a href="{{ url('campaign_create') }}">
+									Create
+								</a>
+							</li>
+							{%  endif %}
+						</ul>
 					</li>
 					
 					<li class="sub-menu">

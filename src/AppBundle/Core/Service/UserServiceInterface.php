@@ -38,12 +38,19 @@ interface UserServiceInterface {
 	 * @param int $postingCategoryId
 	 */
 	public function addPostingCategory(User $user, $postingCategoryId);
+
+	/**
+	 *
+	 * @param User $user
+	 * @return UserProfile found by user
+	 */
+	public function getUserProfile(User $user);
 	
 	/**
 	 * @param string $username
 	 * @return User
 	 */
-	public function getUser($username);
+	public function getUserFromUsername($username);
 	
 	/**
 	 *
@@ -82,4 +89,24 @@ interface UserServiceInterface {
 	 * @return UserPreferenceType
 	 */
 	public function getUserPreferenceType($preferenceKey);
+
+	/**
+	 * @return \AppBundle\Entity\User[]|array
+	 */
+	public function getAllInfluencers();
+
+	/**
+	 * @param User $user
+	 * @return SocialProfile
+	 */
+	public function getSocialProfile($user);
+
+	public function getInfluencers($categoryIds, $followerCount);
+
+	/**
+	 * @param $userId integer
+	 * @return User
+     */
+	public function getUserFromId($userId);
+
 }

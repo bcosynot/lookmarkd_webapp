@@ -4,8 +4,20 @@ define(function(require,exports) {
     require('jquery.scrollTo');
     require('jquery.nicescroll');
     require('bootstrap/tooltip');
+	require('dcjqaccordion');
     /*---LEFT BAR ACCORDION----*/
     exports.init = function init() {
+
+		$('#nav-accordion').dcAccordion({
+			eventType: 'click',
+			autoClose: true,
+			saveState: true,
+			disableLink: true,
+			speed: 'slow',
+			showCount: false,
+			autoExpand: true,
+			classExpand: 'dcjq-current-parent'
+		});
 
 	//sidebar dropdown menu auto scrolling
 
