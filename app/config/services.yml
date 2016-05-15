@@ -7,7 +7,8 @@ parameters:
     social_profile_util.class: AppBundle\Util\SocialProfileUtil
     social_service.class: AppBundle\Core\Service\SocialService
     social_statistic_dao.class: AppBundle\Core\Dao\SocialStatisticDAO
-    consumer.async_instagrams_stats.class: AppBundle\Consumer\AsyncInstagramStatsConsumer
+    campaign_service.class: AppBundle\Core\Service\CampaignService
+    campaign_dao.class: AppBundle\Core\Dao\CampaignDAO
 
 services:
   
@@ -37,5 +38,13 @@ services:
     social_profile_util:
         class: "%social_profile_util.class%"
         arguments: ["@user_service","@logger", "@social_service","@sonata.notification.backend"]
+
+    campaign_dao:
+            class: "%campaign_dao.class%"
+            arguments: ["@doctrine.orm.entity_manager","@logger"]
+
+    campaign_service:
+        class: "%campaign_service.class%"
+        arguments: ["@campaign_dao","@logger"]
 
 

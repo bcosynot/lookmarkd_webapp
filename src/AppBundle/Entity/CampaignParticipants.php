@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CampaignParticipants
 {
+    const STATUS_REQUESTED = 1;
+    const STATUS_ACCEPTED = 2;
+    const STATUS_DECLINED = 3;
+    const STATUS_COMPLETED = 4;
+    const STATUS_CANCELLED = 5;
+    
     /**
      * @var integer
      *
@@ -23,15 +29,15 @@ class CampaignParticipants
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="campaign", type="bigint")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Campaign",)
+     * @ORM\JoinColumn(name="campaign", referencedColumnName="id")
      */
     private $campaign;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="participant", type="bigint")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="participant", referencedColumnName="id")
      */
     private $participant;
 
@@ -56,7 +62,7 @@ class CampaignParticipants
     /**
      * Set campaign
      *
-     * @param integer $campaign
+     * @param $campaign
      *
      * @return CampaignParticipants
      */
@@ -70,7 +76,7 @@ class CampaignParticipants
     /**
      * Get campaign
      *
-     * @return integer
+     * @return mixed
      */
     public function getCampaign()
     {
@@ -80,7 +86,7 @@ class CampaignParticipants
     /**
      * Set participant
      *
-     * @param integer $participant
+     * @param $participant
      *
      * @return CampaignParticipants
      */
@@ -94,7 +100,7 @@ class CampaignParticipants
     /**
      * Get participant
      *
-     * @return integer
+     * @return mixed
      */
     public function getParticipant()
     {
@@ -124,5 +130,6 @@ class CampaignParticipants
     {
         return $this->status;
     }
+
 }
 

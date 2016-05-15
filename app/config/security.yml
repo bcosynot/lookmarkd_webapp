@@ -23,23 +23,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        brand:
-            anonymous: true
-
-            pattern: ^/(brand|dashboard|login/success)
-
-            form_login:
-              provider: fos_userbundle
-              csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-              login_path: brand_login
-              check_path: brand_login_check
-              always_use_default_target_path: true
-              default_target_path: loginSuccess
-
-            logout: true
-
-            switch_user: true
-
         main:
             anonymous: true
             # activate different ways to authenticate
@@ -57,8 +40,8 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                login_path: /influencer/login
-                check_path: /influencer/login_check
+                login_path: brand_login
+                check_path: brand_login_check
                 always_use_default_target_path: true
                 default_target_path: loginSuccess
 

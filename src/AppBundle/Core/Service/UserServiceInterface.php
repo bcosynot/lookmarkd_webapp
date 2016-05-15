@@ -50,7 +50,7 @@ interface UserServiceInterface {
 	 * @param string $username
 	 * @return User
 	 */
-	public function getUser($username);
+	public function getUserFromUsername($username);
 	
 	/**
 	 *
@@ -100,5 +100,13 @@ interface UserServiceInterface {
 	 * @return SocialProfile
 	 */
 	public function getSocialProfile($user);
+
+	public function getInfluencers($categoryIds, $followerCount);
+
+	/**
+	 * @param $userId integer
+	 * @return User
+     */
+	public function getUserFromId($userId);
 
 }
