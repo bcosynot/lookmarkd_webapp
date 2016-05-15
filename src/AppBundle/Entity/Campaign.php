@@ -24,14 +24,14 @@ class Campaign
     /**
      * @var string
      *
-     * @ORM\Column(name="campaignName", type="string", length=255)
+     * @ORM\Column(name="campaign_name", type="string", length=255)
      */
     private $campaignName;
 
     /**
      * @var integer
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\Column(name="owner", type="bigint")
+     * @ORM\JoinColumn(name="owner", referencedColumnName="id")
      */
     private $owner;
 
@@ -52,10 +52,58 @@ class Campaign
     /**
      * @var integer
      *
-     * @ORM\Column(name="reward_type", type="integer")
+     * @ORM\Column(name="cash_reward", type="integer")
      */
-    private $rewardType;
+    private $cashReward;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kind_reward", type="string")
+     */
+    private $kindReward;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="brief", type="string")
+     */
+    private $brief;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="num_posts", type="integer")
+     */
+    private $numPosts;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="handles", type="string")
+     */
+    private $handles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hashtags", type="string")
+     */
+    private $hashtags;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="msg_subject", type="string")
+     */
+    private $msgSubject;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="msg_body", type="string")
+     */
+    private $msgBody;
 
     /**
      * Get id
@@ -164,27 +212,132 @@ class Campaign
     }
 
     /**
-     * Set rewardType
-     *
-     * @param integer $rewardType
-     *
-     * @return Campaign
+     * @return int
      */
-    public function setRewardType($rewardType)
+    public function getCashReward()
     {
-        $this->rewardType = $rewardType;
-
-        return $this;
+        return $this->cashReward;
     }
 
     /**
-     * Get rewardType
-     *
-     * @return integer
+     * @param int $cashReward
      */
-    public function getRewardType()
+    public function setCashReward($cashReward)
     {
-        return $this->rewardType;
+        $this->cashReward = $cashReward;
     }
+
+    /**
+     * @return string
+     */
+    public function getKindReward()
+    {
+        return $this->kindReward;
+    }
+
+    /**
+     * @param string $kindReward
+     */
+    public function setKindReward($kindReward)
+    {
+        $this->kindReward = $kindReward;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrief()
+    {
+        return $this->brief;
+    }
+
+    /**
+     * @param string $brief
+     */
+    public function setBrief($brief)
+    {
+        $this->brief = $brief;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumPosts()
+    {
+        return $this->numPosts;
+    }
+
+    /**
+     * @param int $numPosts
+     */
+    public function setNumPosts($numPosts)
+    {
+        $this->numPosts = $numPosts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHandles()
+    {
+        return $this->handles;
+    }
+
+    /**
+     * @param string $handles
+     */
+    public function setHandles($handles)
+    {
+        $this->handles = $handles;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashtags()
+    {
+        return $this->hashtags;
+    }
+
+    /**
+     * @param string $hashtags
+     */
+    public function setHashtags($hashtags)
+    {
+        $this->hashtags = $hashtags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMsgSubject()
+    {
+        return $this->msgSubject;
+    }
+
+    /**
+     * @param string $msgSubject
+     */
+    public function setMsgSubject($msgSubject)
+    {
+        $this->msgSubject = $msgSubject;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMsgBody()
+    {
+        return $this->msgBody;
+    }
+
+    /**
+     * @param string $msgBody
+     */
+    public function setMsgBody($msgBody)
+    {
+        $this->msgBody = $msgBody;
+    }
+
 }
 

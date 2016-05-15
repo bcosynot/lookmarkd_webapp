@@ -53,7 +53,8 @@ require.config({
         scrollup: 'scrollup/dist/jquery.scrollUp.min',
         'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
         tweenlite: 'tweenlite/TweenLite.min',
-        wow: 'wow/dist/wow'
+        wow: 'wow/dist/wow',
+        moment: 'moment/moment'
     },
     shim: {
         bootstrap: {

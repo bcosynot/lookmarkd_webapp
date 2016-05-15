@@ -75,14 +75,16 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 
 					<li class="sub-menu">
 						<a href="javascript:;"> <i
-							class="ion-ios-calendar-outline"></i> <span>Campaigns</span>
+							class="ion-ios-calendar-outline"></i> <span>Collaboration</span>
 						</a>
 						<ul class="sub">
+							{% if app.user.userType == 2 %}
 							<li>
 								<a href="{{ url('campaign_create') }}">
 									Create
 								</a>
 							</li>
+							{%  endif %}
 						</ul>
 					</li>
 					

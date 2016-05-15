@@ -42,8 +42,8 @@ var require = {
         tweenlite: 'tweenlite/TweenLite.min',
         'jquery-hoverintent': 'jquery-hoverintent/jquery.hoverIntent',
         'jquery.cookie': 'jquery.cookie/jquery.cookie',
-        moment: 'moment/min/moment.min',
-        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize'
+        moment: 'moment/moment',
+        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
     },
     shim: {
         bootstrap: {
@@ -213,6 +213,12 @@ var require = {
             ]
         },
         'textarea-autosize': {
+            exports: '$',
+            deps: [
+                'jquery'
+            ]
+        },
+        moment: {
             exports: '$',
             deps: [
                 'jquery'

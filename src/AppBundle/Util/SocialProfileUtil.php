@@ -80,7 +80,8 @@ class SocialProfileUtil
      */
     public function isNecessaryToUpdateSocialStatistics($followerCount)
     {
-        $currentTime = new \DateTime(time());
+        $currentTime = new \DateTime();
+        $currentTime->setTimestamp(time());
         return null == $followerCount || (null != $followerCount && sizeof($followerCount) > 0 && $currentTime->diff($followerCount[0]->getRecordedAt())->h > 5);
     }
 
