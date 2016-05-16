@@ -4,10 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Campaign;
 use AppBundle\Entity\CampaignParticipants;
+use Doctrine\DBAL\Types\JsonArrayType;
+use JMS\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class CampaignController extends Controller
 {
@@ -110,6 +114,7 @@ class CampaignController extends Controller
     /**
      * @Route("/brand/campaign/create/save/", name="campaign_create_save")
      * @param Request $request
+     * @return JsonResponse
      */
     function saveCampaignAction(Request $request)
     {
@@ -146,14 +151,11 @@ class CampaignController extends Controller
         if (null != $selectedInfluencers && sizeof($selectedInfluencers) > 0) {
             foreach ($selectedInfluencers as $selectedInfluencer) {
                 $selectedInfluencer = intval($selectedInfluencer);
-                dump($selectedInfluencer);
                 $selectedInfluencerUser = $this->get('user_service')->getUserFromId($selectedInfluencer);
-                dump($selectedInfluencerUser);
                 $campaignParticipant = new CampaignParticipants();
                 $campaignParticipant->setCampaign($campaign);
                 $campaignParticipant->setParticipant($selectedInfluencerUser);
                 $campaignParticipant->setStatus(CampaignParticipants::STATUS_REQUESTED);
-                dump($campaignParticipant);
                 $this->get('campaign_service')->saveOrUpdateCampaignParticipant($campaignParticipant);
             }
         }
@@ -161,4 +163,28 @@ class CampaignController extends Controller
         return new JsonResponse($campaign->getId());
 
     }
+
+    /**
+     * @Route("/influencer/campaign/requests/{_format}",
+     *     name="new_campaign_requests",
+     *     defaults={"_format": "html"},
+     *     requirements={
+     *         "_format": "html|json",
+     *         "_method": "GET"
+     *     })
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function newCollaborationRequestsAction(Request $request)
+    {
+        $user = $this->getUser();
+        $latestRequests = $this->get('campaign_service')->getNewRequests($user);
+        if ($request->getRequestFormat() == 'json') {
+            return new JsonResponse(array('requestsCount'=>sizeof($latestRequests)));
+        } else {
+            return $this->render('controller/campaign/requests.html.twig', array(
+                'requests' => $latestRequests));
+        }
+    }
+
 }

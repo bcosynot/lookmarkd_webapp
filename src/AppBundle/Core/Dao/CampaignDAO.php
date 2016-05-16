@@ -5,7 +5,9 @@ namespace AppBundle\Core\Dao;
 
 use AppBundle\Entity\Campaign;
 use AppBundle\Entity\CampaignParticipants;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use Monolog\Logger;
 
 class CampaignDAO
@@ -52,5 +54,23 @@ class CampaignDAO
         $this->em->flush();
         $this->em->commit();
         return $campaignParticipant;
+    }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function getNewRequests($user)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('cp')
+                ->from('AppBundle\Entity\CampaignParticipants', 'cp')
+                ->join('cp.campaign', 'c')
+                ->where('cp.participant = :user')
+                ->andWhere('cp.status = :requestStatus')
+                ->setParameter('user', $user)
+                ->setParameter('requestStatus', CampaignParticipants::STATUS_REQUESTED)
+                ->addSelect('c');
+        return $qb->getQuery()->getResult();
     }
 }

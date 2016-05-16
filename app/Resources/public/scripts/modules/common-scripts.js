@@ -107,7 +107,7 @@ define(function(require,exports) {
 	    $('[data-toggle="tooltip"]').tooltip();
 
 	    function getTotalUnreadCount() {
-	    	var unreadCountURL = $('#total-unread-messages-count').attr('data-unread-messages-count-url');
+	    	var unreadCountURL = $('#total-unread-messages-count').data('unread-messages-count-url');
 	    	$.getJSON(unreadCountURL, {}, function(data){
 	    		if(data.success && data.unreadCount > 0) {
 	    			$('#total-unread-messages-count').text(data.unreadCount);
@@ -116,8 +116,21 @@ define(function(require,exports) {
 	    }
 	    
 	    getTotalUnreadCount();
-	    
 	    setInterval(getTotalUnreadCount, 30000);
+
+		function getNewCampaignRequests() {
+			if($('#total-new-campaign-requests-count').length) {
+				var url = $('#total-new-campaign-requests-count').data('url');
+				$.getJSON(url, {}, function (data) {
+					if (data.requestsCount > 0) {
+						$('#total-new-campaign-requests-count').text(data.requestsCount);
+					}
+				});
+			}
+		}
+
+		getNewCampaignRequests();
+		setInterval(getNewCampaignRequests, 30000);
 	    
 	};
 });

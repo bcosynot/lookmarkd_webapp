@@ -53,4 +53,13 @@ class CampaignService implements CampaignServiceInterface
     {
         return $this->campaignDAO->saveOrUpdateCampaignParticipant($campaignParticipant);
     }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function getNewRequests($user)
+    {
+        return $this->campaignDAO->getNewRequests($user);
+    }
 }

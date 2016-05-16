@@ -43,7 +43,7 @@ var require = {
         'jquery-hoverintent': 'jquery-hoverintent/jquery.hoverIntent',
         'jquery.cookie': 'jquery.cookie/jquery.cookie',
         moment: 'moment/moment',
-        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
+        'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize'
     },
     shim: {
         bootstrap: {
