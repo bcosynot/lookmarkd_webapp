@@ -1,5 +1,5 @@
 {% extends 'dashboard-base.html.twig' %}
-{% block title %}New Collaboration Requests{% endblock %}
+{% block title %}Accepted Collaboration Request{% endblock %}
 {% block stylesheetsDist %}
     <script>
         (function (u) {
@@ -77,23 +77,9 @@
                         <button class="btn btn-success status-reply-button"
                                 data-campaign-participant-id="{{ request.id }}"
                                 data-action="accept"
-                                data-status="{{ acceptedStatus }}"
+                                data-status="{{ completedStatus }}"
                                 data-url="{{ url('influencer_campaign_request_update_status') }}">
-                            Accept
-                        </button>
-                        <button class="btn btn-error status-reply-button"
-                                data-campaign-participant-id="{{ request.id }}"
-                                data-action="decline"
-                                data-status="{{ declinedStatus }}"
-                                data-url="{{ url('influencer_campaign_request_update_status') }}">
-                            Decline
-                        </button>
-                        <button class="btn btn-primary status-reply-button"
-                                data-campaign-participant-id="{{ request.id }}"
-                                data-action="ignore"
-                                data-status="{{ ignoredStatus }}"
-                                data-url="{{ url('influencer_campaign_request_update_status') }}">
-                            Ignore
+                            Mark Completed
                         </button>
                     </div>
                 </div>

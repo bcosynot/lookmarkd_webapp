@@ -81,4 +81,19 @@ class CampaignDAO
         $q->setParameter('id', $campaignParticipantId);
         $q->execute();
     }
+
+    public function getAcceptedRequests($user)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('cp')
+            ->from('AppBundle\Entity\CampaignParticipants', 'cp')
+            ->join('cp.campaign', 'c')
+            ->where('cp.participant = :user')
+            ->andWhere('cp.status = :requestStatus')
+            ->setParameter('user', $user)
+            ->setParameter('requestStatus', CampaignParticipants::STATUS_ACCEPTED)
+            ->addSelect('c')
+            ->orderBy('c.start');
+        return $qb->getQuery()->getResult();
+    }
 }
