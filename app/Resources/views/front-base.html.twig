@@ -19,6 +19,28 @@
     <body id="front-base">
         {% block body %}
 
+        <div id="influencer-login-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Influencer Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <a class="btn btn-block btn-social btn-instagram"
+                           href="{{ url('homepage') }}connect/instagram">
+                            <span class="ion-social-instagram-outline"></span>
+                            Sign in with Instagram
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <!-- ********** HEADER SECTION ********** -->
         <div id="h">
             <nav role="navigation">
@@ -43,8 +65,13 @@
                                aria-expanded="false">Sign In<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('brand_login') }}" class="text16">Brand</a></li>
-                                <li><a href="login" class="text16">Influencer</a></li>
+                                <li><a href="{{ url('brand_login') }}" id="" class="text16">Brand</a></li>
+                                <li>
+                                    <a href="#" id="influencer-login-link" class="text16"
+                                       data-toggle="modal" data-target="#influencer-login-modal">
+                                        Influencer
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li><a href="about-us" class="text16">About</a></li>

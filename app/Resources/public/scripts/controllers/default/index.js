@@ -3,8 +3,6 @@ define(function(require, exports) {
     var $ = require('jquery');
     var log = require('loglevel');
     require('bootstrap');
-    require('bootstrap/scrollspy');
-    require('bootstrap/collapse');
     require('bootstrap3-ie10-viewport-bug-workaround');
     var WOW = require('wow');
     require('animatescroll');
@@ -28,5 +26,6 @@ define(function(require, exports) {
         $('#bs-example-navbar-collapse-1').on('hide.bs.collapse', function() {
             $('.nav-pills').removeClass('nav-stacked');
         });
+
     };
 });
