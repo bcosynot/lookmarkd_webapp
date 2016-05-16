@@ -183,8 +183,28 @@ class CampaignController extends Controller
             return new JsonResponse(array('requestsCount'=>sizeof($latestRequests)));
         } else {
             return $this->render('controller/campaign/requests.html.twig', array(
-                'requests' => $latestRequests));
+                'requests' => $latestRequests,
+                'acceptedStatus' => CampaignParticipants::STATUS_ACCEPTED,
+                'declinedStatus' => CampaignParticipants::STATUS_DECLINED,
+                'ignoredStatus' => CampaignParticipants::STATUS_IGNORED,
+            ));
         }
+    }
+
+
+    /**
+     * @Route("/influencer/campaign/requests/update/status", name="influencer_campaign_request_update_status")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateCampaignParticipantStatus(Request $request) {
+
+        $campaignParticipantId = $request->get('campaignParticipantId');
+        $status = $request->get('status');
+        
+        $this->get('campaign_service')->updateCampaignParticipantStatus($campaignParticipantId, $status);
+
+        return new JsonResponse(array('campaignParticipantId'=>$campaignParticipantId));
     }
 
 }

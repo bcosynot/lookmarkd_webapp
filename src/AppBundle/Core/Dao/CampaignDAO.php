@@ -73,4 +73,12 @@ class CampaignDAO
                 ->addSelect('c');
         return $qb->getQuery()->getResult();
     }
+
+    public function updateCampaignParticipantStatus($campaignParticipantId, $status)
+    {
+        $q = $this->em->createQuery('UPDATE AppBundle\Entity\CampaignParticipants c SET c.status = :status WHERE c.id = :id');
+        $q->setParameter('status', $status);
+        $q->setParameter('id', $campaignParticipantId);
+        $q->execute();
+    }
 }

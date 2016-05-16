@@ -17,6 +17,7 @@ class CampaignParticipants
     const STATUS_DECLINED = 3;
     const STATUS_COMPLETED = 4;
     const STATUS_CANCELLED = 5;
+    const STATUS_IGNORED = 6;
     
     /**
      * @var integer
