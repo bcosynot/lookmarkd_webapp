@@ -180,7 +180,7 @@ class CampaignController extends Controller
         $user = $this->getUser();
         $latestRequests = $this->get('campaign_service')->getNewRequests($user);
         if ($request->getRequestFormat() == 'json') {
-            return new JsonResponse(array('requestsCount'=>sizeof($latestRequests)));
+            return new JsonResponse(array('requestsCount' => sizeof($latestRequests)));
         } else {
             return $this->render('controller/campaign/requests.html.twig', array(
                 'requests' => $latestRequests,
@@ -197,14 +197,31 @@ class CampaignController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function updateCampaignParticipantStatus(Request $request) {
+    public function updateCampaignParticipantStatus(Request $request)
+    {
 
         $campaignParticipantId = $request->get('campaignParticipantId');
         $status = $request->get('status');
-        
+
         $this->get('campaign_service')->updateCampaignParticipantStatus($campaignParticipantId, $status);
 
-        return new JsonResponse(array('campaignParticipantId'=>$campaignParticipantId));
+        return new JsonResponse(array('campaignParticipantId' => $campaignParticipantId));
+    }
+
+    /**
+     * @Route("/influencer/campaign/accepted", name="accepted_campaign_requests")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function acceptedCollaborationRequestsAction()
+    {
+        $user = $this->getUser();
+        $acceptedRequests = $this->get('campaign_service')->getAcceptedRequests($user);
+        dump($acceptedRequests);
+        return $this->render('controller/campaign/accepted.html.twig', array(
+            'requests' => $acceptedRequests,
+            'completedStatus' => CampaignParticipants::STATUS_COMPLETED,
+        ));
     }
 
 }
