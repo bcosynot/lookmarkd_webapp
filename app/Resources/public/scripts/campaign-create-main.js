@@ -207,7 +207,7 @@ require(['modules/common-scripts', 'jquery', 'moment', 'bootstrap/tab', 'bootstr
         $('.ladda-label', this).text('Creating campaign...');
         $(this).prop('disabled',true);
 
-        var campaignName =  $('#campaign-name').text();
+        var campaignName =  $('#campaign-name').val();
         var startDate = moment($('#schedule-input').data('daterangepicker').startDate._d).format('YYYY-MM-DD');
         var endDate = moment($('#schedule-input').data('daterangepicker').endDate._d).format('YYYY-MM-DD');
         var brief = $('#brief-description').val();

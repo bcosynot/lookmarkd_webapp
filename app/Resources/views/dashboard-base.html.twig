@@ -85,6 +85,17 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 								</a>
 							</li>
 							{%  endif %}
+							{% if app.user.userType == 1 %}
+								<li>
+									<a href="{{ url('new_campaign_requests') }}">
+										<span>
+											Requests
+										</span>
+										<span class="badge" id="total-new-campaign-requests-count"
+											  data-url="{{ url('new_campaign_requests') }}/json"></span>
+									</a>
+								</li>
+							{%  endif %}
 						</ul>
 					</li>
 					
