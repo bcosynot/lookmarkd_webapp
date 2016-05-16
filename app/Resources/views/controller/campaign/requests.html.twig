@@ -76,19 +76,25 @@
                 </div>
                 <div class="panel-footer">
                     <div class="form-group">
-                        <button class="btn btn-success"
+                        <button class="btn btn-success status-reply-button"
                                 data-campaign-participant-id="{{ request.id }}"
-                                data-action="accept">
+                                data-action="accept"
+                                data-status="{{ acceptedStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
                             Accept
                         </button>
-                        <button class="btn btn-error"
+                        <button class="btn btn-error status-reply-button"
                                 data-campaign-participant-id="{{ request.id }}"
-                                data-action="decline">
+                                data-action="decline"
+                                data-status="{{ declinedStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
                             Decline
                         </button>
-                        <button class="btn btn-primary"
+                        <button class="btn btn-primary status-reply-button"
                                 data-campaign-participant-id="{{ request.id }}"
-                                data-action="ignore">
+                                data-action="ignore"
+                                data-status="{{ ignoredStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
                             Ignore
                         </button>
                     </div>

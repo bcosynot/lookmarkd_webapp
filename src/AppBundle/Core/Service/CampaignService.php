@@ -62,4 +62,9 @@ class CampaignService implements CampaignServiceInterface
     {
         return $this->campaignDAO->getNewRequests($user);
     }
+
+    public function updateCampaignParticipantStatus($campaignParticipantId, $status)
+    {
+        $this->campaignDAO->updateCampaignParticipantStatus($campaignParticipantId, $status);
+    }
 }
