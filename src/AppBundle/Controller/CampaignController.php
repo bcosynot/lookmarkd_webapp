@@ -217,7 +217,6 @@ class CampaignController extends Controller
     {
         $user = $this->getUser();
         $acceptedRequests = $this->get('campaign_service')->getAcceptedRequests($user);
-        dump($acceptedRequests);
         return $this->render('controller/campaign/accepted.html.twig', array(
             'requests' => $acceptedRequests,
             'completedStatus' => CampaignParticipants::STATUS_COMPLETED,
