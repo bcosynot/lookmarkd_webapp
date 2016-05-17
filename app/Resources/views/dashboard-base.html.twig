@@ -84,6 +84,11 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 									Create
 								</a>
 							</li>
+								<li>
+									<a href="{{ url('active_campaigns') }}">
+										Active
+									</a>
+								</li>
 							{%  endif %}
 							{% if app.user.userType == 1 %}
 								<li>

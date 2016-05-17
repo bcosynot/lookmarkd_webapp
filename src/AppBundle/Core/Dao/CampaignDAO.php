@@ -9,6 +9,8 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Monolog\Logger;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class CampaignDAO
 {
@@ -95,5 +97,33 @@ class CampaignDAO
             ->addSelect('c')
             ->orderBy('c.start');
         return $qb->getQuery()->getResult();
+    }
+
+    public function getActiveRequestsCreatedByUser($user)
+    {
+        $currentDate = new \DateTime();
+        $currentDate->setTimestamp(time());
+
+        return $this->em->createQueryBuilder()
+                            ->select('c')
+                            ->from('AppBundle\Entity\Campaign', 'c')
+            ->where('c.owner = :user')
+            ->andWhere('c.start <= :currentDate')
+            ->andWhere('c.end <= :currentDate')
+            ->setParameter('currentDate', $currentDate)
+            ->setParameter('user', $user)
+            ->getQuery()->getResult();
+    }
+
+    public function getCampaignParticipantsForCampaignIds($campaignIds)
+    {
+        return $this->em->createQueryBuilder()
+            ->select('cp')
+            ->from('AppBundle\Entity\CampaignParticipants', 'cp')
+            ->join('cp.campaign', 'c')
+            ->where('c.id IN (:campaignIds)')
+            ->setParameter('campaignIds', $campaignIds)
+            ->getQuery()
+            ->getResult();
     }
 }
