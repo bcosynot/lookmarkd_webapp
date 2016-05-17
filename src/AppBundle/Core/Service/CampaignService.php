@@ -81,4 +81,9 @@ class CampaignService implements CampaignServiceInterface
     {
         return $this->campaignDAO->getCampaignParticipants($campaignParticipantId);
     }
+
+    public function getCompletedRequests($user)
+    {
+        return $this->campaignDAO->getCompletedRequests($user);
+    }
 }

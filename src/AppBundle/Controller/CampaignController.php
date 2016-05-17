@@ -239,6 +239,20 @@ class CampaignController extends Controller
         $this->get('campaign_service')->saveOrUpdateCampaignParticipant($campaignParticipants);
         
         return new JsonResponse();
-    } 
+    }
+
+    /**
+     * @Route("/influencer/campaign/completed", name="completed_campaign_requests")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function completedCollaborationRequestsAction()
+    {
+        $user = $this->getUser();
+        $acceptedRequests = $this->get('campaign_service')->getCompletedRequests($user);
+        return $this->render('controller/campaign/completed.html.twig', array(
+            'requests' => $acceptedRequests,
+            'completedStatus' => CampaignParticipants::STATUS_COMPLETED,
+        ));
+    }
 
 }

@@ -1,5 +1,5 @@
 {% extends 'dashboard-base.html.twig' %}
-{% block title %}Accepted Collaboration Request{% endblock %}
+{% block title %}Accepted Collaboration Requests{% endblock %}
 {% block stylesheetsDist %}
     <script>
         (function (u) {
@@ -29,6 +29,9 @@
 {% block stylesheetsCustom %}
 {% endblock %}
 {% block content %}
+{% if requests|length == 0 %}
+    <h3>All done! Check back later :)</h3>
+{% endif %}
 {% for request in requests %}
 <div id="attach-link-{{ request.id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">

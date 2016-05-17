@@ -101,4 +101,19 @@ class CampaignDAO
     {
         return $this->em->getRepository('AppBundle:CampaignParticipants')->find($campaignParticipantId);
     }
+
+    public function getCompletedRequests($user)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('cp')
+            ->from('AppBundle\Entity\CampaignParticipants', 'cp')
+            ->join('cp.campaign', 'c')
+            ->where('cp.participant = :user')
+            ->andWhere('cp.status = :requestStatus')
+            ->setParameter('user', $user)
+            ->setParameter('requestStatus', CampaignParticipants::STATUS_COMPLETED)
+            ->addSelect('c')
+            ->orderBy('c.start');
+        return $qb->getQuery()->getResult();
+    }
 }
