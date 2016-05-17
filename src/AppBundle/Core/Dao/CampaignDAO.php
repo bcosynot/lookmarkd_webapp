@@ -101,8 +101,7 @@ class CampaignDAO
 
     public function getActiveRequestsCreatedByUser($user)
     {
-        $currentDate = new \DateTime();
-        $currentDate->setTimestamp(time());
+        $currentDate = $this->getCurrentDateTime();
 
         return $this->em->createQueryBuilder()
                             ->select('c')
@@ -145,5 +144,31 @@ class CampaignDAO
             ->addSelect('c')
             ->orderBy('c.start');
         return $qb->getQuery()->getResult();
+    }
+
+    public function getRequestsDueSoon($user)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('cp')
+            ->from('AppBundle\Entity\CampaignParticipants', 'cp')
+            ->join('cp.campaign', 'c')
+            ->where('cp.participant = :user')
+            ->andWhere('cp.status = :requestStatus')
+            ->andWhere('DATE_DIFF(CURRENT_DATE(), c.end) <= 3')
+            ->setParameter('user', $user)
+            ->setParameter('requestStatus', CampaignParticipants::STATUS_ACCEPTED)
+            ->addSelect('c')
+            ->orderBy('DATE_DIFF(CURRENT_DATE(), c.end)');
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCurrentDateTime()
+    {
+        $currentDate = new \DateTime();
+        $currentDate->setTimestamp(time());
+        return $currentDate;
     }
 }

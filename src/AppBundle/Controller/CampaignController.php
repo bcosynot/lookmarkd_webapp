@@ -223,6 +223,20 @@ class CampaignController extends Controller
     }
 
     /**
+     * @Route("/influencer/campaign/due", name="due_campaign_requests")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function dueSoonCollaborationRequestsAction()
+    {
+        $user = $this->getUser();
+        $acceptedRequests = $this->get('campaign_service')->getRequestsDueSoon($user);
+        return $this->render('controller/campaign/duesoon.html.twig', array(
+            'requests' => $acceptedRequests,
+            'completedStatus' => CampaignParticipants::STATUS_COMPLETED,
+        ));
+    }
+
+    /**
      * @Route("/influencer/campaign/attach/link", name="attach_link")
      * @param Request $request
      * @return JsonResponse

@@ -11,6 +11,7 @@ namespace AppBundle\Core\Service;
 use AppBundle\Core\Dao\CampaignDAO;
 use AppBundle\Entity\Campaign;
 use AppBundle\Entity\CampaignParticipants;
+use AppBundle\Entity\User;
 use Monolog\Logger;
 
 class CampaignService implements CampaignServiceInterface
@@ -95,5 +96,10 @@ class CampaignService implements CampaignServiceInterface
     public function getCampaignParticipantsForCampaignIds($campaignIds)
     {
        return $this->campaignDAO->getCampaignParticipantsForCampaignIds($campaignIds);
+    }
+
+    public function getRequestsDueSoon($user)
+    {
+        return $this->campaignDAO->getRequestsDueSoon($user);
     }
 }
