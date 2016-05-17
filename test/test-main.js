@@ -54,7 +54,9 @@ require.config({
         'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
         tweenlite: 'tweenlite/TweenLite.min',
         wow: 'wow/dist/wow',
-        moment: 'moment/moment'
+        moment: 'moment/moment',
+        'datatables.net': 'datatables.net/js/jquery.dataTables',
+        'datatables.net-bs': 'datatables.net-bs/js/dataTables.bootstrap'
     },
     shim: {
         bootstrap: {
