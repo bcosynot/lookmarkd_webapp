@@ -19,6 +19,7 @@
     <body id="front-base">
         {% block body %}
 
+        {% if (not app.user or (app.user and app.user.userType != 1)) %}
         <div id="influencer-login-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
@@ -37,6 +38,8 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+        {% if (not app.user or (app.user and app.user.userType != 2)) %}
         <div id="brand-login-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
@@ -67,6 +70,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <!-- ********** HEADER SECTION ********** -->
         <div id="h">
             <nav role="navigation">
@@ -91,18 +95,36 @@
                                aria-expanded="false">Sign In<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                {% if (not app.user or (app.user and app.user.userType != 2)) %}
                                 <li>
                                     <a href="#" id="brand-login-link" class="text16"
                                         data-toggle="modal" data-target="#brand-login-modal">
                                         Brand
                                     </a>
                                 </li>
+                                {% endif %}
+                                {% if (app.user and app.user.userType == 2) %}
+                                    <li>
+                                        <a href="{{ url('dashboard') }}" id="brand-login-link" class="text16">
+                                            Brand
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if (not app.user or (app.user and app.user.userType != 1)) %}
                                 <li>
                                     <a href="#" id="influencer-login-link" class="text16"
                                        data-toggle="modal" data-target="#influencer-login-modal">
                                         Influencer
                                     </a>
                                 </li>
+                                {% endif %}
+                                {% if (app.user and app.user.userType == 1) %}
+                                    <li>
+                                        <a href="{{ url('dashboard') }}" id="influencer-login-link" class="text16">
+                                            Influencer
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                         <li><a href="about-us" class="text16">About</a></li>
