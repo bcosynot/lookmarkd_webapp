@@ -49,6 +49,12 @@ class CampaignParticipants
      */
     private $status;
 
+    /**
+     * @var array
+     * @ORM\Column(name="urls", type="simple_array")
+     */
+    private $urls;
+
 
     /**
      * Get id
@@ -130,6 +136,22 @@ class CampaignParticipants
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return array
+     */
+    public function getURLs()
+    {
+        return $this->urls;
+    }
+
+    /**
+     * @param array $urls
+     */
+    public function setURLs($urls)
+    {
+        $this->urls = $urls;
     }
 
 }

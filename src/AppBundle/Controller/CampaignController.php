@@ -210,7 +210,6 @@ class CampaignController extends Controller
 
     /**
      * @Route("/influencer/campaign/accepted", name="accepted_campaign_requests")
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function acceptedCollaborationRequestsAction()
@@ -222,5 +221,24 @@ class CampaignController extends Controller
             'completedStatus' => CampaignParticipants::STATUS_COMPLETED,
         ));
     }
+
+    /**
+     * @Route("/influencer/campaign/attach/link", name="attach_link")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function attachLinkAction(Request $request) {
+
+        $campaignParticipantId = $request->get('campaignParticipantId');;
+        $link = $request->get('link');
+
+        $campaignParticipants = $this->get('campaign_service')->getCampaignParticipants($campaignParticipantId);
+        $links = $campaignParticipants->getURLs();
+        $links[] = $link;
+        $campaignParticipants->setURLs($links);
+        $this->get('campaign_service')->saveOrUpdateCampaignParticipant($campaignParticipants);
+        
+        return new JsonResponse();
+    } 
 
 }

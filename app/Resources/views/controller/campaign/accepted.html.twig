@@ -29,6 +29,30 @@
 {% block stylesheetsCustom %}
 {% endblock %}
 {% block content %}
+{% for request in requests %}
+<div id="attach-link-{{ request.id }}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Attach Link</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Paste link for Instagram post"
+                           id="link-{{ request.id }}" />
+                    <button class="btn btn-success attach-link"
+                            data-campaign-participant-id="{{ request.id }}"
+                            data-action="attach-link"
+                            data-url="{{ url('attach_link') }}">
+                        Attach
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 <div class="container" id="main-requests-contatiner">
 {% for request in requests %}
     <div class="row mt" data-campaign-participant-id="{{ request.id }}">
@@ -76,10 +100,15 @@
                     <div class="form-group">
                         <button class="btn btn-success status-reply-button"
                                 data-campaign-participant-id="{{ request.id }}"
-                                data-action="accept"
+                                data-action="complete"
                                 data-status="{{ completedStatus }}"
                                 data-url="{{ url('influencer_campaign_request_update_status') }}">
                             Mark Completed
+                        </button>
+                        <button class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#attach-link-{{ request.id }}">
+                            Attach Link For Related Post On Instagram
                         </button>
                     </div>
                 </div>

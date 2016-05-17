@@ -96,4 +96,9 @@ class CampaignDAO
             ->orderBy('c.start');
         return $qb->getQuery()->getResult();
     }
+
+    public function getCampaignParticipants($campaignParticipantId)
+    {
+        return $this->em->getRepository('AppBundle:CampaignParticipants')->find($campaignParticipantId);
+    }
 }
