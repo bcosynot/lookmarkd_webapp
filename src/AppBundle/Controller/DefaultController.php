@@ -32,4 +32,11 @@ class DefaultController extends Controller {
 	public function howItWorksBrandAction() {
 		return $this->render ( 'controller/default/how_it_works_brand.html.twig' );
 	}
+
+	/**
+	 * @Route("/login-form", name="ajax-login-form")
+	 */
+	public function loginForForAJAXAction() {
+		return $this->render ( 'controller/default/login-form.html.twig' );
+	}
 }
