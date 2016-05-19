@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "x-editable": "~1.5.1"
+  },
+  "resolutions": {
+    "bootstrap": "~3"
   }
 }
