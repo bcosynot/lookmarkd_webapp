@@ -1,0 +1,17 @@
+<form accept-charset="UTF-8" method="post" action="{{ path('brand_login_check') }}" role="form" class="form-signin">
+    <fieldset>
+        <label class="panel-login">
+            <div class="login_result"></div>
+        </label>
+        <input class="form-control" placeholder="Username" id="username" type="text"
+               name="_username">
+        <input class="form-control" placeholder="Password" id="password" type="password"
+               name="_password">
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}">
+        <br>
+        <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Login »">
+        <br/>
+        <a href="{{ path('fos_user_resetting_request') }}">Forgot Password?</a>
+    </fieldset>
+</form>

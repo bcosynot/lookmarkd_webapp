@@ -27,5 +27,11 @@ define(function(require, exports) {
             $('.nav-pills').removeClass('nav-stacked');
         });
 
+        $('#brand-login-modal').on('show.bs.modal', function(e) {
+            var link = $(e.relatedTarget);
+            $(this).find('.modal-body').text('loading...');
+            $(this).find('.modal-body').load(link.attr('href'));
+        });
+
     };
 });
