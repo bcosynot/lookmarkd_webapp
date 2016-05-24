@@ -11,11 +11,7 @@
 		{% block herocta %}
 			<div class="row">
 				<div class="col-md-12">
-					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
-						href="{{ hwi_oauth_login_url('instagram') }}">
-					  <span class="ion-social-instagram-outline"></span>
-					  Sign in with Instagram
-					</a>
+					{% include '::influencer_login_button.html.twig' %}
 					<br />
 					<a href="#" id="hero-learn-more">Learn More</a>
 				</div>
@@ -107,11 +103,7 @@
 	<div id="cta">
 		<div class="container">
 			<div class="row centered">
-				<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
-						href="{{ hwi_oauth_login_url('instagram') }}">
-					  <span class="ion-social-instagram-outline"></span>
-					  Sign in with Instagram
-				</a>
+				{% include '::influencer_login_button.html.twig' %}
 			</div><!--/row -->
 		</div><!--/container -->
 	</div><!--/CTA -->

@@ -29,11 +29,7 @@
                         <h4 class="modal-title">Influencer Login</h4>
                     </div>
                     <div class="modal-body">
-                        <a class="btn btn-block btn-social btn-instagram"
-                           href="{{ hwi_oauth_login_url('instagram') }}">
-                            <span class="ion-social-instagram-outline"></span>
-                            Sign in with Instagram
-                        </a>
+                        {% include '::influencer_login_button.html.twig' %}
                     </div>
                 </div>
             </div>

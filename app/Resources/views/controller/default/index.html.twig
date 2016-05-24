@@ -77,11 +77,7 @@
 				instructions about their campaigns. Get reminded of upcoming deadlines with
 				schedulers and and submit deliverables - All Automated. Save time to do things more important to you.</p>
 				<p  class="wow slideInUp">
-					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
-						href="{{ hwi_oauth_login_url('instagram') }}">
-					  <span class="ion-social-instagram-outline"></span>
-					  Sign in with Instagram
-					</a>
+					{% include '::influencer_login_button.html.twig' %}
 					<a class="wow slideInUp btn btn-lg btn-green" href="{{ url('how_it_works_influencer') }}">Learn More</a>
 				</p>
 			</div>
