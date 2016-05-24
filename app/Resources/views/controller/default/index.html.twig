@@ -78,7 +78,7 @@
 				schedulers and and submit deliverables - All Automated. Save time to do things more important to you.</p>
 				<p  class="wow slideInUp">
 					<a class="wow slideInUp btn btn-lg btn-social btn-instagram" 
-						href="https://api.instagram.com/oauth/authorize/?client_id={{ instagram_client_id }}&redirect_uri={{ url('instagram_login') | url_encode(true) }}&response_type=code">
+						href="{{ hwi_oauth_login_url('instagram') }}">
 					  <span class="ion-social-instagram-outline"></span>
 					  Sign in with Instagram
 					</a>
