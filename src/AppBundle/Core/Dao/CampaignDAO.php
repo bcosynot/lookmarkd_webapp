@@ -99,6 +99,10 @@ class CampaignDAO
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param $user
+     * @return Campaign[]
+     */
     public function getActiveRequestsCreatedByUser($user)
     {
         $currentDate = $this->getCurrentDateTime();
@@ -108,7 +112,7 @@ class CampaignDAO
                             ->from('AppBundle\Entity\Campaign', 'c')
             ->where('c.owner = :user')
             ->andWhere('c.start <= :currentDate')
-            ->andWhere('c.end <= :currentDate')
+            ->andWhere('c.end >= :currentDate')
             ->setParameter('currentDate', $currentDate)
             ->setParameter('user', $user)
             ->getQuery()->getResult();
@@ -170,5 +174,23 @@ class CampaignDAO
         $currentDate = new \DateTime();
         $currentDate->setTimestamp(time());
         return $currentDate;
+    }
+
+    /**
+     * @param $user
+     * @return Campaign[]
+     */
+    public function getEndedRequestsCreatedByUser($user)
+    {
+        $currentDate = $this->getCurrentDateTime();
+
+        return $this->em->createQueryBuilder()
+            ->select('c')
+            ->from('AppBundle\Entity\Campaign', 'c')
+            ->where('c.owner = :user')
+            ->andWhere('c.end <= :currentDate')
+            ->setParameter('currentDate', $currentDate)
+            ->setParameter('user', $user)
+            ->getQuery()->getResult();
     }
 }

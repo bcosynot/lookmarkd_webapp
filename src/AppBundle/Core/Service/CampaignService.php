@@ -88,6 +88,10 @@ class CampaignService implements CampaignServiceInterface
         return $this->campaignDAO->getCompletedRequests($user);
     }
 
+    /**
+     * @param $user
+     * @return \AppBundle\Entity\Campaign[]
+     */
     public function getActiveRequestsCreatedByUser($user)
     {
         return $this->campaignDAO->getActiveRequestsCreatedByUser($user);
@@ -101,5 +105,14 @@ class CampaignService implements CampaignServiceInterface
     public function getRequestsDueSoon($user)
     {
         return $this->campaignDAO->getRequestsDueSoon($user);
+    }
+
+    /**
+     * @param $user
+     * @return \AppBundle\Entity\Campaign[]
+     */
+    public function getEndedRequestsCreatedByUser($user)
+    {
+        return $this->campaignDAO->getEndedRequestsCreatedByUser($user);
     }
 }

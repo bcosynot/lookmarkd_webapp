@@ -349,6 +349,55 @@ class CampaignController extends Controller
             'accepted' => $accepted,
             'completed' => $completed,
             'declined' => $declined,
+            'titleStatus' => 'Active'
+        ));
+    }
+
+    /**
+     * @Route("/brand/campaigns/ended", name="ended_campaigns")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function endedCollaborationRequestsAction()
+    {
+        $user = $this->getUser();
+        $campaigns = $this->get('campaign_service')->getEndedRequestsCreatedByUser($user);
+        $campaignIds = array();
+        $pending = array();
+        $accepted = array();
+        $completed = array();
+        $declined = array();
+        foreach ($campaigns as $campaign) {
+            $campaignId = $campaign->getId();
+            $campaignIds[] = $campaignId;
+            $pending[$campaignId] = array();
+            $accepted[$campaignId] = array();
+            $completed[$campaignId] = array();
+            $declined[$campaignId] = array();
+        }
+        $campaignParticipants = $this->get('campaign_service')->getCampaignParticipantsForCampaignIds($campaignIds);
+        foreach ($campaignParticipants as $participant) {
+            $campaignId = $participant->getCampaign()->getId();
+            $status = $participant->getStatus();
+            if ($status == CampaignParticipants::STATUS_REQUESTED) {
+                $pending[$campaignId][] = $participant;
+            } else if ($status == CampaignParticipants::STATUS_ACCEPTED) {
+                $accepted[$campaignId][] = $participant;
+            } else if ($status == CampaignParticipants::STATUS_COMPLETED) {
+                $completed[$campaignId][] = $participant;
+            } else if($status == CampaignParticipants::STATUS_DECLINED) {
+                $declined[$campaignId][] = $participant;
+            } else if($status == CampaignParticipants::STATUS_IGNORED) {
+                $pending[$campaignId][] = $participant;
+            }
+        }
+
+        return $this->render('controller/campaign/active.html.twig', array(
+            'campaigns' => $campaigns,
+            'pending' => $pending,
+            'accepted' => $accepted,
+            'completed' => $completed,
+            'declined' => $declined,
+            'titleStatus' => 'Ended'
         ));
     }
 

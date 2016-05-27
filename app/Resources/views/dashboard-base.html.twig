@@ -84,11 +84,16 @@ stylesheetsCustom %} {% block stylesheetsAll %}
 									Create
 								</a>
 							</li>
-								<li>
-									<a href="{{ url('active_campaigns') }}">
-										Active
-									</a>
-								</li>
+							<li>
+								<a href="{{ url('active_campaigns') }}">
+									Active
+								</a>
+							</li>
+							<li>
+								<a href="{{ url('ended_campaigns') }}">
+									Ended
+								</a>
+							</li>
 							{%  endif %}
 							{% if app.user.userType == 1 %}
 								<li>
