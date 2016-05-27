@@ -41,7 +41,7 @@
             <div class="modal-body">
                 <ol class="list-group">
                     {% for participant in participants %}
-                        <li class="list-group-item">@{{ participant.user.username }}</li>
+                        <li class="list-group-item">@{{ participant.participant.username }}</li>
                     {% endfor %}
                 </ol>
             </div>
@@ -127,47 +127,49 @@
                             </thead>
                             <tbody>
                             {% for campaign in campaigns %}
-                                <td>{{ campaign.campaignName }}</td>
-                                <td>{{ campaign.brief }}</td>
-                                <td>{{ campaign.start|date('d-m-Y') }}</td>
-                                <td>{{ campaign.end|date('d-m-Y') }}</td>
-                                <td>{{ campaign.numPosts }}</td>
-                                <td>{{ campaign.hashtags }}</td>
-                                <td>{{ campaign.handles }}</td>
-                                <td>
-                                    Cash: {{ campaign.cashReward }}<br/>
-                                    Kind: {{ campaign.kindReward }}
-                                </td>
-                                <td>
-                                    {% if pending[campaign.id]|length > 0 %}
-                                    <p>
-                                        <a href="#" data-toggle="modal" data-target="#pending-{{ campaign.id }}">
-                                            Pending: {{ pending[campaign.id]|length }}
-                                        </a>
-                                    </p>
-                                    {% endif %}
-                                    {% if accepted[campaign.id]|length > 0 %}
-                                    <p>
-                                        <a href="#" data-toggle="modal" data-target="#accepted-{{ campaign.id }}">
-                                            Accepted: {{ accepted[campaign.id]|length }}
-                                        </a>
-                                    </p>
-                                    {% endif %}
-                                    {% if completed[campaign.id]|length > 0 %}
-                                    <p>
-                                        <a href="#" data-toggle="modal" data-target="#completed-{{ campaign.id }}">
-                                            Completed: {{ completed[campaign.id]|length }}
-                                        </a>
-                                    </p>
-                                    {% endif %}
-                                    {% if declined[campaign.id]|length > 0 %}
-                                    <p>
-                                        <a href="#" data-toggle="modal" data-target="#declined-{{ campaign.id }}">
-                                            Declined: {{ declined[campaign.id]|length }}
-                                        </a>
-                                    </p>
-                                    {% endif %}
-                                </td>
+                                <tr>
+                                    <td>{{ campaign.campaignName }}</td>
+                                    <td>{{ campaign.brief }}</td>
+                                    <td>{{ campaign.start|date('d-m-Y') }}</td>
+                                    <td>{{ campaign.end|date('d-m-Y') }}</td>
+                                    <td>{{ campaign.numPosts }}</td>
+                                    <td>{{ campaign.hashtags }}</td>
+                                    <td>{{ campaign.handles }}</td>
+                                    <td>
+                                        Cash: {{ campaign.cashReward }}<br/>
+                                        Kind: {{ campaign.kindReward }}
+                                    </td>
+                                    <td>
+                                        {% if pending[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#pending-{{ campaign.id }}">
+                                                Pending: {{ pending[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if accepted[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#accepted-{{ campaign.id }}">
+                                                Accepted: {{ accepted[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if completed[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#completed-{{ campaign.id }}">
+                                                Completed: {{ completed[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if declined[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#declined-{{ campaign.id }}">
+                                                Declined: {{ declined[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
                             {% endfor %}
                             </tbody>
                             <tfoot>
