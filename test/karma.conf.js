@@ -32,6 +32,11 @@ module.exports = function(config) {
             {pattern: 'bower_components/picturefill/dist/picturefill.js', included: false},
             {pattern: 'bower_components/typeahead.js/dist/typeahead.bundle.js', included: false},
             {pattern: 'bower_components/moment/moment.js', included: false},
+            {pattern: 'bower_components/datatables.net/js/jquery.dataTables.js', included: false},
+            {pattern: 'bower_components/datatables.net-bs/js/dataTables.bootstrap.js', included: false},
+            {pattern: 'bower_components/datatables.net-select/js/dataTables.select.js', included: false},
+            {pattern: 'bower_components/datatables.net-responsive/js/dataTables.responsive.js', included: false},
+            {pattern: 'bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js', included: false},
             //endbower
             {pattern: 'app/Resources/public/scripts/**/*.js', included: false},
             /*{pattern: 'test/**/*Spec.js', included: false}*/

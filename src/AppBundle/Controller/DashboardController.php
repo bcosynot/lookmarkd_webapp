@@ -16,9 +16,9 @@ class DashboardController extends Controller {
 	 */
 	public function dashboardIndecAction() {
 		$user = $this->getUser();
-		if(null!=$user && User::USER_TYPE_INFLUENCER === $user->getUserType()) {
+		if($this->isInfluencer($user)) {
 			return $this->redirectToRoute('dashboard_influencer');
-		} else if(null!=$user && User::USER_TYPE_BRAND === $user->getUserType()) {
+		} else if($this->isBrand($user)) {
 			//TODO: Add dashboard for brand
 			return $this->redirectToRoute('dashboard_influencer');
 		} else {
@@ -34,33 +34,10 @@ class DashboardController extends Controller {
 		$model = array();
 		$user = $this->getUser();
 		$model = $this->redirectToOnboardingStep($user, $model);
-		if($user->getUserType() == User::USER_TYPE_BRAND) {
-			$activeCampaigns = $this->get('campaign_service')->getActiveRequestsCreatedByUser($user);
-			$activeCampaignsCount = 0;
-			if(null!=$activeCampaigns) {
-				$activeCampaignsCount = sizeof($activeCampaigns);
-				$campaignService = $this->get('campaign_service');
-				list($activePending, $activeAccepted, $activeCompleted, $activeDeclined) =
-						CampaignUtil::getCampaignStatuses($activeCampaigns, $campaignService);
-				$model['activePending'] = $activePending;
-				$model['activeAccepted'] = $activeAccepted;
-				$model['activeCompleted'] = $activeCompleted;
-				$model['activeDeclined'] = $activeDeclined;
-			}
-			$model['activeCampaigns'] = $activeCampaignsCount;
-			$endedCampaigns = $this->get('campaign_service')->getEndedRequestsCreatedByUser($user);
-			$endedCampaignsCount = 0;
-			if(null!=$endedCampaigns) {
-				$endedCampaignsCount = sizeof($endedCampaigns);
-				$campaignService = $this->get('campaign_service');
-				list($endedPending, $endedAccepted, $endedCompleted, $endedDeclined) =
-					CampaignUtil::getCampaignStatuses($endedCampaigns, $campaignService);
-				$model['endedPending'] = $endedPending;
-				$model['endedAccepted'] = $endedAccepted;
-				$model['endedCompleted'] = $endedCompleted;
-				$model['endedDeclined'] = $endedDeclined;
-			}
-			$model['endedCampaigns'] = $endedCampaignsCount;
+		if($this->isBrand($user)) {
+			$model = $this->updateModelForBrand($user, $model);
+		} else if ($this->isInfluencer($user)) {
+			$model = $this->updateModelForInfluencer($user, $model);
 		}
 		return $this->render ( 'controller/dashboard/dashboard.html.twig', $model );
 	}
@@ -125,6 +102,73 @@ class DashboardController extends Controller {
 			return $model;
 		}
 		return $model;
+	}
+
+	/**
+	 * @param $user
+	 * @param $model
+	 * @return mixed
+	 */
+	public function updateModelForBrand($user, $model)
+	{
+		$activeCampaigns = $this->get('campaign_service')->getActiveRequestsCreatedByUser($user);
+		$activeCampaignsCount = 0;
+		if (null != $activeCampaigns) {
+			$activeCampaignsCount = sizeof($activeCampaigns);
+			$campaignService = $this->get('campaign_service');
+			list($activePending, $activeAccepted, $activeCompleted, $activeDeclined) =
+				CampaignUtil::getCampaignStatuses($activeCampaigns, $campaignService);
+			$model['activePending'] = $activePending;
+			$model['activeAccepted'] = $activeAccepted;
+			$model['activeCompleted'] = $activeCompleted;
+			$model['activeDeclined'] = $activeDeclined;
+		}
+		$model['activeCampaigns'] = $activeCampaignsCount;
+		$endedCampaigns = $this->get('campaign_service')->getEndedRequestsCreatedByUser($user);
+		$endedCampaignsCount = 0;
+		if (null != $endedCampaigns) {
+			$endedCampaignsCount = sizeof($endedCampaigns);
+			$campaignService = $this->get('campaign_service');
+			list($endedPending, $endedAccepted, $endedCompleted, $endedDeclined) =
+				CampaignUtil::getCampaignStatuses($endedCampaigns, $campaignService);
+			$model['endedPending'] = $endedPending;
+			$model['endedAccepted'] = $endedAccepted;
+			$model['endedCompleted'] = $endedCompleted;
+			$model['endedDeclined'] = $endedDeclined;
+		}
+		$model['endedCampaigns'] = $endedCampaignsCount;
+		return $model;
+	}
+
+	private function updateModelForInfluencer($user, $model)
+	{
+		$latestRequests = $this->get('campaign_service')->getNewRequests($user);
+		$model['newRequests'] = $latestRequests;
+		$dueSoonRequests = $this->get('campaign_service')->getRequestsDueSoon($user);
+		$model['dueSoonRequests'] = $dueSoonRequests;
+		$acceptedRequests = $this->get('campaign_service')->getAcceptedRequests($user);
+		$model['acceptedRequests'] = $acceptedRequests;
+		$completedRequests = $this->get('campaign_service')->getCompletedRequests($user);
+		$model['completedRequests'] = $completedRequests;
+		return $model;
+	}
+
+	/**
+	 * @param $user
+	 * @return bool
+	 */
+	public function isInfluencer($user)
+	{
+		return null != $user && User::USER_TYPE_INFLUENCER === $user->getUserType();
+	}
+
+	/**
+	 * @param $user
+	 * @return bool
+	 */
+	public function isBrand($user)
+	{
+		return null != $user && User::USER_TYPE_BRAND === $user->getUserType();
 	}
 
 }

@@ -2,21 +2,18 @@
 
 {% block title %}Settings{% endblock %}
 {% block stylesheetsCustom %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
 <link rel="stylesheet" href="{{ asset('styles/toastr.min.css') }}" />
+
 {% endblock %}
 {% block stylesheetsDist %}
-<style type="text/css">
-</style>
-<script>
-    (function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(["{{ asset('styles/main.css') }}","{{ asset('styles/dashboard-style.css') }}","{{ asset('styles/style-responsive.css') }}","{{ asset('styles/toastr.min.css') }}"]));
-</script>
-<noscript>
-	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
-	<link rel="stylesheet" href="{{ asset('dashboard-style/style.css') }}" />
-	<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
-	<link rel="stylesheet" href="{{ asset('styles/toastr.min.css') }}" />
-</noscript>
-{% endblock stylesheetsDist %} 
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/toastr.min.css') }}" />
+{% endblock stylesheetsDist %}
 
 {% block content %} 
 <div class="row mt">

@@ -4,6 +4,7 @@ namespace AppBundle\Security\Core\User;
 
 use AppBundle\Core\Service\UserServiceInterface;
 use AppBundle\Entity\SocialProfile;
+use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
@@ -95,7 +96,6 @@ class FOSUBUserProvider extends BaseClass {
 	 *
 	 */
 	public function loadUserByOAuthUserResponse(UserResponseInterface $response) {
-		$this->logger->info ( "in loadUserByOAuthUserResponse" );
 		$username = $response->getUsername ();
 		$user = $this->userManager->findUserBy ( array (
 				$this->getProperty ( $response ) => $username 
@@ -104,7 +104,6 @@ class FOSUBUserProvider extends BaseClass {
 		if (null === $user) {
 			$service = $response->getResourceOwner ()->getName ();
 			$setter = 'set' . ucfirst ( $service );
-			$this->logger->info ( "service:" . $service );
 			$setter_id = $setter . 'Id';
 			$setter_token = $setter . 'AccessToken';
 			// create new user here
@@ -117,6 +116,7 @@ class FOSUBUserProvider extends BaseClass {
 			$user->setEmail ( '' );
 			$user->setPassword ( $response->getAccessToken () );
 			$user->setEnabled ( true );
+			$user->setUserType(User::USER_TYPE_INFLUENCER);
 			$this->userManager->updateUser ( $user );
 			$userProfile = new UserProfile ();
 			$realName = $response->getRealName ();
@@ -147,7 +147,12 @@ class FOSUBUserProvider extends BaseClass {
 		
 		// update access token
 		$user->$setter ( $response->getAccessToken () );
-		
+
+		if(null ==  $user->getUserType() || 0 == $user->getUsertype()) {
+			$user->setUserType(User::USER_TYPE_INFLUENCER);
+		}
+		$this->userManager->updateUser ( $user );
+
 		return $user;
 	}
 	public function setRouter($router) {
