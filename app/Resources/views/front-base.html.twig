@@ -48,6 +48,25 @@
             </div>
         </div>
         {% endif %}
+        <div id="pricing-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Pricing</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Lookmarkd is <strong>free</strong> to use for now.
+                        </p>
+                        <p>
+                            We are currently in private beta and haven't decided on a pricing structure yet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- ********** HEADER SECTION ********** -->
         <div id="h">
             <nav role="navigation">
@@ -101,6 +120,7 @@
                                 {% endif %}
                             </ul>
                         </li>
+                        <li><a href="#" class="text16" data-toggle="modal" data-target="#pricing-modal">Pricing</a></li>
                         <li><a href="about-us" class="text16">About</a></li>
                     </ul>
                 </div>
