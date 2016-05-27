@@ -11,9 +11,10 @@
 		{% block herocta %}
 			<div class="row">
 				<div class="col-md-12">
-					<a class="btn btn-lg btn-green" href="#"><i class="ion-locked"></i>&nbsp;Sign In</a>
+					<a class="btn btn-lg btn-green" href="{{ url('ajax-login-form') }}" data-remote="false"
+					   data-toggle="modal" data-target="#brand-login-modal"><i class="ion-locked"></i>&nbsp;Sign In</a>
 					<br />
-					<a href="#" id="hero-learn-more">Learn More</a>
+					<a href="#" id="hero-learn-more" class="white">Learn More</a>
 				</div>
 			</div><!--/row -->{% endblock %}
 
