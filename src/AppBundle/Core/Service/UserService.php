@@ -196,6 +196,11 @@ class UserService implements UserServiceInterface
         return $this->userDAO->getSocialProfile($user);
     }
 
+    /**
+     * @param $categoryIds
+     * @param $followerCount
+     * @return User[]
+     */
     public function getInfluencers($categoryIds, $followerCount)
     {
         return $this->userDAO->getInfluencers($categoryIds, $followerCount);
