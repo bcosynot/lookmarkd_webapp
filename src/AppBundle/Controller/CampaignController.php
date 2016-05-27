@@ -2,16 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Core\Service\CampaignService;
 use AppBundle\Entity\Campaign;
 use AppBundle\Entity\CampaignParticipants;
-use Doctrine\DBAL\Types\JsonArrayType;
-use JMS\Serializer\Serializer;
+use AppBundle\Util\CampaignUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class CampaignController extends Controller
 {
@@ -87,7 +85,7 @@ class CampaignController extends Controller
         if (null != $influencers && sizeof($influencers) > 0) {
             foreach ($influencers as $influencer) {
                 $postingCategory = $userService->getPostingCateogiresForUser($influencer);
-                if(null!=$postingCategory && sizeof($postingCategory) > 0) {
+                if (null != $postingCategory && sizeof($postingCategory) > 0) {
                     $postingCategories[] = $postingCategory[0]->getCategoryName();
                 } else {
                     $postingCategories[] = '-';
@@ -144,7 +142,7 @@ class CampaignController extends Controller
             );
         }
 
-        return new JsonResponse(array('data'=>$data));
+        return new JsonResponse(array('data' => $data));
     }
 
     /**
@@ -277,7 +275,8 @@ class CampaignController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function attachLinkAction(Request $request) {
+    public function attachLinkAction(Request $request)
+    {
 
         $campaignParticipantId = $request->get('campaignParticipantId');;
         $link = $request->get('link');
@@ -287,7 +286,7 @@ class CampaignController extends Controller
         $links[] = $link;
         $campaignParticipants->setURLs($links);
         $this->get('campaign_service')->saveOrUpdateCampaignParticipant($campaignParticipants);
-        
+
         return new JsonResponse();
     }
 
@@ -313,35 +312,8 @@ class CampaignController extends Controller
     {
         $user = $this->getUser();
         $campaigns = $this->get('campaign_service')->getActiveRequestsCreatedByUser($user);
-        $campaignIds = array();
-        $pending = array();
-        $accepted = array();
-        $completed = array();
-        $declined = array();
-        foreach ($campaigns as $campaign) {
-            $campaignId = $campaign->getId();
-            $campaignIds[] = $campaignId;
-            $pending[$campaignId] = array();
-            $accepted[$campaignId] = array();
-            $completed[$campaignId] = array();
-            $declined[$campaignId] = array();
-        }
-        $campaignParticipants = $this->get('campaign_service')->getCampaignParticipantsForCampaignIds($campaignIds);
-        foreach ($campaignParticipants as $participant) {
-            $campaignId = $participant->getCampaign()->getId();
-            $status = $participant->getStatus();
-            if ($status == CampaignParticipants::STATUS_REQUESTED) {
-                $pending[$campaignId][] = $participant;
-            } else if ($status == CampaignParticipants::STATUS_ACCEPTED) {
-                $accepted[$campaignId][] = $participant;
-            } else if ($status == CampaignParticipants::STATUS_COMPLETED) {
-                $completed[$campaignId][] = $participant;
-            } else if($status == CampaignParticipants::STATUS_DECLINED) {
-                $declined[$campaignId][] = $participant;
-            } else if($status == CampaignParticipants::STATUS_IGNORED) {
-                $pending[$campaignId][] = $participant;
-            }
-        }
+        $campaignService = $this->get('campaign_service');
+        list($pending, $accepted, $completed, $declined) = CampaignUtil::getCampaignStatuses($campaigns, $campaignService);
 
         return $this->render('controller/campaign/active.html.twig', array(
             'campaigns' => $campaigns,
@@ -361,35 +333,8 @@ class CampaignController extends Controller
     {
         $user = $this->getUser();
         $campaigns = $this->get('campaign_service')->getEndedRequestsCreatedByUser($user);
-        $campaignIds = array();
-        $pending = array();
-        $accepted = array();
-        $completed = array();
-        $declined = array();
-        foreach ($campaigns as $campaign) {
-            $campaignId = $campaign->getId();
-            $campaignIds[] = $campaignId;
-            $pending[$campaignId] = array();
-            $accepted[$campaignId] = array();
-            $completed[$campaignId] = array();
-            $declined[$campaignId] = array();
-        }
-        $campaignParticipants = $this->get('campaign_service')->getCampaignParticipantsForCampaignIds($campaignIds);
-        foreach ($campaignParticipants as $participant) {
-            $campaignId = $participant->getCampaign()->getId();
-            $status = $participant->getStatus();
-            if ($status == CampaignParticipants::STATUS_REQUESTED) {
-                $pending[$campaignId][] = $participant;
-            } else if ($status == CampaignParticipants::STATUS_ACCEPTED) {
-                $accepted[$campaignId][] = $participant;
-            } else if ($status == CampaignParticipants::STATUS_COMPLETED) {
-                $completed[$campaignId][] = $participant;
-            } else if($status == CampaignParticipants::STATUS_DECLINED) {
-                $declined[$campaignId][] = $participant;
-            } else if($status == CampaignParticipants::STATUS_IGNORED) {
-                $pending[$campaignId][] = $participant;
-            }
-        }
+        $campaignService = $this->get('campaign_service');
+        list($pending, $accepted, $completed, $declined) = CampaignUtil::getCampaignStatuses($campaigns, $campaignService);
 
         return $this->render('controller/campaign/active.html.twig', array(
             'campaigns' => $campaigns,

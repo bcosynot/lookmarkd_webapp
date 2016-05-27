@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Util\CampaignUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MetzWeb\Instagram\Instagram;
@@ -32,10 +33,34 @@ class DashboardController extends Controller {
 
 		$model = array();
 		$user = $this->getUser();
-		$nextStep = $this->get('social_profile_util')->getNextOnboardingStep($user);
-		$model['nextStep'] = $nextStep;
-		if(null!=$nextStep && $nextStep === 'bloggername') {
-			$model['saveBloggerNameURL'] = $this->get('router')->generate('edit_profile', array('fieldName'=>'bloggerName','value'=>null), true);
+		$model = $this->redirectToOnboardingStep($user, $model);
+		if($user->getUserType() == User::USER_TYPE_BRAND) {
+			$activeCampaigns = $this->get('campaign_service')->getActiveRequestsCreatedByUser($user);
+			$activeCampaignsCount = 0;
+			if(null!=$activeCampaigns) {
+				$activeCampaignsCount = sizeof($activeCampaigns);
+				$campaignService = $this->get('campaign_service');
+				list($activePending, $activeAccepted, $activeCompleted, $activeDeclined) =
+						CampaignUtil::getCampaignStatuses($activeCampaigns, $campaignService);
+				$model['activePending'] = $activePending;
+				$model['activeAccepted'] = $activeAccepted;
+				$model['activeCompleted'] = $activeCompleted;
+				$model['activeDeclined'] = $activeDeclined;
+			}
+			$model['activeCampaigns'] = $activeCampaignsCount;
+			$endedCampaigns = $this->get('campaign_service')->getEndedRequestsCreatedByUser($user);
+			$endedCampaignsCount = 0;
+			if(null!=$endedCampaigns) {
+				$endedCampaignsCount = sizeof($endedCampaigns);
+				$campaignService = $this->get('campaign_service');
+				list($endedPending, $endedAccepted, $endedCompleted, $endedDeclined) =
+					CampaignUtil::getCampaignStatuses($endedCampaigns, $campaignService);
+				$model['endedPending'] = $endedPending;
+				$model['endedAccepted'] = $endedAccepted;
+				$model['endedCompleted'] = $endedCompleted;
+				$model['endedDeclined'] = $endedDeclined;
+			}
+			$model['endedCampaigns'] = $endedCampaignsCount;
 		}
 		return $this->render ( 'controller/dashboard/dashboard.html.twig', $model );
 	}
@@ -85,5 +110,21 @@ class DashboardController extends Controller {
 		
 		return new JsonResponse($model);
 	}
-	
+
+	/**
+	 * @param $user
+	 * @param $model
+	 * @return mixed
+	 */
+	public function redirectToOnboardingStep($user, $model)
+	{
+		$nextStep = $this->get('social_profile_util')->getNextOnboardingStep($user);
+		$model['nextStep'] = $nextStep;
+		if (null != $nextStep && $nextStep === 'bloggername') {
+			$model['saveBloggerNameURL'] = $this->get('router')->generate('edit_profile', array('fieldName' => 'bloggerName', 'value' => null), true);
+			return $model;
+		}
+		return $model;
+	}
+
 }
