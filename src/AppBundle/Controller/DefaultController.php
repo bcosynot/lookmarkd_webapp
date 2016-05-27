@@ -39,4 +39,12 @@ class DefaultController extends Controller {
 	public function loginForForAJAXAction() {
 		return $this->render ( 'controller/default/login-form.html.twig' );
 	}
+
+	/**
+	 * @Route("/tos-privacy", name="tos_and_privacy_policy")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+	public function tosAndPrivacyPolicyAction() {
+		return $this->render('controller/default/tos_and_privacy_policy.html.twig');
+	}
 }
