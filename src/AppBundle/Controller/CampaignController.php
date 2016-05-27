@@ -29,12 +29,33 @@ class CampaignController extends Controller
                 if (null != $socialStatistics && sizeof($socialStatistics) > 0) {
                     $followers[] = $socialStatistics[0]->getStatistic();
                 } else {
-                    $followers[] = -1;
+                    $followers[] = '-';
                 }
             }
         }
 
         return $followers;
+    }
+
+    function getMediaCounts($influencers)
+    {
+
+        $mediaCounts = array();
+        if (null != $influencers && sizeof($influencers) > 0) {
+            $socialProfileUtil = $this->get('social_profile_util');
+            $socialService = $this->get('social_service');
+            foreach ($influencers as $influencer) {
+                $socialProfileUtil->updateSocialStatisticsIfNecessary($influencer);
+                $socialStatistics = $socialService->getMostRecentMediaCount($influencer);
+                if (null != $socialStatistics && sizeof($socialStatistics) > 0) {
+                    $mediaCounts[] = $socialStatistics[0]->getStatistic();
+                } else {
+                    $mediaCounts[] = '-';
+                }
+            }
+        }
+
+        return $mediaCounts;
     }
 
     function getInstagramProfilePictures($influencers)
@@ -58,20 +79,31 @@ class CampaignController extends Controller
         return $instagramProfilePictures;
     }
 
+    function getPostingCategories($influencers)
+    {
+
+        $userService = $this->get('user_service');
+        $postingCategories = array();
+        if (null != $influencers && sizeof($influencers) > 0) {
+            foreach ($influencers as $influencer) {
+                $postingCategory = $userService->getPostingCateogiresForUser($influencer);
+                if(null!=$postingCategory && sizeof($postingCategory) > 0) {
+                    $postingCategories[] = $postingCategory[0]->getCategoryName();
+                } else {
+                    $postingCategories[] = '-';
+                }
+            }
+        }
+
+        return $postingCategories;
+    }
+
     /**
      * @Route("/brand/campaign/create", name="campaign_create")
      */
     function campaignCreateAction()
     {
-        $userService = $this->get('user_service');
-        $influencers = $userService->getAllInfluencers();
-        $followers = $this->getFollowerCounts($influencers);
-        $instagramProfilePictures = $this->getInstagramProfilePictures($influencers);
-
-        return $this->render('controller/campaign/create.html.twig', array(
-            'influencers' => $influencers,
-            'profilePictures' => $instagramProfilePictures,
-            'followers' => $followers));
+        return $this->render('controller/campaign/create.html.twig');
     }
 
     /**
@@ -96,7 +128,9 @@ class CampaignController extends Controller
         $userService = $this->get('user_service');
         $influencers = $userService->getInfluencers($categoryIds, $followerCount);
         $followers = $this->getFollowerCounts($influencers);
+        $mediaCounts = $this->getMediaCounts($influencers);
         $instagramProfilePictures = $this->getInstagramProfilePictures($influencers);
+        $postingCategories = $this->getPostingCategories($influencers);
 
         $data = array();
         foreach ($influencers as $index => $influencer) {
@@ -104,11 +138,13 @@ class CampaignController extends Controller
                 'username' => $influencer->getUsername(),
                 'followerCount' => $followers[$index],
                 'profilePicture' => $instagramProfilePictures[$index],
-                'userId' => $influencer->getId()
+                'userId' => $influencer->getId(),
+                'category' => $postingCategories[$index],
+                'mediaCount' => $mediaCounts[$index],
             );
         }
 
-        return new JsonResponse($data);
+        return new JsonResponse(array('data'=>$data));
     }
 
     /**

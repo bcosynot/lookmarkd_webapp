@@ -11,7 +11,11 @@
     "typeahead.js": "https://github.com/corejavascript/typeahead.js.git#~0.11.1",
     "moment": "^2.13.0",
     "datatables.net": "^1.10.11",
-    "datatables.net-bs": "^1.10.11"
+    "datatables.net-bs": "^1.10.11",
+    "datatables.net-select": "^1.2.0",
+    "datatables.net-select-bs": "^1.2.0",
+    "datatables.net-responsive": "^2.1.0",
+    "datatables.net-responsive-bs": "^2.1.0"
   },
   "devDependencies": {
     "x-editable": "~1.5.1"

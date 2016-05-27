@@ -169,6 +169,16 @@ input#follower_count_filter {
     margin-left: 1em;
 }
 
+div#DataTables_Table_0_wrapper, #DataTables_Table_0_wrapper > div:nth-child(1),
+#DataTables_Table_0_wrapper > div:nth-child(2), #DataTables_Table_0_wrapper > div:nth-child(3)
+{
+    min-width: 95%;
+}
+
+#DataTables_Table_0_info > span {
+    display: none;
+}
+
 @media ( max-width: 585px ) {
 
     span.round-tabs {

@@ -1,5 +1,6 @@
 require(['modules/common-scripts', 'jquery', 'moment', 'bootstrap/tab', 'bootstrap/transition',
-            'bootstrap-daterangepicker', 'textarea-autosize' ], function (common, $, moment) {
+            'bootstrap-daterangepicker', 'textarea-autosize', 'datatables.net-bs', 'datatables.net-select',
+            'datatables.net-responsive', 'datatables.net-responsive-bs', 'bootstrap/tooltip'], function (common, $, moment) {
 
     'use strict';
     common.init();
@@ -27,92 +28,92 @@ require(['modules/common-scripts', 'jquery', 'moment', 'bootstrap/tab', 'bootstr
         // TODO: Logic for creating message based on provided fields
     });
 
+    function showUpdatedTable() {
+        $('#influencers-updating').hide();
+        $('#influencer-list').slideDown();
+        var selectedInfluencers = getSelectedInfluencers();
+        table.rows().every(function () {
+            var rowId = parseInt(this.id());
+            if (selectedInfluencers.indexOf(rowId) !== -1) {
+                this.select();
+            }
+        });
+    }
+
+    var table = $('#influencer-list table').DataTable({
+        'ajax': {
+            'url': $('#posting_category_filter').data('url'),
+                        'data': function(d) {
+                            $('#influencer-list').slideUp();
+                            $('#influencers-updating').show();
+                            d.categoryId =  $('#posting_category_filter').val();
+                            d.followerCount = $('#follower_count_filter').val();
+                        }
+                    },
+                    'columns': [
+                        {
+                            className: 'select-checkbox',
+                            name: 'checkbox',
+                            defaultContent: '',
+                            orderable: false
+                        },
+                        {
+                            'name':'username',
+                            'data':'username',
+                            'render': function ( data, type) {
+                                if(type==='display') {
+                                    return '<a href="https://instagram.com/' + data + '" target="_blank">'+data+'</a>';
+                                } else {
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            'name': 'category',
+                            'data': 'category'
+                        },
+                        {
+                            'name':'followerCount',
+                            'data':'followerCount'
+                        },
+                        {
+                            'name':'mediaCount',
+                            'data':'mediaCount'
+                        }
+                    ],
+                    select: {
+                        style:    'multi',
+                        selector: 'td'
+                    },
+                    'rowId': 'userId',
+                    'initComplete': function() {
+                        showUpdatedTable();
+                    },
+                    'responsive': true,
+                    'autoWidth': false,
+                    'order': [[ 3, 'desc' ], [1, 'asc']]
+    });
+
+    table
+        .on( 'select', function ( e, dt, type, indexes ) {
+            selectInfluencer(table.rows( indexes ).data().toArray()[0].userId);
+        } )
+        .on( 'deselect', function ( e, dt, type, indexes ) {
+            deselectInfluencer(table.rows( indexes ).data().toArray()[0].userId);
+        } );
+
+    function reloadTable() {
+        table.clear();
+        table.ajax.reload(showUpdatedTable, true);
+    }
+
     $('#follower_count_filter').change(function () {
-        var url = $(this).data('url');
-        var minFollowerCount = $(this).val();
-        $('#influencer-list').slideUp();
-        $('#influencers-updating').show();
-        $.post(url,
-            {
-                categoryId: $('#posting_category_filter').val(),
-                followerCount: minFollowerCount
-            }, function (data) {
-                updateFilteredInfluencersList(data);
-            });
+        reloadTable();
     });
 
     $('#posting_category_filter').change(function () {
-        var url = $(this).data('url');
-        var categoryId = $(this).val();
-        $('#influencer-list').slideUp();
-        $('#influencers-updating').show();
-        $.getJSON(url,
-            {
-                categoryId: categoryId,
-                followerCount: $('#follower_count_filter').val()
-            }, function (data) {
-                updateFilteredInfluencersList(data);
-            });
+        reloadTable();
     });
-
-    function addToFilterResults(influencer) {
-        var parentBoxElement = $('<div class="col-md-3">');
-        var influencerBox = $('<div class="panel panel-default influencer-box">');
-        var panelBody = $('<div class="panel-body">');
-        panelBody.css({
-            'background': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),url("' + influencer.profilePicture + '") no-repeat',
-            'background-size': 'cover'
-        });
-        panelBody.appendTo(influencerBox);
-        var panelTitle = $('<h4 class="panel-title white">');
-        var linkedUserName = $('<a href="https://instagram.com/' + influencer.username + '">');
-        linkedUserName.text('@' + influencer.username);
-        linkedUserName.appendTo(panelTitle);
-        panelTitle.appendTo(panelBody);
-        var followerCountElement = $('<div class="row mt"><div class="col-md-12"><p class="white"><span class="ion-eye white"></span>&nbsp;&nbsp;' + influencer.followerCount + '</p></div>');
-        followerCountElement.appendTo(panelBody);
-        var buttonToAdd = $('<button class="btn btn-block btn-primary selection" data-user-id="'+influencer.userId+'"><span class="ion-checkmark"></span></button></div></div></div>');
-        buttonToAdd.appendTo(panelBody);
-        influencerBox.appendTo(parentBoxElement);
-        parentBoxElement.appendTo('#influencer-list');
-    }
-
-    function showTooltipForNoInfluencers(data) {
-        if (data.length === 0) {
-            $('#no-influencers-found').show();
-        } else {
-            $('#no-influencers-found').hide();
-        }
-    }
-
-    function markSelectedInfluencers() {
-        var selectedInfluencers = getSelectedInfluencers();
-        for (var j = 0; j < selectedInfluencers.length; j++) {
-            selectInfluencer(selectedInfluencers[j]);
-        }
-    }
-
-    function updateFilteredInfluencersList(data) {
-        $('#influencer-list').slideUp();
-        $('#influencers-updating').show();
-        $('#influencer-list *:not(#no-influencers-found)').remove();
-        for (var i = 0; i<data.length; i++) {
-            var influencer = data[i];
-            addToFilterResults(influencer);
-        }
-        showTooltipForNoInfluencers(data);
-        markSelectedInfluencers();
-        showInfluencerList();
-    }
-
-    function showInfluencerList() {
-        if ($.active > 0) {
-            window.setTimeout(showInfluencerList, 1000);
-        } else {
-            $('#influencers-updating').hide();
-            $('#influencer-list').slideDown();
-        }
-    }
 
     function convertAllToInt(selectedInfluencers) {
         for (var i = 0; i < selectedInfluencers.length; i++) {
@@ -178,9 +179,23 @@ require(['modules/common-scripts', 'jquery', 'moment', 'bootstrap/tab', 'bootstr
         }
     }
 
+    function showTooltipOnDraftMessageButton() {
+        $('#select-influencers-then-draft-message')
+            .attr('title', 'Select at least one influencer to continue.').tooltip();
+    }
+
+    showTooltipOnDraftMessageButton();
+
     function updateSelectedCount() {
         var numberSelected = getSelectedInfluencers().length;
         $('#number-selected').text(numberSelected);
+        var dontAllowNextStep = (numberSelected === 0);
+        $('#select-influencers-then-draft-message button').prop('disabled', dontAllowNextStep);
+        if(dontAllowNextStep) {
+            showTooltipOnDraftMessageButton();
+        } else {
+            $('#select-influencers-then-draft-message').tooltip('destroy');
+        }
     }
 
     function deselectInfluencer(userId) {

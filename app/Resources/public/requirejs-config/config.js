@@ -45,7 +45,10 @@ var require = {
         moment: 'moment/moment',
         'textarea-autosize': 'textarea-autosize/dist/jquery.textarea_autosize',
         'datatables.net': 'datatables.net/js/jquery.dataTables',
-        'datatables.net-bs': 'datatables.net-bs/js/dataTables.bootstrap'
+        'datatables.net-bs': 'datatables.net-bs/js/dataTables.bootstrap',
+        'datatables.net-select': 'datatables.net-select/js/dataTables.select',
+        'datatables.net-responsive': 'datatables.net-responsive/js/dataTables.responsive',
+        'datatables.net-responsive-bs': 'datatables.net-responsive-bs/js/responsive.bootstrap'
     },
     shim: {
         bootstrap: {
@@ -237,6 +240,28 @@ var require = {
             deps: [
                 'jquery',
                 'datatables.net'
+            ]
+        },
+        'datatables.net-select': {
+            exports: '$',
+            deps: [
+                'jquery',
+                'datatables.net'
+            ]
+        },
+        'datatables.net-responsive': {
+            exports: '$',
+            deps: [
+                'jquery',
+                'datatables.net'
+            ]
+        },
+        'datatables.net-responsive-bs': {
+            exports: '$',
+            deps: [
+                'jquery',
+                'datatables.net',
+                'datatables.net-responsive'
             ]
         }
     },

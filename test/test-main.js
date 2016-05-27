@@ -56,7 +56,10 @@ require.config({
         wow: 'wow/dist/wow',
         moment: 'moment/moment',
         'datatables.net': 'datatables.net/js/jquery.dataTables',
-        'datatables.net-bs': 'datatables.net-bs/js/dataTables.bootstrap'
+        'datatables.net-bs': 'datatables.net-bs/js/dataTables.bootstrap',
+        'datatables.net-select': 'datatables.net-select/js/dataTables.select',
+        'datatables.net-responsive': 'datatables.net-responsive/js/dataTables.responsive',
+        'datatables.net-responsive-bs': 'datatables.net-responsive-bs/js/responsive.bootstrap'
     },
     shim: {
         bootstrap: {
