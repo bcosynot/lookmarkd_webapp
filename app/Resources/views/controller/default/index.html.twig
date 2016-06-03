@@ -2,7 +2,7 @@
 {% block title %}Lookmarkd{% endblock %}
 {% block stylesheetsCustom %}
 <style>
- #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),  url('{{ asset('img/header-hand-camera.jpg')}}') no-repeat;}
+ #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),  path('{{ asset('img/header-hand-camera.jpg')}}') no-repeat;}
 </style>
 {% endblock stylesheetsCustom %}
 		{% block heromsg %}Easily Connecting<br/>Influencers &amp; Brands{% endblock %}
@@ -17,7 +17,7 @@
 					  </a>
 					  <ul class="dropdown-menu" style="right:50%;left:auto;" aria-labelledby="dropdownMenu2">
 					    <li><a href="{{ path('how_it_works_brand') }}">Brand</a></li>
-					    <li><a href="{{ url('how_it_works_influencer') }}">Influencer</a></li>
+					    <li><a href="{{ path('how_it_works_influencer') }}">Influencer</a></li>
 					  </ul>
 					</div>
 					<a href="#" id="hero-learn-more" class="white">Learn More</a>
@@ -58,7 +58,7 @@
 					Get the best insights and stats for your campaign to squeeze the maximum ROI.
 				</p>
 				<p>
-					<a href="{{ url('how_it_works_brand') }}" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
+					<a href="{{ path('how_it_works_brand') }}" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
 				</p>
 			</div>
 			<div class="col-md-2 text-center">
@@ -78,7 +78,7 @@
 				schedulers and and submit deliverables - All Automated. Save time to do things more important to you.</p>
 				<p  class="wow slideInUp">
 					{% include '::influencer_login_button.html.twig' %}
-					<a class="wow slideInUp btn btn-lg btn-green" href="{{ url('how_it_works_influencer') }}">Learn More</a>
+					<a class="wow slideInUp btn btn-lg btn-green" href="{{ path('how_it_works_influencer') }}">Learn More</a>
 				</p>
 			</div>
 		</div><!--/row -->

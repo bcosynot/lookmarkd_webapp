@@ -81,8 +81,8 @@
                                aria-expanded="false">How It Works<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('how_it_works_brand') }}" class="text16">For Brands</a></li>
-                                <li><a href="{{ url('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
+                                <li><a href="{{ path('how_it_works_brand') }}" class="text16">For Brands</a></li>
+                                <li><a href="{{ path('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
                             </ul>
                         </li>
                         <li role="presentation" class="dropdown">
@@ -93,7 +93,7 @@
                             <ul class="dropdown-menu">
                                 {% if (not app.user) %}
                                 <li>
-                                    <a href="{{ url('ajax-login-form') }}" id="brand-login-link" class="text16"
+                                    <a href="{{ path('ajax-login-form') }}" id="brand-login-link" class="text16"
                                         data-toggle="modal" data-target="#brand-login-modal"
                                         data-remote="false">
                                         Brand
@@ -108,7 +108,7 @@
                                 {% endif %}
                                 {% if app.user %}
                                 <li>
-                                    <a href="{{ url('dashboard') }}" class="text16">
+                                    <a href="{{ path('dashboard') }}" class="text16">
                                         Dashboard
                                     </a>
                                 </li>
@@ -127,7 +127,7 @@
             </nav>
             <div class="container">
                 <div class="row">
-                    <a href="{{ url('homepage') }}"><h3 class="logo">LOOKMARKD</h3></a>
+                    <a href="{{ path('homepage') }}"><h3 class="logo">LOOKMARKD</h3></a>
                     <h1>{% block heromsg %}{% endblock %}</h1>
                 </div><!--/row -->
                 {% block herocta %}{% endblock %}
