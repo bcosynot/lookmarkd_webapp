@@ -1,0 +1,229 @@
+{% extends 'dashboard-base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block stylesheetsDist %}
+	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+	<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+	<link rel="stylesheet" href="{{ asset('styles/lineicons.css') }}" />
+{% endblock stylesheetsDist %}
+
+{% block content %}
+	<div class="row mt">
+		{% if nextStep == 'postingcategories' %}
+		<div class="col-lg-offset-2 col-lg-6">
+			<div class="alert alert-success">
+				<p><strong>You're doing great!</strong></p>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+				    <span class="sr-only">Two more steps</span>
+				  </div>
+				</div>
+				<p>Two more steps to being discovered by amazing brands..</p>
+				<p>
+					<a href="{{ url('add_posting_category') }}" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Brands need to know what you post about. Add categories to your profile so they can easily search and discover you.">
+					Step 3/4: Add a category
+					</a>
+				</p>
+			</div>
+		</div>
+		{% endif %}
+		{% if nextStep == 'bloggername' %}
+		<div class="col-lg-offset-2 col-lg-6">
+			<div class="alert alert-success">
+				<p><strong>Look at you go!</strong></p>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+				    <span class="sr-only">One more step</span>
+				  </div>
+				</div>
+				<p>Step 4/4: What's your brand/blogging/stage name?</p>
+				<p>
+					<input type="text" class="form-control" id="bloggerName" placeholder="Enter brand/blogging/stage name here"/>
+				</p>
+				<p>
+					<button class='btn btn-primary btn-lg' 
+						id="saveBloggerName" 
+						data-url="{{ saveBloggerNameURL }}" 
+						data-loading-text="Saving..."
+						data-welcome-msg-url="{{ url('send_welcome_message') }}">Save</button>
+				</p>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+	{% if constant('\\AppBundle\\Entity\\User::USER_TYPE_INFLUENCER') == app.user.userType %}
+		<div class="row mt">
+			<a href="{{ path('new_campaign_requests', {'_format': 'html'}) }}">
+				<div class="col-md-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ newRequests|length }} new requests</strong></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+			<a href="{{ path('due_campaign_requests') }}">
+				<div class="col-md-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ dueSoonRequests|length }} due soon</strong></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+			<a href="{{ path('accepted_campaign_requests') }}">
+				<div class="col-md-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ acceptedRequests|length }} accepted</strong></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+			<a href="{{ path('completed_campaign_requests') }}">
+				<div class="col-md-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ completedRequests|length }} completed</strong></h3>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+	{% endif %}
+	{% if constant('\\AppBundle\\Entity\\User::USER_TYPE_BRAND') == app.user.userType %}
+		<div class="row mt">
+			<div class="col-md-4 col-md-offset-4">
+				<h3>
+					<a class="btn btn-lg btn-primary" href="{{ path('campaign_create') }}">
+						Create Collaboration Request
+					</a>
+				</h3>
+			</div>
+		</div>
+		<div class="row mt">
+			<a href="{{ path('active_campaigns') }}">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ activeCampaigns }} collaborations currently active</strong></h3>
+						</div>
+						{% if activeCampaigns > 0 %}
+							<div class="panel-footer">
+								<ul class="list-group">
+									<li class="list-group-item">
+										<h4 class="list-group-item-heading">Responses</h4>
+										<p class="list-group-item-text">Summary of responses to your requests</p>
+									</li>
+									{% if endedCompleted is defined %}
+										<li class="list-group-item list-group-item-success">
+											{{ activeCompleted|length  }} completed
+										</li>
+									{% endif %}
+									{% if activeAccepted is defined %}
+										<li class="list-group-item list-group-item-info">
+											{{ activeAccepted|length }} accepted
+										</li>
+									{% endif %}
+									{% if endedPending is defined %}
+										<li class="list-group-item list-group-item-warning">
+											{{ activePending|length  }} pending
+										</li>
+									{% endif %}
+									{% if endedDeclined is defined %}
+										<li class="list-group-item list-group-item-danger">
+											{{ activeDeclined|length  }} declined
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						{% endif %}
+						{% if activeCampaigns == 0 %}
+							<div class="panel-footer">
+								<a href="{{ path('campaign_create') }}">Create a new collaboration request!</a>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</a>
+			<a href="{{ path('ended_campaigns') }}">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3><strong>{{ endedCampaigns }} collaborations that are not active anymore</strong></h3>
+						</div>
+						{% if endedCampaigns > 0 %}
+							<div class="panel-footer">
+								<ul class="list-group">
+									<li class="list-group-item">
+										<h4 class="list-group-item-heading">Responses</h4>
+										<p class="list-group-item-text">
+											Summary of responses to your requests of collaborations in the past
+										</p>
+									</li>
+									{% if endedCompleted is defined %}
+										<li class="list-group-item list-group-item-success">
+											{{ endedCompleted|length  }} completed
+										</li>
+									{% endif %}
+									{% if endedAccepted is defined %}
+										<li class="list-group-item list-group-item-info">
+											{{ endedAccepted|length }} accepted
+										</li>
+									{% endif %}
+									{% if endedPending is defined %}
+										<li class="list-group-item list-group-item-warning">
+											{{ endedPending|length  }} pending
+										</li>
+									{% endif %}
+									{% if endedDeclined is defined %}
+										<li class="list-group-item list-group-item-danger">
+											{{ endedDeclined|length  }} declined
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</a>
+		</div>
+	{% endif %}
+	<div class="row mt">
+		<div class="col-md-2 col-sm-2 col-md-offset-1 box0 insta-stats"
+		 id="followerCount" data-url="{{ url('insta_stats_followers_count') }}">
+        	<div class="box1">
+				<h2><i class="ion-eye"></i></h2>
+				<h3>Loading followers...</h3>
+            </div>
+            <p>Loading info...</p>
+       </div>
+       <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="likesCount">
+       	<div class="box1">
+			<h2><i class="ion-heart"></i></h2>
+			<h3>Loading likes...</h3>
+        </div>
+        <p>Loading info...</p>
+      </div>
+      
+     <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="commentsCount">
+      	<div class="box1">
+			<h2><i class="ion-chatbox"></i></h2>
+			<h3>Loading comments...</h3>
+        </div>
+        <p>Loading info..</p>
+     </div>
+     
+     <div class="col-md-2 col-sm-2 box0 insta-stats"
+		 id="mediaCount"  data-url="{{ url('insta_stats_media_counts') }}">
+      	<div class="box1">
+			<h2><i class="ion-social-instagram-outline"></i></h2>
+			<h3>Loading  posts...</h3>
+        </div>
+        <p>Loading info...</p>
+     </div>
+	</div>
+{% endblock %}

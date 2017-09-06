@@ -1,0 +1,36 @@
+{
+  "name": "dcjqaccordion",
+  "version": "2.7.1",
+  "homepage": "http://www.designchemical.com/lab/jquery-vertical-accordion-menu-plugin",
+  "authors": [
+    "Design Chemical"
+  ],
+  "description": "The plugin takes standard html nested lists and turns them into vertical accordion menus.",
+  "main": "js/jquery.dcjqaccordion.2.7.min.js",
+  "keywords": [
+    "js",
+    "accordion"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.4.2",
+    "jquery.cookie": ">= 1.4.1"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "2.7.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.7.1",
+    "commit": "32d2ef74be2754dc0f0879aee713513a74c909fa"
+  },
+  "_source": "git://github.com/albertedevigo/dcjqaccordion.git",
+  "_target": "~2.7.1",
+  "_originalSource": "dcjqaccordion",
+  "_direct": true
+}

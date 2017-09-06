@@ -1,0 +1,104 @@
+{% extends 'dashboard-base.html.twig' %}
+{% block title %}Due Soon Collaborations{% endblock %}
+{% block stylesheetsDist %}
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}"/>
+{% endblock stylesheetsDist %}
+{% block stylesheetsCustom %}
+{% endblock %}
+{% block content %}
+{% if requests|length == 0 %}
+    <h3>All done! Check back later :)</h3>
+{% endif %}
+{% for request in requests %}
+<div id="attach-link-{{ request.id }}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Attach Link</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Paste link for Instagram post"
+                           id="link-{{ request.id }}" />
+                    <button class="btn btn-success attach-link"
+                            data-campaign-participant-id="{{ request.id }}"
+                            data-action="attach-link"
+                            data-url="{{ url('attach_link') }}">
+                        Attach
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="container" id="main-requests-contatiner">
+{% for request in requests %}
+    <div class="row mt" data-campaign-participant-id="{{ request.id }}">
+        <div class="col-md-11">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ request.campaign.campaignName }}
+                        <span style="float:right;">
+                            {{ request.campaign.start|date("d/m/Y") }} to {{ request.campaign.end|date("d/m/Y") }}
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <p>
+                            <span class="ion-information-circled"></span>
+                            {{ request.campaign.brief }}
+                        </p>
+                        <p>
+                            <span class="ion-ios-plus"></span>
+                            Atleast {{ request.campaign.numPosts }} post(s)
+                        </p>
+                        <p>
+                            <span class="ion-at"></span>
+                            Include handles: {{ request.campaign.handles }}
+                        </p>
+                        <p>
+                            <span class="ion-pound"></span>
+                            Include hashtags: {{ request.campaign.hashtags }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <span class="ion-cash"></span>
+                            Cash Reward: {{ request.campaign.cashReward }}
+                        </p>
+                        <p>
+                            <span class="ion-cube"></span>
+                            Kind Reward: {{ request.campaign.kindReward }}
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <button class="btn btn-success status-reply-button"
+                                data-campaign-participant-id="{{ request.id }}"
+                                data-action="complete"
+                                data-status="{{ completedStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
+                            Mark Completed
+                        </button>
+                        <button class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#attach-link-{{ request.id }}">
+                            Attach Link For Related Post On Instagram
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor  %}
+</div>
+{% endblock %}
+{% block javascriptDataMain %}"{{ asset('scripts/campaign-requests-main.js') }}"{% endblock %}
+{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/campaign-requests-main.js') }}"></script>{% endblock %}

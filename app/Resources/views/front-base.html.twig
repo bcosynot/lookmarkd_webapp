@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% block stylesheetsCustom %}
+            {% endblock stylesheetsCustom %}
+        		<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+            	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        		<link rel="stylesheet" href="{{ asset('styles/animate.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body id="front-base">
+        {% block body %}
+
+        {% if (not app.user) %}
+        <div id="influencer-login-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Influencer Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% include '::influencer_login_button.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="brand-login-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Brand Login</h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div id="pricing-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Pricing</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Lookmarkd is <strong>free</strong> to use for now.
+                        </p>
+                        <p>
+                            We are currently in private beta and haven't decided on a pricing structure yet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ********** HEADER SECTION ********** -->
+        <div id="h">
+            <nav role="navigation">
+                <div class="navbar-header">
+                        <i class="ion-navicon-round white navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></i>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav nav-pills navbar-right">
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">How It Works<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('how_it_works_brand') }}" class="text16">For Brands</a></li>
+                                <li><a href="{{ path('how_it_works_influencer') }}" class="text16">For Influencers</a></li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle text16"
+                               data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">Sign In<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if (not app.user) %}
+                                <li>
+                                    <a href="{{ path('ajax-login-form') }}" id="brand-login-link" class="text16"
+                                        data-toggle="modal" data-target="#brand-login-modal"
+                                        data-remote="false">
+                                        Brand
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="influencer-login-link" class="text16"
+                                       data-toggle="modal" data-target="#influencer-login-modal">
+                                        Influencer
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% if app.user %}
+                                <li>
+                                    <a href="{{ path('dashboard') }}" class="text16">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/logout" id="brand-login-link" class="text16">
+                                        Logout
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li><a href="#" class="text16" data-toggle="modal" data-target="#pricing-modal">Pricing</a></li>
+                        <li><a href="about-us" class="text16">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <a href="{{ path('homepage') }}"><h3 class="logo">LOOKMARKD</h3></a>
+                    <h1>{% block heromsg %}{% endblock %}</h1>
+                </div><!--/row -->
+                {% block herocta %}{% endblock %}
+                <div class="row dark-background translucent mt">
+                    <h2 class="wow fadeIn white">{% block persuasivemsg %}{% endblock %}</h2>
+                </div>
+
+            </div><!--/container -->
+
+        </div><!--/header -->
+
+        <div id="cta">
+            <div class="container">
+            </div><!--/container -->
+        </div><!--/CTA -->
+
+        {% block content %}{% endblock %}
+
+        {% include '::front-brands-with-us.html.twig' %}
+
+        {% include '::front-social.html.twig' %}
+
+        {% include '::front-footer.html.twig' %}
+
+        {% endblock %}
+        {% block javascripts %}
+            {% if app.environment == 'node' %}
+            	{% block javascriptsDev %}
+                <script type="text/javascript" src="/requirejs-config/config.js"></script>
+                <script type="text/javascript" data-main={% block javascriptDataMain %}"{{ asset('/scripts/default-index-main.js') }}"{% endblock %}
+                	src="/bower_components/requirejs/require.js"></script>
+                {% endblock %}
+            {% else %}
+                {% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/default-index-main.js') }}"></script>{% endblock %}
+            {% endif %}
+            {% block customjavascripts %}{% endblock customjavascripts %}
+        {% endblock %}
+    </body>
+</html>

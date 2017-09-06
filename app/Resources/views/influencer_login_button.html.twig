@@ -1,0 +1,14 @@
+{% if (not app.user) %}
+<a class="wow slideInUp btn btn-lg btn-social btn-instagram"
+   href="{{ hwi_oauth_login_url('instagram') }}">
+    <span class="ion-social-instagram-outline"></span>
+    Sign in with Instagram
+</a>
+{% endif %}
+{% if (app.user) %}
+    <a class="wow slideInUp btn btn-lg btn-primary btn-instagram"
+       href="{{ url('dashboard') }}">
+        Go to dashboard
+    </a>
+    <a href="{{ path('fos_user_security_logout') }}" style="color:#fff;"><small>Not {{ app.user.username }}? Logout.</small></a>
+{% endif %}

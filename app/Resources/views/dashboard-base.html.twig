@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{% block title %}Welcome!{% endblock %}</title> {% block
+stylesheets %} {% block stylesheetsCustom %} {% endblock
+stylesheetsCustom %} {% block stylesheetsAll %}
+<link rel="stylesheet"
+	href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+{% endblock stylesheetsAll %} {% if app.environment == 'node' %}
+<link rel="stylesheet" href="/styles/main.css?no-rev" />
+<link rel="stylesheet" href="/styles/dashboard-style.css?no-rev" />
+<link rel="stylesheet" href="/styles/style-responsive.css?no-rev" />
+<link rel="stylesheet" href="/styles/lineicons.css?no-rev" />
+{% else %} {% block stylesheetsDist %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/lineicons.css') }}" />
+{% endblock stylesheetsDist %} {% endif %} {% endblock %}
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+	{% block body %}
+	<section id="container">
+
+		{% block topbar %}
+		<!--header start-->
+		<header class="header black-bg">
+			<div class="sidebar-toggle-box">
+				<div class="ion-navicon-round tooltips fa-bars" id="nav-toggle" data-placement="right"
+					data-original-title="Toggle Navigation"></div>
+			</div>
+			{% block logo %}
+			<!--logo start-->
+			<a href="index.html" class="logo"><b>Lookmarkd</b></a>
+			<!--logo end-->
+			{% endblock logo %}
+			<div class="top-menu">
+				<ul class="nav pull-right top-menu">
+					<li class="dropdown mt">
+						<a class="ion-android-notifications-none top-navbar-text"></a>
+					</li>
+					<li class="dropdown mt">
+						<a href="#" id="user-settings" class="top-navbar-text">
+							{{ app.user.username }}&nbsp;&nbsp;<i class="ion-gear-b"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<div class="notify-arrow notify-arrow-white"></div>
+                            <li>
+                                <a class="green" href="/logout">Logout</a>
+                            </li>
+                            <li>
+                                <a class="green" href="/profile">Profile</a>
+                            </li>
+                        </ul>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<!--header end-->
+		{% endblock topbar %}
+		{% block left_sidebar %}
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<li class="mt"><a class="active" href="{{ url('dashboard_influencer') }}"> <i
+							class="ion-android-desktop"></i> <span>Dashboard</span>
+					</a></li>
+
+					<li class="sub-menu">
+						<a href="javascript:;"> <i
+							class="ion-ios-calendar-outline"></i> <span>Collaboration</span>
+						</a>
+						<ul class="sub">
+							{% if app.user.userType == 2 %}
+							<li>
+								<a href="{{ url('campaign_create') }}">
+									Create
+								</a>
+							</li>
+							<li>
+								<a href="{{ url('active_campaigns') }}">
+									Active
+								</a>
+							</li>
+							<li>
+								<a href="{{ url('ended_campaigns') }}">
+									Ended
+								</a>
+							</li>
+							{%  endif %}
+							{% if app.user.userType == 1 %}
+								<li>
+									<a href="{{ url('new_campaign_requests') }}">
+										<span>
+											Requests
+										</span>
+										<span class="badge" id="total-new-campaign-requests-count"
+											  data-url="{{ url('new_campaign_requests') }}/json"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('accepted_campaign_requests') }}">
+										Accepted
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('due_campaign_requests') }}">
+										Due Soon
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('completed_campaign_requests') }}">
+										Completed
+									</a>
+								</li>
+							{%  endif %}
+						</ul>
+					</li>
+					
+					<li class="sub-menu">
+						<a href="{{ url('message_inbox') }}"> <i
+								class="ion-ios-chatboxes"></i> <span>Messages</span>
+								<span class="badge" id="total-unread-messages-count"
+							data-unread-messages-count-url="{{ url('messages_unread_count') }}"></span>
+						</a>
+					</li>
+					
+					<li class="sub-menu"><a href="{{ url('user_settings') }}"> <i
+							class="ion-ios-gear"></i> <span>Settings</span>
+					</a>
+					</li>
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+		<!--sidebar end-->
+		{% endblock left_sidebar %}
+		{% block content_wrapper %}
+		<!--main content start-->
+      	<section id="main-content">
+        	<section class="wrapper">
+	        	{% block content %}
+	        	{% endblock content %}
+        	</section>
+        </section>
+        {% endblock content_wrapper %}
+        {% block footer %}
+        <!--footer start-->
+      	<!-- <footer class="site-footer">
+      	</footer> -->
+      	<!--footer end-->
+        {% endblock footer %}
+
+	</section>
+	{% endblock body %} 
+	{% block javascripts %} 
+		{% if app.environment == 'node' %}
+			{% block javascriptsDev %}
+			<script type="text/javascript" src="{{ asset('requirejs-config/config.js') }}"></script>
+			<script type="text/javascript" data-main={% block javascriptDataMain %}"{{ asset('scripts/dashboard-influencer-main.js') }}"{% endblock %}
+				src="/bower_components/requirejs/require.js"></script>
+			{% endblock %}
+		{% else %}
+			{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/dashboard-influencer-main.js') }}"></script>{% endblock %}
+		{% endif %} 
+		{% block customjavascripts %}{% endblock customjavascripts	%} 
+	{% endblock javascripts %}
+</body>
+</html>

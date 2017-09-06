@@ -1,0 +1,373 @@
+{% extends 'dashboard-base.html.twig' %}
+{% block title %}Create Collaboration Request{% endblock %}
+{% block stylesheetsDist %}
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/request-collaboration.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dataTables.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/select.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/responsive.bootstrap.min.css') }}"/>
+{% endblock stylesheetsDist %}
+{% block stylesheetsCustom %}
+    <link rel="stylesheet" href="{{ asset('styles/daterangepicker.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/request-collaboration.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/dataTables.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/select.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/responsive.bootstrap.min.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+                <ul class="nav nav-tabs" id="myTab">
+                    <div class="liner"></div>
+
+                    <li class="active">
+                        <a href="#schedule" data-toggle="tab" title="Select collaboration schedule">
+                         <span class="round-tabs one">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                         </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#brief" data-toggle="tab" title="Collaboration brief">
+                         <span class="round-tabs two">
+                              <i class="glyphicon glyphicon-tasks"></i>
+                         </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reward-type" data-toggle="tab" title="Select reward type">
+                             <span class="round-tabs five">
+                                  <i class="glyphicon glyphicon-gift"></i>
+                             </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#influencers" data-toggle="tab" title="Select influencers">
+                         <span class="round-tabs four">
+                             <i class="glyphicon glyphicon-user"></i>
+                         </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#message" data-toggle="tab" title="Draft message">
+                          <span class="round-tabs three">
+                                  <i class="glyphicon glyphicon-envelope"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li class="hidden"><a href="#done" data-toggle="tab" title="completed">
+                         <span class="round-tabs six">
+                              <i class="glyphicon glyphicon-ok"></i>
+                         </span> </a>
+                    </li>
+
+                </ul>
+               </div>
+            </div>
+<div class="row">
+        <div class="col-md-12">
+            <div class="tab-content">
+
+                <div class="tab-pane fade in active" id="schedule">
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Idea name &amp; schedule</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="campaign-name">Give your idea a name</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="ion-bookmark"></span></div>
+                                            <input type="text" id="campaign-name" name="campaign-name" class="form-control"
+                                             placeholder="Idea name"/>
+                                        </div>
+                                     </div>
+                                     <div class="form-group">
+                                        <label for="schedule-input">Collaboration start &amp; end dates</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="ion-calendar"></span></div>
+                                            <input type="text" id="schedule-input" name="schedule-input" class="form-control"
+                                                size="30"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="form-group">
+                                        <a href="#brief" class="btn btn-success next-button"
+                                         data-next-step="brief"
+                                         data-toggle="tab">
+                                         Next: Collaboration brief</a>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="brief">
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Collaboration Brief</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="brief-description">Write down your brief</label>
+                                        <textarea id="brief-description" class="form-control"></textarea>
+                                        <small class="help-block">
+                                            Give a quick description for your collaboration.
+                                        </small>
+                                        <span class="help-block" id="char-counter">
+                                            1500 characters remaining
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Other important information</h3> (optional)
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="posts-count">Number of posts</label>
+                                        <div class="input-group col-md-5">
+                                            <div class="input-group-addon">At least</div>
+                                            <input type="number" class="form-control" min="1" size="3"
+                                               id="posts-count" name="posts-count" value="1" />
+                                            <div class="input-group-addon">post(s)</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="handles">Posts should include the following handles</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="ion-at"></span></div>
+                                            <input type="text" class="form-control" id="handles" name="handles" />
+                                        </div>
+                                        <small class="help-block">Separate multiple handles with comma or space</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hashtags">Posts should include the following hashtags</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="ion-pound"></span></div>
+                                            <input type="text" class="form-control" id="hashtags" name="hashtags" />
+                                        </div>
+                                        <small class="help-block">Separate multiple hashtags with comma or space</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="include-text">Posts should include the following text</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="ion-document-text"></span></div>
+                                            <input type="text" class="form-control" id="include-text" name="include-text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="form-group">
+                                        <a href="#reward-type" class="btn btn-success next-button"
+                                         data-next-step="reward-type"
+                                         data-toggle="tab">
+                                         Next: Select Rewards</a>
+                                        <a href="#schedule" class="pull-right btn btn-link next-button"
+                                         data-toggle="tab">
+                                            Previous: Idea name &amp; schedule
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="reward-type">
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Rewards</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                                data-target="#cash-details">
+                                                <span class="ion-cash"></span> Cash
+                                            </button>
+                                        </div>
+                                        <div class="form-group collapse" id="cash-details">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">&#x20B9;</div>
+                                                <input type="number" class="form-control" id="cash-amount"
+                                                    min="0" placeholder="Amount to be paid" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-block"
+                                                data-toggle="collapse" data-target="#kind-details">
+                                                <span class="ion-cube"></span> Kind
+                                            </button>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="collapse form-control" id="kind-details" rows="6"
+                                                placeholder="Details for products or other things to be given out"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="form-group">
+                                        <a href="#influencers" class="btn btn-success next-button"
+                                         data-next-step="influencers"
+                                         data-toggle="tab">
+                                         Next: Select influencers</a>
+                                        <a href="#brief" class="pull-right btn btn-link next-button"
+                                         data-toggle="tab">
+                                            Previous: Collaboration brief
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="influencers">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        Select influencers
+                                        &nbsp;<small>(<span id="number-selected">0</span> selected)</small>
+                                     </h3>
+                                    <br />
+                                    Show influencers who post about
+                                     <select id="posting_category_filter"
+                                        data-url="{{ url('campaign_create_fetch_influencers') }}">
+                                        <option value="-999">Anything</option>
+                                        <option value="8">Arts</option>
+                                        <option value="2">Beauty</option>
+                                        <option value="7">Entertainment</option>
+                                        <option value="1">Fashion</option>
+                                        <option value="3">Luxury</option>
+                                        <option value="5">Sports</option>
+                                        <option value="6">Technology</option>
+                                        <option value="4">Travel</option>
+                                     </select>
+                                      and have at least
+                                     <input type="number" size="3" value="0"
+                                        id="follower_count_filter"
+                                         data-url="{{ url('campaign_create_fetch_influencers') }}" />
+                                     followers
+                                </div>
+                                <div class="panel-body" id="influencer-list">
+                                    <h3 id="no-influencers-found" style="display:none;">
+                                        We couldn't find any influencers. Try broadening your
+                                        search filters to find more.
+                                    </h3>
+                                    <table class="display table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <th></th>
+                                            <th>Influencer</th>
+                                            <th>Category</th>
+                                            <th>Followers</th>
+                                            <th>Posts</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot>
+                                            <th></th>
+                                            <th>Influencer</th>
+                                            <th>Category</th>
+                                            <th>Followers</th>
+                                            <th>Posts</th>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="form-group">
+                                        <div id="select-influencers-then-draft-message" data-toggle="tooltip">
+                                            <button data-target="#message" class="btn btn-success next-button"
+                                             data-next-step="message"
+                                             data-toggle="tab"
+                                             disabled="disabled">
+                                                Next: Draft Message
+                                             </button>
+                                         </div>&nbsp;&nbsp;<small id="influencers-updating" style="display:none; color: #666;">Updating list of influencers...</small>
+                                        <a href="#reward-type" class="pull-right btn btn-link next-button"
+                                         data-toggle="tab">
+                                            Previous: Select rewards
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="message">
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Draft Message for Influencers</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- Name input-->
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Subject</label>
+                                        <input id="subject" name="subject" type="text"
+                                               placeholder="Subject Line" class="form-control"
+                                               value="Invitation to collaborate">
+                                    </div>
+
+                                    <!-- Message body -->
+                                    <div class="form-group" id="message-form-group">
+                                        <label id="mBody" for="message-body">Message Body</label>
+                                        <textarea class="form-control" id="message-body" name="body"
+                                                      placeholder="Please enter your message here..."
+                                                      rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <!-- Form actions -->
+                                    <div class="form-group">
+                                        <a href="javascript:void(0)" id="mailSent"
+                                               class="ladda-button btn btn-success btn-lg"
+                                               data-url="{{ url('campaign_create_save') }}"
+                                               data-style="expand-left">
+                                               <span class="ladda-label">Create Campaign!</span>
+
+                                        </a>
+                                        <a href="#influencers"
+                                            data-toggle="tab"
+                                            class="btn btn-link pull-right">
+                                            Previous: Select Influencers
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="done">
+                    <div class="text-center">
+                        <i class="img-intro icon-checkmark-circle"></i>
+                    </div>
+                    <h3 class="head text-center">DONE! Collaboration requests have been sent :)</h3>
+                </div>
+               </div>
+               </div>
+              </div>
+{% endblock %}
+{% block javascriptDataMain %}"{{ asset('scripts/campaign-create-main.js') }}"{% endblock %}
+{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/campaign-create-main.js') }}"></script>{% endblock %}

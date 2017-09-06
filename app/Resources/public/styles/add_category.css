@@ -1,0 +1,65 @@
+#fashion{
+	background: url('../img/fashion-category.jpg') no-repeat;
+}
+
+#arts{
+	background: url('../img/arts-category.jpg') no-repeat;
+}
+
+#sports{
+	background: url('../img/sports-category.jpg') no-repeat;
+}
+
+#technology{
+	background: url('../img/technology-category.jpg') no-repeat;
+}
+
+#entertainment{
+	background: url('../img/entertainment-category.jpg') no-repeat;
+}
+
+#beauty{
+	background: url('../img/beauty-category.jpg') no-repeat;
+}
+
+#travel{
+	background: url('../img/travel-category.jpg') no-repeat;
+}
+
+#luxury{
+	background: url('../img/luxury-category.jpg') no-repeat;
+}
+
+
+.category-picture .checkmark {
+	color: #1abc9c;
+	display:none;
+	text-align: center;
+	font-weight: bold;
+	margin-top : 20px;
+	transition: 0.3s;
+	text-shadow:0 0 1px;
+	font-size: xx-large;
+}
+
+.category-picture:hover .checkmark, .selected.category-picture .checkmark {
+	background-color:rgba(0, 0, 0, 0.5);
+	display: block;
+}
+
+.pr2-social {
+	display: block;
+	width: 100%;
+	background: #1abc9c;
+	margin-bottom: 20px;
+}
+
+#front-base .pr2-social.centered p {
+	color: #FFFFFF;
+	font-weight: bolder;
+}
+
+#done-button, button#cancel {
+	display:none;
+	text-align: center;
+}

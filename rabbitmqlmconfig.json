@@ -1,0 +1,1 @@
+{"rabbit_version":"3.6.1","policies":[],"queues":[{"name":"aysncstats","durable":true,"auto_delete":true,"arguments":{}}],"exchanges":[],"bindings":[]}

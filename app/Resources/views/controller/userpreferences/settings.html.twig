@@ -1,0 +1,53 @@
+{% extends 'dashboard-base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+{% block stylesheetsCustom %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/toastr.min.css') }}" />
+
+{% endblock %}
+{% block stylesheetsDist %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/toastr.min.css') }}" />
+{% endblock stylesheetsDist %}
+
+{% block content %} 
+<div class="row mt">
+	<div class="col-lg-12">
+		<h2>Settings</h2>
+	</div>
+</div>
+<div class="row mt">
+	<div class="col-lg-12">
+		<h3>Email</h3>
+	</div>
+</div>
+{% for pref in userPreferences %}
+<div class="row mt">
+	<div class="col-lg-offset-1 col-lg-6">
+		<label for="{{ pref.preferenceType.preferenceKey }}">
+			{{ pref.preferenceType.description }}
+		</label>
+	</div>
+	<div class="col-lg-2">
+		<input type="checkbox" name="{{ pref.preferenceType.preferenceKey }}"
+			data-pref-id="{{ pref.preferenceType.id }}"
+			class="pref-checkbox"
+			data-set-pref-url="{{ url('set_user_pref', {'prefKey':pref.preferenceType.preferenceKey, 'value':'1'}) }}"
+			{% if pref.value==1 %}checked="checked"{% endif %}/>
+	</div>
+</div>
+{% endfor %}
+{% endblock %} 
+
+{%
+block javascriptDataMain %}"{{
+asset('scripts/userpreferences-settings-main.js') }}"{% endblock %} {%
+block javascriptsDist %}
+<script type="text/javascript"
+	src="{{ asset('scripts/userpreferences-settings-main.js') }}"></script>
+{% endblock %}

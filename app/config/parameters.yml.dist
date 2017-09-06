@@ -1,0 +1,26 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database.host:     127.0.0.1
+    database.port:     ~
+    database.name:     symfony
+    database.user:     root
+    database.password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database.path: "%kernel.root_dir%/data.db3"
+
+    mailer.transport:  smtp
+    mailer.host:       smtp.sendgrid.net
+    mailer.port:	   587
+    mailer.user:       ~
+    mailer.password:   ~
+    mail.encryption:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    
+    # Instagram API keys
+    instagram.client.id: randomstrings
+    instagram.client.secret: randomstrings
+   

@@ -1,0 +1,15 @@
+ @import "bootstrap-sass-official/assets/stylesheets/_bootstrap";
+ @import "style";
+ @import "bootstrap-social/_bootstrap-social";
+
+.header {
+    height: 50px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+em.underline {
+  text-decoration: underline;
+}

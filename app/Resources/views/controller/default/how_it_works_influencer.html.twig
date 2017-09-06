@@ -1,0 +1,134 @@
+{% extends 'front-base.html.twig' %}
+{% block title %}How Lookmarkd Works For Influencers{% endblock %}
+{% block stylesheetsCustom %}
+<style>
+ #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),  url('{{ asset('img/hero_influencer.jpg')}}') no-repeat;}
+</style>
+{% endblock stylesheetsCustom %}
+
+		{% block heromsg %}You have the power to influence.<br/> Use it wisely.{% endblock %}
+
+		{% block herocta %}
+			<div class="row">
+				<div class="col-md-12">
+					{% include '::influencer_login_button.html.twig' %}
+					<br />
+					<a href="#" id="hero-learn-more" class="white">Learn More</a>
+				</div>
+			</div>{% endblock %}
+
+		{% block persuasivemsg %}Get discovered by leading brands and be a part of
+				their digital campaigns.{% endblock %}
+
+	{% block content %}
+
+	<!-- ********** INTRODUCTION SECTION ********** --> 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered wow fadeIn">
+				<h2 id="how-it-works-title">Steps To Success</h2>
+				<hr class="aligncenter">
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+	</div>
+	<div class="container">	
+		<div class="row text-center steps" id="steps-success">
+			<div class="col-md-6 green-background white wow fadeIn">
+				<h2 class="white">Step 1</h2>
+				<p class="wow slideInUp">
+					Sign up with your social media account
+				</p>
+				<p class="text-center">
+					<i class="ion-social-instagram-outline big wow slideInUp"></i>
+				</p>
+			</div>
+		</div>
+		<div class="row text-center steps">
+			<div class="col-md-6 col-md-offset-6 text-center dark-background white wow fadeIn">
+				<h2 class="white">Step 2</h2>
+				<p class="wow slideInUp">
+					Receive campaign invites from brands and be a part of leading brand's campaigns
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-email-unread big wow slideInUp"></i>
+				</p>
+			</div>
+		</div>
+		<div class="row text-center steps">
+			<div class="col-md-6 text-center green-background white wow fadeIn">
+				<h2 class="white">Step 3</h2>
+				<p class="wow slideInUp">
+					Our tools help you view and generate schedules for campaigns you have accepted, upcoming shoots snd pending posts
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-settings big wow slideInUp"></i>
+				</p>
+			</div>
+		</div>
+		<div class="row text-center steps">
+			<div class="col-md-6 col-md-offset-6 text-center dark-background white wow fadeIn">
+				<h2 class="white">Step 4</h2>
+				<p class="wow slideInUp">
+					Connect with your favorite brands
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-android-wifi big wow slideInUp"></i>
+				</p>
+			</div>
+		</div>
+		<div class="row text-center steps">
+			<div class="col-md-6 text-center green-background white wow fadeIn">
+				<h2 class="white">Step 5</h2>
+				<p class="wow slideInUp">
+					Link your profile with all your social handles and update your profile for better chances of getting Lookmarkd by the brands
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-person-add big wow slideInUp"></i>
+				</p>
+			</div>
+		</div>
+		<div cass="row text-center">
+			<div class="col-md-6 col-md-offset-6 text-center dark-background white wow fadeIn steps steps">
+				<h2 class="white">Step 6</h2>
+				<p class="wow slideInUp">
+					Profit!
+				</p>
+				<p class="wow slideInUp">
+					<i class="ion-cash big wow slideInUp"></i>
+				</p>
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+	<!-- ********** CALL TO ACTION SECTION ********** --> 
+	<div id="cta">
+		<div class="container">
+			<div class="row centered">
+				{% include '::influencer_login_button.html.twig' %}
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+	<!-- ********** FEATURES SECTION - Part 1 ********** -->
+	<div id="g"> 
+		<div class="container mt">
+			<div class="row">
+				<div class="col-md-4 centered">
+					<i class="ion-help-circled green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Awesome Support</p>
+					<p class="text16 wow fadeIn">Great support for timely and delightful help, if you need it.
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-ios-analytics-outline green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Genuine Metrics</p>
+					<p class="text16 wow fadeIn">Metrics that give you the right picture to track your campaigns and hashtags.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-pie-graph green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Detailed Reports</p>
+					<p class="text16 wow fadeIn">Get detailed reports and analytics about campaigns and followers.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->		
+		</div><!--/container -->
+	</div>
+	
+
+{% endblock %}

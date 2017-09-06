@@ -1,0 +1,158 @@
+{% extends 'front-base.html.twig' %}
+
+{% block title %}Add category{% endblock %}
+{% block stylesheetsCustom %}
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/add_category.css') }}">
+{% endblock stylesheetsCustom %}
+{% block stylesheetsDist %}
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}">
+<style type="text/css">
+	#fashion{
+	background: url('{{ asset('img/fashion-category.jpg') }}') no-repeat;
+	}
+	
+	#arts{
+		background: url('{{ asset('img/arts-category.jpg') }}') no-repeat;
+	}
+	
+	#sports{
+		background: url('{{ asset('img/sports-category.jpg') }}') no-repeat;
+	}
+	
+	#technology{
+		background: url('{{ asset('img/technology-category.jpg') }}') no-repeat;
+	}
+	
+	#entertainment{
+		background: url('{{ asset('img/entertainment-category.jpg') }}') no-repeat;
+	}
+	
+	#beauty{
+		background: url('{{ asset('img/beauty-category.jpg') }}') no-repeat;
+	}
+	
+	#travel{
+		background: url('{{ asset('img/travel-category.jpg') }}') no-repeat;
+	}
+	
+	#luxury{
+		background: url('{{ asset('img/luxury-category.jpg') }}') no-repeat;
+	}
+</style>
+{% endblock stylesheetsDist %}
+
+{% block body %}
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<h2>How would you categorise your posts?</h2>
+				<hr class="aligncenter">
+				<h4>Click on <em class="underline">one</em> of the images below to tell us what you <em class="underline"><strong>mostly</strong></em> post about</h4>
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+		
+		<div class="row">
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="8">
+				<div class="content-panel pn" id="arts">
+					<div class="pr2-social centered">
+						<p class="white">Arts</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="2">
+				<div class="content-panel pn" id="beauty">
+					<div class="pr2-social centered">
+						<p class="white">Beauty</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="7">
+				<div class="content-panel pn" id="entertainment">
+					<div class="pr2-social centered">
+						<p class="white">Entertainment</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="1">
+				<div class="content-panel pn" id="fashion">
+					<div class="pr2-social centered">
+						<p class="white">Fashion</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="3">
+				<div class="content-panel pn" id="luxury">
+					<div class="pr2-social centered">
+						<p class="white">Luxury</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="5">
+				<div class="content-panel pn" id="sports">
+					<div class="pr2-social centered">
+						<p class="white">Sports</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="6">
+				<div class="content-panel pn" id="technology">
+					<div class="pr2-social centered">
+						<p class="white">Technology</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb cursor-pointer category-picture" data-posting-category-id="4">
+				<div class="content-panel pn" id="travel">
+					<div class="pr2-social centered">
+						<p class="white">Travel</p>
+					</div>
+					<div class="checkmark">
+						<h2 class="ion-android-checkmark-circle"></h3>
+					</div>
+				</div><!-- --/panel ---->
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 mb" id="done-button">
+				<button class="btn btn-success btn-lg btn-block" 
+					data-refrer='{{ refrer }}'
+					data-submit-url='{{ submitURL }}'
+					data-loading-text="Saving...">Done</button><button class="btn btn-default btn-sm btn-block" id="cancel">Cancel</button>
+				<small><a href="#" data-toggle="tooltip" data-placement="bottom" title="We allow adding only a single category to help you connect with brands that are the perfect fit. We may make it possible to add multiple categories in the future, given enough demand.">Why can't I select more than one category?</a></small>
+			</div>
+			
+		</div><!--/row -->
+	</div><!--/container -->
+{% endblock body %}
+{% block javascriptDataMain %}"{{ asset('/scripts/profile-add-category-main.js') }}"{% endblock %}
+{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/profile-add-category-main.js') }}"></script>{% endblock %}

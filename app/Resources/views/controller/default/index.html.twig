@@ -1,0 +1,141 @@
+{% extends 'front-base.html.twig' %}
+{% block title %}Lookmarkd{% endblock %}
+{% block stylesheetsCustom %}
+<style>
+ #h {background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),  url('{{ asset('img/header-hand-camera.jpg')}}') no-repeat;}
+</style>
+{% endblock stylesheetsCustom %}
+		{% block heromsg %}Easily Connecting<br/>Influencers &amp; Brands{% endblock %}
+
+		{% block herocta %}
+			<div class="row">
+				<div class="col-md-12">
+					<div class="dropdown">
+					  <a class="btn btn-lg btn-green dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <i class="ion-locked"></i>Get Started
+					    <span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu" style="right:50%;left:auto;" aria-labelledby="dropdownMenu2">
+					    <li><a href="{{ path('how_it_works_brand') }}">Brand</a></li>
+					    <li><a href="{{ path('how_it_works_influencer') }}">Influencer</a></li>
+					  </ul>
+					</div>
+					<a href="#" id="hero-learn-more" class="white">Learn More</a>
+				</div>
+			</div><!--/row -->
+		{% endblock %}
+
+		{% block persuasivemsg %}Save time &amp; increase revenue with best in class communication/management tools for brands and influencers.{% endblock %}
+
+	{% block content %}
+
+	<!-- ********** INTRODUCTION SECTION ********** --> 
+	<div class="container mt">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 centered">
+				<h2 id="how-it-works-title">How It Works</h2>
+				<hr class="aligncenter">
+			</div><!-- /col-md-6-->
+		</div><!--/row -->
+		
+		<div class="row">
+			<div class="col-md-5 text-center">
+				<h3 class="wow fadeIn">Brands</h3>
+				<hr class="aligncenter">
+				<h4 class="wow fadeIn">Create - Manage - Track</h4>
+				<br />
+				<span class="wow slideInLeft" style="font-size: 10em;font-weight:800; border: solid 5px;">
+					<i class="ion-stats-bars" style="margin-left:0.25em;"></i>
+				</span>
+				<br />
+				<p class="wow slideInLeft">
+					Tap on influencer based marketing. Confidently find the right
+					influencers that can help you reach your target audience quickly and
+					effectively.
+				</p>
+				<p class="wow slideInLeft">
+					Armed with India's most popular bloggers and influencers - create, manage and track your campaigns with our easy and rich tools.
+					Get the best insights and stats for your campaign to squeeze the maximum ROI.
+				</p>
+				<p>
+					<a href="{{ path('how_it_works_brand') }}" class="wow slideInUp btn btn-lg btn-green">Learn More</a>
+				</p>
+			</div>
+			<div class="col-md-2 text-center">
+				<span class="wow fadeIn" style="font-size: 10em;font-weight:800;"><i class="ion-arrow-swap"></i></span>
+			</div>
+			<div class="col-md-5 of text-center">
+				<h3 class="wow fadeIn">Influencers</h3>
+				<hr class="aligncenter">
+				<h4 class="wow fadeIn">Influence - Share - Earn</h4>
+				<br />
+				<span class="wow slideInRight" style="font-size: 10em;font-weight:800; border: solid 5px;border-radius:50%;">
+					<i class="ion-person" style="margin-left:0.25em;"></i>
+				</span>
+				<br />
+				<p class="wow slideInRight">Connect with brands in a few clicks and get detailed
+				instructions about their campaigns. Get reminded of upcoming deadlines with
+				schedulers and and submit deliverables - All Automated. Save time to do things more important to you.</p>
+				<p  class="wow slideInUp">
+					{% include '::influencer_login_button.html.twig' %}
+					<a class="wow slideInUp btn btn-lg btn-green" href="{{ path('how_it_works_influencer') }}">Learn More</a>
+				</p>
+			</div>
+		</div><!--/row -->
+	</div><!--/container -->
+	
+	<!-- ********** FEATURES SECTION - Part 1 ********** -->
+	<div id="g"> 
+		<div class="container mt">
+			<div class="row">
+				<div class="col-md-4 centered">
+					<i class="ion-help-circled green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Awesome Support</p>
+					<p class="text16 wow fadeIn">Great support for timely and delightful help, if you need it.
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-ios-analytics-outline green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Genuine Metrics</p>
+					<p class="text16 wow fadeIn">Metrics that give you the right picture to track your campaigns and hashtags.</p>
+				</div><!--/col-md-4-->
+				<div class="col-md-4 centered">
+					<i class="ion-pie-graph green big wow fadeIn"></i>
+					<p class="green wow fadeIn">Detailed Reports</p>
+					<p class="text16 wow fadeIn">Get detailed reports and analytics about campaigns and followers.</p>
+				</div><!--/col-md-4-->
+			</div><!--/row -->		
+		</div><!--/container -->
+	</div>
+	
+	<div id="cta">
+		<div class="container">
+			<div class="row centered">
+				<h2>Brands On Our Platform</h2>
+				<hr class="aligncenter">
+				<br />
+				<img src="{{ asset('img/accessorizelogopink.png') }}" style="margin-right: 10px;" />
+				<img src="{{ asset('img/beinghuman_logo.gif') }}" style="margin-right: 10px;" />
+				<img src="{{ asset('img/wacoal_logo.gif') }}" style="margin-right: 10px;" />
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/CTA -->
+	
+	<div id="g">
+		<div class="container">
+			<div class="row mt">
+				<div class="col-md-6 col-md-offset-3 centered">
+					<h2>Stay In Contact</h2>
+					<hr class="aligncenter">
+					<h4>We Are Social People</h4>
+					<p class="text28">
+					<a href="#"><i class="ion-social-twitter big"></i></a>
+					<a href="#"><i class="ion-social-instagram big"></i></a>
+					<a href="#"><i class="ion-social-facebook big"></i></a>
+					</p>
+				</div><!-- /col-md-6-->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/g -->
+
+
+{% endblock %}

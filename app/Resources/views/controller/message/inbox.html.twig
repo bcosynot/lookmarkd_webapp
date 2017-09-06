@@ -1,0 +1,216 @@
+{% extends 'dashboard-base.html.twig' %} 
+{% block title %}Messages{% endblock %}
+{% block stylesheetsCustom %}
+<style type="text/css">
+	#threads, #message-body {
+		background: #ffffff;
+		min-height: 80vh;
+		height: 80vh;
+		max-height: 80vh;
+	}
+	
+	#threads{
+		border-right: #ecf0f1 2px solid;
+	}
+	
+	#threads #threads-header, #message-body #new-message-header, #messages-header, #message-footer {
+		background: #ecf0f1;
+	}
+	
+	#message-body #no-threads-alert {
+		text-align: center;
+	}
+	
+	#threads .thread-details {
+		border-bottom: #ecf0f1 solid 1px;
+		display: block;
+		width: 100%;
+	}
+	
+	#threads .thread-details.active {
+		background-color: #5B6271;
+		color: #ffffff;
+	}
+	
+	#threads .thread-details.active p {
+		color: #ffffff;
+	}
+	
+	#new-msg.btn { 
+		margin-top: 5px;
+	}
+	
+	#new-msg-row, #new-message-form, #messages-list {
+		display: none;
+	}
+	
+	.message.recieved {
+		background: #ecf0f1;
+		border-color: #ecf0f1;
+	}
+	
+	.message.sent {
+		background: #1abc9c;
+		color: #ffffff;
+		border-color: #1abc9c;
+	}
+	
+	.message {
+		padding: 1em;
+		border-radius: 2px;
+	}
+	
+	#messages-list, #messages-list .container-fluid, #messages-list > .container-fluid > ul, #msg-body ul {
+	    min-height: 100%;
+	    max-height: 100%;
+    	height: 100%;
+    }
+    
+    #msg-body-parent {
+    	min-height: 75%;
+	    max-height: 75%;
+    	height: 75%;
+    }
+    
+    #msg-body ul li div p {
+    	font-size: 1em;
+    	padding: 5px;
+    }
+    
+    .container-fluid > ul {
+    	max-width: 100%;
+    	min-width: 100%;
+    	width: 100%;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    li.row.thread-msg {
+    	margin-top:5px;
+    }
+	
+</style>
+<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/typeahead.css') }}" />
+{% endblock %}
+{% block stylesheetsDist %}
+	<link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}" />
+	<link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}" />
+	<link rel="stylesheet" href="{{ asset('styles/typeahead.css') }}" />
+{% endblock stylesheetsDist %}
+{% block content %}
+<div class="row mt">
+	<div class="col-lg-3 col-md-3 col-sm-1 col-sm-offset-1 container-fluid" 
+		id="threads" 
+		data-current-thread-id=""
+		data-new-messages-url="{{ url('get_new_messages') }}"
+		data-threads-information-url="{{ url('messages_threads_information') }}"
+		data-thread-fetch-url="{{ url('messages_get',{'threadId':null}) }}">
+		<ul>
+			<li class="row" id="threads-header">
+				<div class="col-sm-8">
+					<h4>Inbox</h4>
+				</div>
+				<div class="col-sm-4">
+					<button class="btn btn-sm btn-success" id="new-msg"><strong>+ New</strong></button>
+				</div>
+			</li>
+			<li class="row thread-details" id="new-msg-row">
+				<div class="col-sm-8">
+					<p><strong>New message</strong></p> 
+				</div>
+				<div class="col-sm-offset-2 col-sm-2">
+					<p><span class="ion-ios-close-outline cursor-pointer" id="new-msg-closer"></span></p>
+				</div>
+			</li>
+			{% if totalThreads == 0 %}
+			<li class="row thread-details" id="new-msg-helper">
+				<div class="col-sm-12">
+					<p>Click on the green "New" button to send a new message</p>
+				</div>
+			</li>
+			{% endif %}
+			{% for thread in threads %}
+			<li class="row existing thread-details cursor-pointer" 
+				id="{{ thread.id }}"
+				data-thread-fetch-url="{{ url('messages_get',{'threadId':thread.id}) }}">
+				<div class="col-sm-8">
+					<p>
+						<strong class="participant">{{ thread.associatedUser }}</strong>
+						{% if thread.unreadCount > 0 %}
+						<span class="badge">{{ thread.unreadCount }}</span>
+						{% endif %}
+					</p> 
+				</div>
+				<div class="col-sm-offset-2 col-sm-2">
+					<!-- <p><span class="ion-ios-close-outline cursor-pointer thread-delete"></span></p> -->
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="col-lg-7 col-md-7 col-sm-7 container-fluid" id="message-body">
+		<div class="row mt" id="no-threads-alert">
+			<h1 class="ion-alert"></h1>
+			<h3>No message selected</h3>
+		</div>
+		<div class="row" id="new-message-form">
+			<div class="col-sm-12 col-lg-12 col-md-12 container-fluid">
+				<div class="row" id="new-message-header">
+						<h4>New Message</h4>
+				</div>
+				<div class="row mt">
+					<div class="col-sm-12 col-lg-12 col-md-12">
+						<div class="form-group">
+							<input type="text" 
+								class="form-control typeahead" 
+								placeholder="Enter recepient name"
+								data-recipients-url="{{ url('message_get_recipients_list') }}"
+								id="recipient" />
+						</div>
+						<div class="form-group">
+							<textarea placeholder="Enter message..." class="form-control" id="new-message-body"></textarea>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-md btn-success pull-right"
+								data-send-new-msg-url="{{ url('messages_send_new') }}"
+								data-validate-recipient-url="{{ url('messages_validate_recipient', {'recipientName':null}) }}"
+								data-loading-text="Sending..."
+								id="send-new-msg">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="messages-list">
+			<div class="col-sm-12 col-lg-12 col-md-12 container-fluid">
+				<ul>
+					<li class="row" id="messages-header">
+							<h4></h4>
+					</li>
+					<li class="row mt" id="msg-body-parent">
+						<div class="col-sm-12 col-lg-12 col-md-12 container-fluid" id="msg-body">
+							<ul>
+							</ul>
+						</div>
+					</li>
+					<li class="row mt" id="message-footer">
+						<div class="col-sm-10 col-lg-10 col-md-10">
+							<input type="text" placeholder="Enter message..." class="form-control" id="existing-thread-msg" />
+						</div>
+						<div class="col-sm-2 col-lg-2 col-md-2">
+							<button class="btn btn-md btn-success pull-right" id="send-existing-thread-msg"
+								data-send-url="{{ url('messages_send') }}">Send&nbsp;&nbsp<span class="ion-android-send"></span></button>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block javascriptDataMain %}"{{ asset('scripts/messages-inbox-main.js') }}"{% endblock %}
+{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/messages-inbox-main.js') }}"></script>{% endblock %}

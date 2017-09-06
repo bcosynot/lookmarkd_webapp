@@ -1,0 +1,89 @@
+{% extends 'dashboard-base.html.twig' %}
+{% block title %}New Collaboration Requests{% endblock %}
+{% block stylesheetsDist %}
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}"/>
+{% endblock stylesheetsDist %}
+{% block stylesheetsCustom %}
+{% endblock %}
+{% block content %}
+{% if requests|length == 0 %}
+    <h3>All done! Check back later :)</h3>
+{% endif %}
+    <div class="container" id="main-requests-contatiner">
+{% for request in requests %}
+    <div class="row mt" data-campaign-participant-id="{{ request.id }}">
+        <div class="col-md-11">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ request.campaign.campaignName }}
+                        <span style="float:right;">
+                            {{ request.campaign.start|date("d/m/Y") }} to {{ request.campaign.end|date("d/m/Y") }}
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <p>
+                            <span class="ion-information-circled"></span>
+                            {{ request.campaign.brief }}
+                        </p>
+                        <p>
+                            <span class="ion-ios-plus"></span>
+                            Atleast {{ request.campaign.numPosts }} post(s)
+                        </p>
+                        <p>
+                            <span class="ion-at"></span>
+                            Include handles: {{ request.campaign.handles }}
+                        </p>
+                        <p>
+                            <span class="ion-pound"></span>
+                            Include hashtags: {{ request.campaign.hashtags }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <span class="ion-cash"></span>
+                            Cash Reward: {{ request.campaign.cashReward }}
+                        </p>
+                        <p>
+                            <span class="ion-cube"></span>
+                            Kind Reward: {{ request.campaign.kindReward }}
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <button class="btn btn-success status-reply-button"
+                                data-campaign-participant-id="{{ request.id }}"
+                                data-action="accept"
+                                data-status="{{ acceptedStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
+                            Accept
+                        </button>
+                        <button class="btn btn-error status-reply-button"
+                                data-campaign-participant-id="{{ request.id }}"
+                                data-action="decline"
+                                data-status="{{ declinedStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
+                            Decline
+                        </button>
+                        <button class="btn btn-primary status-reply-button"
+                                data-campaign-participant-id="{{ request.id }}"
+                                data-action="ignore"
+                                data-status="{{ ignoredStatus }}"
+                                data-url="{{ url('influencer_campaign_request_update_status') }}">
+                            Ignore
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor  %}
+</div>
+{% endblock %}
+{% block javascriptDataMain %}"{{ asset('scripts/campaign-requests-main.js') }}"{% endblock %}
+{% block javascriptsDist %} <script type="text/javascript" src="{{ asset('scripts/campaign-requests-main.js') }}"></script>{% endblock %}

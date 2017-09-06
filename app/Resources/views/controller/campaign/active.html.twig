@@ -1,0 +1,176 @@
+{% extends 'dashboard-base.html.twig' %}
+{% block title %}{{ titleStatus }} Collaborations{% endblock %}
+{% block stylesheetsDist %}
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dashboard-style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/style-responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/dataTables.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/responsive.bootstrap.min.css') }}"/>
+{% endblock stylesheetsDist %}
+{% block stylesheetsCustom %}
+    <link rel="stylesheet" href="{{ asset('styles/dataTables.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/responsive.bootstrap.min.css') }}"/>
+{% endblock %}
+{% block content %}
+{% for campaignId, participants in pending %}
+<div id="pending-{{ campaignId }}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Pending: {{ pending[campaignId]|length }}</h4>
+            </div>
+            <div class="modal-body">
+                <ol class="list-group">
+                    {% for participant in participants %}
+                        <li class="list-group-item">@{{ participant.participant.username }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% for campaignId, participants in accepted %}
+    <div id="accepted-{{ campaignId }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Accepted: {{ accepted[campaignId]|length }}</h4>
+                </div>
+                <div class="modal-body">
+                    <ol class="list-group">
+                        {% for participant in participants %}
+                            <li class="list-group-item">@{{ participant.participant.username }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% for campaignId, participants in completed %}
+    <div id="completed-{{ campaignId }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Completed: {{ completed[campaignId]|length }}</h4>
+                </div>
+                <div class="modal-body">
+                    <ol class="list-group">
+                        {% for participant in participants %}
+                            <li class="list-group-item">@{{ participant.participant.username }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% for campaignId, participants in declined %}
+    <div id="declined-{{ campaignId }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Completed: {{ declined[campaignId]|length }}</h4>
+                </div>
+                <div class="modal-body">
+                    <ol class="list-group">
+                        {% for participant in participants %}
+                            <li class="list-group-item">@{{ participant.participant.username }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    <div class="container" id="main-requests-contatiner">
+        <div class="row mt">
+            <div class="col-md-11">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{ titleStatus }} Collaborations
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="campaigns" class="display table table-striped table-bordered">
+                            <thead>
+                            <th>Name</th>
+                            <th>Brief</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Posts</th>
+                            <th>Hashtags</th>
+                            <th>Handles</th>
+                            <th>Rewards</th>
+                            <th>Status</th>
+                            </thead>
+                            <tbody>
+                            {% for campaign in campaigns %}
+                                <tr>
+                                    <td>{{ campaign.campaignName }}</td>
+                                    <td>{{ campaign.brief }}</td>
+                                    <td>{{ campaign.start|date('d-m-Y') }}</td>
+                                    <td>{{ campaign.end|date('d-m-Y') }}</td>
+                                    <td>{{ campaign.numPosts }}</td>
+                                    <td>{{ campaign.hashtags }}</td>
+                                    <td>{{ campaign.handles }}</td>
+                                    <td>
+                                        Cash: {{ campaign.cashReward }}<br/>
+                                        Kind: {{ campaign.kindReward }}
+                                    </td>
+                                    <td>
+                                        {% if pending[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#pending-{{ campaign.id }}">
+                                                Pending: {{ pending[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if accepted[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#accepted-{{ campaign.id }}">
+                                                Accepted: {{ accepted[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if completed[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#completed-{{ campaign.id }}">
+                                                Completed: {{ completed[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if declined[campaign.id]|length > 0 %}
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#declined-{{ campaign.id }}">
+                                                Declined: {{ declined[campaign.id]|length }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <th>Name</th>
+                            <th>Brief</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Posts</th>
+                            <th>Hashtags</th>
+                            <th>Handles</th>
+                            <th>Rewards</th>
+                            <th>Status</th>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascriptDataMain %}"{{ asset('scripts/campaign-active-main.js') }}"{% endblock %}
+{% block javascriptsDist %}
+    <script type="text/javascript" src="{{ asset('scripts/campaign-active-main.js') }}"></script>{% endblock %}
